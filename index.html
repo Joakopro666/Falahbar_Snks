@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Falahbar.SnkS - Golosinas y Snacks</title>
+    <title>Falahbar.SnkS - Golosinas y SnkS</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="active">Inicio</a></li>
                 <li><a href="#golosinas">Golosinas</a></li>
-                <li><a href="#snacks">Snacks</a></li>
+                <li><a href="#snacks">SnkS</a></li>
                 <li><a href="about.html">Sobre Nosotros</a></li>
                 <li><a href="contact.html">Contacto</a></li>
             </ul>
@@ -33,11 +33,11 @@
             <h1>Falahbar<span class="highlight">.SnkS</span></h1>
             <p class="hero-subtitle">
                 Dulzura y sabor que llegan a todas partes. Golosinas, chocolates y
-                snacks salados a domicilio en La Rioja.
+                SnkS salados a domicilio en La Rioja.
             </p>
             <div class="hero-buttons">
                 <a href="#golosinas" class="btn btn-primary">Ver productos</a>
-                <a href="#snacks" class="btn btn-secondary">Ver snacks</a>
+                <a href="#snacks" class="btn btn-secondary">Ver SnkS</a>
             </div>
         </div>
     </section>
@@ -56,7 +56,7 @@
     <!-- SNACKS -->
     <section class="products products-alt" id="snacks">
         <div class="container">
-            <h2 class="section-title">Snacks Salados</h2>
+            <h2 class="section-title">SnkS Salados</h2>
             <p class="section-subtitle">Para los que aman lo salado</p>
             <div class="products-grid" id="snacksGrid">
                 <!-- Los productos se cargan desde script.js -->
@@ -69,6 +69,24 @@
         <div class="container">
             <h2>¿Listo para tu pedido?</h2>
             <p>Agregá tus productos favoritos al carrito y hacé tu pedido por WhatsApp.</p>
+        </div>
+    </section>
+
+
+    <!-- ACCESO RÁPIDO -->
+    <section class="user-access">
+        <div class="container user-access-box">
+            <div>
+                <h2>Tu nombre para el pedido</h2>
+                <p>Guardalo una vez y cuando envíes tu pedido por WhatsApp saldrá automáticamente en el mensaje.</p>
+            </div>
+            <form class="user-form" id="userForm">
+                <div class="user-form-row">
+                    <input type="text" id="userName" placeholder="Ej: Joaquín" maxlength="40">
+                    <button type="submit" class="btn btn-primary">Guardar nombre</button>
+                </div>
+                <p class="user-saved-message" id="userSavedMessage"></p>
+            </form>
         </div>
     </section>
 

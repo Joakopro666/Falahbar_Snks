@@ -48,6 +48,7 @@ const WHATSAPP_NUMBER = '5493804653294';
 // ESTADO DEL CARRITO
 // =============================================
 let cart = [];
+const STORAGE_KEY_USER = 'falahbar_snks_user_name';
 
 // =============================================
 // RENDERIZAR PRODUCTOS
@@ -140,7 +141,6 @@ function updateCartUI() {
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('add-to-cart')) {
         addToCart(e.target.dataset.id);
-        openCart();
     }
     if (e.target.classList.contains('qty-btn')) {
         const id = e.target.dataset.id;
@@ -180,7 +180,11 @@ if (sendBtn) {
     sendBtn.addEventListener('click', () => {
         if (cart.length === 0) return;
 
-        let message = 'Hola Falahbar! Quiero hacer el siguiente pedido:\n\n';
+        const savedUserName = getSavedUserName();
+        let message = savedUserName
+            ? `Hola Falahbar! Soy ${savedUserName} y quiero hacer el siguiente pedido:\n\n`
+            : 'Hola Falahbar! Quiero hacer el siguiente pedido:\n\n';
+
         cart.forEach(i => {
             message += `- ${i.nombre} x${i.qty} - $${(i.precio * i.qty).toLocaleString('es-AR')}\n`;
         });
@@ -189,6 +193,56 @@ if (sendBtn) {
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');
+    });
+}
+
+
+// =============================================
+// NOMBRE DEL CLIENTE (login simple con localStorage)
+// =============================================
+const userForm = document.getElementById('userForm');
+const userNameInput = document.getElementById('userName');
+const userSavedMessage = document.getElementById('userSavedMessage');
+
+function getSavedUserName() {
+    return localStorage.getItem(STORAGE_KEY_USER)?.trim() || '';
+}
+
+function setSavedUserName(name) {
+    localStorage.setItem(STORAGE_KEY_USER, name.trim());
+}
+
+function loadSavedUserName() {
+    if (!userNameInput) return;
+    const savedName = getSavedUserName();
+    if (savedName) {
+        userNameInput.value = savedName;
+        if (userSavedMessage) {
+            userSavedMessage.textContent = `Nombre guardado: ${savedName}`;
+        }
+    }
+}
+
+if (userForm) {
+    loadSavedUserName();
+
+    userForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = userNameInput.value.trim();
+
+        if (name.length < 2) {
+            if (userSavedMessage) {
+                userSavedMessage.textContent = 'Ingresá un nombre válido.';
+            }
+            return;
+        }
+
+        setSavedUserName(name);
+
+        if (userSavedMessage) {
+            userSavedMessage.textContent = `Nombre guardado: ${name}`;
+        }
     });
 }
 

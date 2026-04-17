@@ -798,4 +798,78 @@ img {
     .product-card {
         padding: 18px 14px;
     }
+
+    .user-access-box {
+        grid-template-columns: 1fr;
+        padding: 22px;
+    }
+
+    .user-form-row {
+        flex-direction: column;
+    }
+
+    #userName {
+        min-width: 100%;
+    }
+}
+
+
+/* ============================================
+   NOMBRE DEL CLIENTE / LOGIN SIMPLE
+   ============================================ */
+.user-access {
+    padding: 56px 0;
+    background-color: #fff;
+    border-top: 1px solid var(--color-border);
+}
+
+.user-access-box {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 24px;
+    align-items: center;
+    background-color: var(--color-bg-alt);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+}
+
+.user-access-box h2 {
+    color: var(--color-primary);
+    margin-bottom: 8px;
+}
+
+.user-access-box p {
+    color: var(--color-text);
+}
+
+.user-form-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+#userName {
+    flex: 1;
+    min-width: 220px;
+    padding: 12px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #fff;
+}
+
+#userName:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px rgba(184, 148, 77, 0.2);
+}
+
+.user-saved-message {
+    min-height: 24px;
+    margin-top: 10px;
+    color: var(--color-success);
+    font-weight: 600;
 }
