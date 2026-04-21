@@ -116,8 +116,25 @@
             <button class="btn btn-whatsapp" id="sendWhatsApp" disabled>
                 Enviar pedido por WhatsApp
             </button>
+            <button class="btn btn-danger" id="clearCartBtn" style="display:none;">
+                🗑️ Vaciar carrito
+            </button>
         </div>
     </aside>
+
+    <!-- MODAL: NOMBRE DEL CLIENTE -->
+    <div class="name-modal-overlay" id="nameModalOverlay">
+        <div class="name-modal" role="dialog" aria-modal="true" aria-labelledby="nameModalTitle">
+            <div class="name-modal-icon">🛍️</div>
+            <h2 id="nameModalTitle">¡Bienvenido a Falahbar.SnkS!</h2>
+            <p>¿Cómo te llamás? Así tu pedido por WhatsApp saldrá con tu nombre.</p>
+            <div class="name-modal-form">
+                <input type="text" id="modalUserName" placeholder="Tu nombre, ej: Joaquín" maxlength="40" autocomplete="given-name">
+                <button class="btn btn-primary" id="modalSaveBtn">Guardar y continuar</button>
+            </div>
+            <button class="name-modal-skip" id="modalSkipBtn">Omitir por ahora</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

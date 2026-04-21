@@ -45,10 +45,26 @@ const snacks = [
 const WHATSAPP_NUMBER = '5493804653294';
 
 // =============================================
-// ESTADO DEL CARRITO
+// ESTADO DEL CARRITO (con persistencia)
 // =============================================
 let cart = [];
-const STORAGE_KEY_USER = 'falahbar_snks_user_name';
+const STORAGE_KEY_USER  = 'falahbar_snks_user_name';
+const STORAGE_KEY_CART  = 'falahbar_snks_cart';
+
+function saveCartToStorage() {
+    localStorage.setItem(STORAGE_KEY_CART, JSON.stringify(cart));
+}
+
+function loadCartFromStorage() {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY_CART);
+        if (raw) cart = JSON.parse(raw);
+    } catch (_) {
+        cart = [];
+    }
+}
+
+loadCartFromStorage();
 
 // =============================================
 // RENDERIZAR PRODUCTOS
@@ -69,6 +85,42 @@ function renderProducts(list, containerId) {
 
 renderProducts(golosinas, 'golosinasGrid');
 renderProducts(snacks, 'snacksGrid');
+updateCartUI(); // reflejar carrito recuperado de localStorage
+
+// =============================================
+// SONIDO Y FEEDBACK VISUAL AL AGREGAR
+// =============================================
+function playAddSound() {
+    try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(600, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(900, ctx.currentTime + 0.08);
+        gain.gain.setValueAtTime(0.18, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
+        osc.start(ctx.currentTime);
+        osc.stop(ctx.currentTime + 0.18);
+    } catch (_) { /* silently fail if audio not supported */ }
+}
+
+let toastTimer = null;
+function showCartToast(nombre) {
+    let toast = document.getElementById('cartToast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'cartToast';
+        toast.className = 'cart-toast';
+        document.body.appendChild(toast);
+    }
+    toast.textContent = `✓ ${nombre} agregado`;
+    toast.classList.add('visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('visible'), 2000);
+}
 
 // =============================================
 // FUNCIONES DEL CARRITO
@@ -77,7 +129,7 @@ function findProduct(id) {
     return [...golosinas, ...snacks].find(p => p.id === id);
 }
 
-function addToCart(id) {
+function addToCart(id, btnEl) {
     const product = findProduct(id);
     if (!product) return;
 
@@ -87,7 +139,28 @@ function addToCart(id) {
     } else {
         cart.push({ ...product, qty: 1 });
     }
+    saveCartToStorage();
     updateCartUI();
+
+    // Animación en el botón
+    if (btnEl) {
+        btnEl.classList.remove('added');
+        void btnEl.offsetWidth; // reflow para reiniciar animación
+        btnEl.classList.add('added');
+        setTimeout(() => btnEl.classList.remove('added'), 460);
+    }
+
+    // Pulso en el ícono del carrito
+    const cartBtn = document.getElementById('cartBtn');
+    if (cartBtn) {
+        cartBtn.classList.remove('pulse');
+        void cartBtn.offsetWidth;
+        cartBtn.classList.add('pulse');
+        setTimeout(() => cartBtn.classList.remove('pulse'), 460);
+    }
+
+    playAddSound();
+    showCartToast(product.nombre);
 }
 
 function changeQty(id, delta) {
@@ -97,6 +170,7 @@ function changeQty(id, delta) {
     if (item.qty <= 0) {
         cart = cart.filter(i => i.id !== id);
     }
+    saveCartToStorage();
     updateCartUI();
 }
 
@@ -105,33 +179,38 @@ function updateCartUI() {
     const cartCount = document.getElementById('cartCount');
     const cartTotal = document.getElementById('cartTotal');
     const sendBtn = document.getElementById('sendWhatsApp');
+    const clearBtn = document.getElementById('clearCartBtn');
 
     const totalItems = cart.reduce((sum, i) => sum + i.qty, 0);
     const totalPrice = cart.reduce((sum, i) => sum + (i.precio * i.qty), 0);
 
-    cartCount.textContent = totalItems;
-    cartTotal.textContent = '$' + totalPrice.toLocaleString('es-AR');
+    if (cartCount) cartCount.textContent = totalItems;
+    if (cartTotal) cartTotal.textContent = '$' + totalPrice.toLocaleString('es-AR');
 
     if (cart.length === 0) {
-        cartItems.innerHTML = '<p class="cart-empty">Tu carrito está vacío.</p>';
-        sendBtn.disabled = true;
+        if (cartItems) cartItems.innerHTML = '<p class="cart-empty">Tu carrito está vacío.</p>';
+        if (sendBtn) sendBtn.disabled = true;
+        if (clearBtn) clearBtn.style.display = 'none';
     } else {
-        sendBtn.disabled = false;
-        cartItems.innerHTML = cart.map(i => `
-            <div class="cart-item">
-                <div class="cart-item-info">
-                    <h4>${i.emoji} ${i.nombre}</h4>
-                    <div class="cart-item-price">
-                        $${(i.precio * i.qty).toLocaleString('es-AR')}
+        if (sendBtn) sendBtn.disabled = false;
+        if (clearBtn) clearBtn.style.display = 'block';
+        if (cartItems) {
+            cartItems.innerHTML = cart.map(i => `
+                <div class="cart-item">
+                    <div class="cart-item-info">
+                        <h4>${i.emoji} ${i.nombre}</h4>
+                        <div class="cart-item-price">
+                            $${(i.precio * i.qty).toLocaleString('es-AR')}
+                        </div>
+                    </div>
+                    <div class="qty-controls">
+                        <button class="qty-btn" data-action="decrease" data-id="${i.id}">−</button>
+                        <span class="qty-value">${i.qty}</span>
+                        <button class="qty-btn" data-action="increase" data-id="${i.id}">+</button>
                     </div>
                 </div>
-                <div class="qty-controls">
-                    <button class="qty-btn" data-action="decrease" data-id="${i.id}">−</button>
-                    <span class="qty-value">${i.qty}</span>
-                    <button class="qty-btn" data-action="increase" data-id="${i.id}">+</button>
-                </div>
-            </div>
-        `).join('');
+            `).join('');
+        }
     }
 }
 
@@ -140,7 +219,7 @@ function updateCartUI() {
 // =============================================
 document.addEventListener('click', (e) => {
     if (e.target.classList.contains('add-to-cart')) {
-        addToCart(e.target.dataset.id);
+        addToCart(e.target.dataset.id, e.target);
     }
     if (e.target.classList.contains('qty-btn')) {
         const id = e.target.dataset.id;
@@ -196,6 +275,19 @@ if (sendBtn) {
     });
 }
 
+
+// =============================================
+// VACIAR CARRITO
+// =============================================
+const clearCartBtn = document.getElementById('clearCartBtn');
+if (clearCartBtn) {
+    clearCartBtn.addEventListener('click', () => {
+        if (!confirm('¿Querés vaciar el carrito? Se eliminarán todos los productos.')) return;
+        cart = [];
+        saveCartToStorage();
+        updateCartUI();
+    });
+}
 
 // =============================================
 // NOMBRE DEL CLIENTE (login simple con localStorage)
@@ -344,9 +436,65 @@ const fadeObserver = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('.value-item').forEach(el => {
+document.querySelectorAll('.value-item, .team-member').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     fadeObserver.observe(el);
 });
+
+// =============================================
+// MODAL: NOMBRE DEL CLIENTE (solo index.html)
+// =============================================
+(function initNameModal() {
+    const overlay = document.getElementById('nameModalOverlay');
+    if (!overlay) return; // solo en index.html
+
+    const modalInput = document.getElementById('modalUserName');
+    const saveBtn    = document.getElementById('modalSaveBtn');
+    const skipBtn    = document.getElementById('modalSkipBtn');
+
+    function closeModal() {
+        overlay.classList.remove('active');
+    }
+
+    function openModal() {
+        const saved = getSavedUserName();
+        if (modalInput && saved) modalInput.value = saved;
+        overlay.classList.add('active');
+        setTimeout(() => modalInput && modalInput.focus(), 350);
+    }
+
+    // Mostrar modal solo si no hay nombre guardado aún
+    if (!getSavedUserName()) {
+        setTimeout(openModal, 600);
+    }
+
+    saveBtn && saveBtn.addEventListener('click', () => {
+        const name = modalInput ? modalInput.value.trim() : '';
+        if (name.length < 2) {
+            modalInput && modalInput.focus();
+            modalInput && (modalInput.style.borderColor = 'var(--color-error)');
+            return;
+        }
+        setSavedUserName(name);
+        // Reflejar en el formulario inferior si existe
+        const bottomInput = document.getElementById('userName');
+        if (bottomInput) bottomInput.value = name;
+        const bottomMsg = document.getElementById('userSavedMessage');
+        if (bottomMsg) bottomMsg.textContent = `Nombre guardado: ${name}`;
+        closeModal();
+    });
+
+    skipBtn && skipBtn.addEventListener('click', closeModal);
+
+    // Cerrar con Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
+    });
+
+    // Enter en el input del modal
+    modalInput && modalInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') saveBtn && saveBtn.click();
+    });
+})();

@@ -867,9 +867,251 @@ img {
     box-shadow: 0 0 0 3px rgba(184, 148, 77, 0.2);
 }
 
-.user-saved-message {
-    min-height: 24px;
-    margin-top: 10px;
-    color: var(--color-success);
-    font-weight: 600;
+/* ============================================
+   MODAL: NOMBRE DEL CLIENTE
+   ============================================ */
+.name-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(62, 42, 30, 0.65);
+    backdrop-filter: blur(4px);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
 }
+
+.name-modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.name-modal {
+    background-color: var(--color-bg);
+    border-radius: 16px;
+    padding: 40px 36px;
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 24px 60px rgba(62, 42, 30, 0.25);
+    transform: translateY(24px) scale(0.97);
+    transition: transform 0.35s ease, opacity 0.35s ease;
+    border-top: 4px solid var(--color-gold);
+}
+
+.name-modal-overlay.active .name-modal {
+    transform: translateY(0) scale(1);
+}
+
+.name-modal-icon {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    line-height: 1;
+}
+
+.name-modal h2 {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+.name-modal p {
+    color: var(--color-muted);
+    margin-bottom: 24px;
+    font-size: 0.97rem;
+}
+
+.name-modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.name-modal-form input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: #fff;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.name-modal-form input:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px rgba(184, 148, 77, 0.2);
+}
+
+.name-modal-form .btn {
+    width: 100%;
+}
+
+.name-modal-skip {
+    background: none;
+    border: none;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: var(--transition);
+}
+
+.name-modal-skip:hover {
+    color: var(--color-text);
+}
+
+/* ============================================
+   ANIMACIÓN: AGREGAR AL CARRITO
+   ============================================ */
+@keyframes addedPop {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.18); background-color: var(--color-primary); }
+    70%  { transform: scale(0.94); }
+    100% { transform: scale(1); background-color: var(--color-gold); }
+}
+
+@keyframes cartPulse {
+    0%   { transform: scale(1); }
+    35%  { transform: scale(1.22); }
+    65%  { transform: scale(0.95); }
+    100% { transform: scale(1); }
+}
+
+@keyframes flyDot {
+    0%   { opacity: 1; transform: translate(0, 0) scale(1); }
+    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.4); }
+}
+
+.add-to-cart.added {
+    animation: addedPop 0.45s ease forwards;
+}
+
+.cart-btn.pulse {
+    animation: cartPulse 0.45s ease;
+}
+
+/* Toast de confirmación */
+.cart-toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background-color: var(--color-primary-dark);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    z-index: 400;
+    pointer-events: none;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+    opacity: 0;
+    white-space: nowrap;
+    box-shadow: var(--shadow-md);
+}
+
+.cart-toast.visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* ============================================
+   BOTÓN VACIAR CARRITO
+   ============================================ */
+.btn-danger {
+    background-color: transparent;
+    color: #ef4444;
+    border: 1.5px solid #ef4444;
+    width: 100%;
+    margin-top: 10px;
+    padding: 11px 24px;
+    font-size: 0.95rem;
+}
+
+.btn-danger:hover {
+    background-color: #ef4444;
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* ============================================
+   SECCIÓN: NUESTRO EQUIPO
+   ============================================ */
+.team {
+    padding: 80px 0;
+    background-color: #fff;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 32px;
+    margin-top: 48px;
+    justify-content: center;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.team-member {
+    text-align: center;
+    padding: 36px 28px;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-border);
+    background-color: var(--color-bg);
+    transition: var(--transition);
+}
+
+.team-member:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-gold);
+}
+
+.team-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-gold) 100%);
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+    box-shadow: 0 4px 16px rgba(139, 94, 52, 0.3);
+    letter-spacing: 1px;
+}
+
+.team-member h3 {
+    font-size: 1.2rem;
+    color: var(--color-dark);
+    margin-bottom: 4px;
+}
+
+.team-role {
+    display: inline-block;
+    color: var(--color-gold);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    margin-bottom: 12px;
+}
+
+.team-member p {
+    color: var(--color-muted);
+    font-size: 0.93rem;
+    line-height: 1.55;
+}
+
