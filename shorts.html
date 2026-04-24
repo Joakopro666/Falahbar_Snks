@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Shorts Falahbar.SnkS: videos cortos con nuestros productos, novedades y combos.">
+    <meta name="theme-color" content="#0c0804">
+    <title>Falahbar.SnkS - Shorts</title>
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="body-reels">
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="header header--reels">
+        <nav class="nav container">
+            <a href="index.html" class="logo" aria-label="Falahbar.SnkS - Inicio">
+                <img src="logo.png" alt="Falahbar.SnkS" class="logo-img">
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="index.html#golosinas">Golosinas</a></li>
+                <li><a href="index.html#snacks">SnkS</a></li>
+                <li><a href="shorts.html" class="active">Shorts</a></li>
+                <li><a href="about.html">Sobre Nosotros</a></li>
+                <li><a href="contact.html">Contacto</a></li>
+            </ul>
+            <a href="index.html#cart" class="cart-btn cart-btn-link" aria-label="Ver carrito en la página principal">
+                <span aria-hidden="true">🛒</span>
+                <span class="cart-count" id="cartCount">0</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- FEED DE SHORTS (estilo TikTok / Reels) -->
+    <main class="reels-viewport" aria-label="Shorts">
+        <div class="reels-feed" id="reelsFeed">
+            <!-- Los reels se generan desde script.js -->
+        </div>
+
+        <!-- Hint inicial para el usuario -->
+        <div class="reels-hint" id="reelsHint" aria-hidden="true">
+            <span class="reels-hint-arrow">↑</span>
+            <span class="reels-hint-text">Deslizá para ver más</span>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

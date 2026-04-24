@@ -3,24 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contactá a Falahbar.SnkS por WhatsApp, Instagram o dejanos tu mensaje.">
+    <meta name="theme-color" content="#8B5E34">
     <title>Falahbar.SnkS - Contacto</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- HEADER / NAVEGACIÓN -->
     <header class="header">
         <nav class="nav container">
-            <a href="index.html" class="logo">Falahbar<span>.SnkS</span></a>
-            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+            <a href="index.html" class="logo" aria-label="Falahbar.SnkS - Inicio">
+                <img src="logo.png" alt="Falahbar.SnkS" class="logo-img">
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="index.html#golosinas">Golosinas</a></li>
                 <li><a href="index.html#snacks">SnkS</a></li>
+                <li><a href="shorts.html">Shorts</a></li>
                 <li><a href="about.html">Sobre Nosotros</a></li>
                 <li><a href="contact.html" class="active">Contacto</a></li>
             </ul>
+            <a href="index.html#cart" class="cart-btn cart-btn-link" aria-label="Ver carrito en la página principal">
+                <span aria-hidden="true">🛒</span>
+                <span class="cart-count" id="cartCount">0</span>
+            </a>
         </nav>
     </header>
 
@@ -43,13 +53,18 @@
                     <p>+54 9 3804 65-3294</p>
                     <a href="https://wa.me/5493804653294?text=Hola%20Falahbar%21%20Soy%20un%20cliente%20y%20quiero%20hacer%20una%20consulta."
                        target="_blank"
+                       rel="noopener"
                        class="btn btn-whatsapp btn-small">
                         Abrir WhatsApp
                     </a>
                 </div>
                 <div class="info-item">
                     <strong>Instagram</strong>
-                    <p>@falahbar.snks</p>
+                    <p>
+                        <a href="https://instagram.com/falahbar.snks" target="_blank" rel="noopener">
+                            @falahbar.snks
+                        </a>
+                    </p>
                 </div>
                 <div class="info-item">
                     <strong>Ubicación</strong>
@@ -67,13 +82,13 @@
 
                 <div class="form-group">
                     <label for="name">Nombre</label>
-                    <input type="text" id="name" name="name" required>
+                    <input type="text" id="name" name="name" required autocomplete="name">
                     <span class="error-message" id="nameError"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
+                    <input type="email" id="email" name="email" required autocomplete="email">
                     <span class="error-message" id="emailError"></span>
                 </div>
 
@@ -91,8 +106,12 @@
 
                 <button type="submit" class="btn btn-primary">Enviar mensaje</button>
 
+                <p class="form-hint">
+                    Al enviar, se abrirá WhatsApp con tu mensaje pre-cargado para que lo envíes. Así nos llega directo y respondemos rápido.
+                </p>
+
                 <p class="form-success" id="formSuccess" style="display: none;">
-                    ✓ ¡Mensaje enviado con éxito! Te responderemos pronto.
+                    ✓ ¡Perfecto! Abrimos WhatsApp con tu mensaje.
                 </p>
             </form>
         </div>

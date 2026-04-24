@@ -3,26 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Falahbar.SnkS - Golosinas, chocolates y snacks salados a domicilio en La Rioja. Pedidos por WhatsApp.">
+    <meta name="theme-color" content="#8B5E34">
     <title>Falahbar.SnkS - Golosinas y SnkS</title>
+    <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- HEADER / NAVEGACIÓN -->
     <header class="header">
         <nav class="nav container">
-            <a href="index.html" class="logo">Falahbar<span>.SnkS</span></a>
-            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
+            <a href="index.html" class="logo" aria-label="Falahbar.SnkS - Inicio">
+                <img src="logo.png" alt="Falahbar.SnkS" class="logo-img">
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="active">Inicio</a></li>
                 <li><a href="#golosinas">Golosinas</a></li>
                 <li><a href="#snacks">SnkS</a></li>
+                <li><a href="shorts.html">Shorts</a></li>
                 <li><a href="about.html">Sobre Nosotros</a></li>
                 <li><a href="contact.html">Contacto</a></li>
             </ul>
             <button class="cart-btn" id="cartBtn" aria-label="Abrir carrito">
-                🛒 <span class="cart-count" id="cartCount">0</span>
+                <span aria-hidden="true">🛒</span>
+                <span class="cart-count" id="cartCount">0</span>
             </button>
         </nav>
     </header>
@@ -30,7 +37,8 @@
     <!-- HERO -->
     <section class="hero">
         <div class="container hero-content">
-            <h1>Falahbar<span class="highlight">.SnkS</span></h1>
+            <h1 class="visually-hidden">Falahbar.SnkS - Golosinas, chocolates y SnkS a domicilio</h1>
+            <img src="logo.png" alt="Falahbar.SnkS" class="hero-logo">
             <p class="hero-subtitle">
                 Dulzura y sabor que llegan a todas partes. Golosinas, chocolates y
                 SnkS salados a domicilio en La Rioja.
@@ -38,6 +46,20 @@
             <div class="hero-buttons">
                 <a href="#golosinas" class="btn btn-primary">Ver productos</a>
                 <a href="#snacks" class="btn btn-secondary">Ver SnkS</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHORTS PREVIEW EN HOME -->
+    <section class="shorts shorts-preview" aria-labelledby="shortsPreviewTitle">
+        <div class="container">
+            <h2 class="section-title" id="shortsPreviewTitle">Shorts Falahbar</h2>
+            <p class="section-subtitle">Un vistazo rápido a nuestros videos cortos</p>
+            <div class="shorts-scroller" id="homeShortsScroller" aria-live="polite">
+                <!-- Se rellena desde script.js -->
+            </div>
+            <div class="shorts-cta">
+                <a href="shorts.html" class="btn btn-secondary">Ver todos los Shorts</a>
             </div>
         </div>
     </section>
@@ -73,19 +95,24 @@
     </section>
 
 
-    <!-- ACCESO RÁPIDO -->
-    <section class="user-access">
+    <!-- ACCESO RÁPIDO / NOMBRE DEL CLIENTE -->
+    <section class="user-access" id="userAccess">
         <div class="container user-access-box">
-            <div>
+            <div class="user-access-info">
                 <h2>Tu nombre para el pedido</h2>
-                <p>Guardalo una vez y cuando envíes tu pedido por WhatsApp saldrá automáticamente en el mensaje.</p>
+                <p>Guardalo una vez y cuando envíes tu pedido por WhatsApp saldrá automáticamente en el mensaje. Lo podés cambiar cuando quieras.</p>
             </div>
             <form class="user-form" id="userForm">
                 <div class="user-form-row">
-                    <input type="text" id="userName" placeholder="Ej: Joaquín" maxlength="40">
-                    <button type="submit" class="btn btn-primary">Guardar nombre</button>
+                    <input type="text" id="userName" placeholder="Ej: Joaquín" maxlength="40" autocomplete="given-name">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
-                <p class="user-saved-message" id="userSavedMessage"></p>
+                <div class="user-form-actions">
+                    <p class="user-saved-message" id="userSavedMessage"></p>
+                    <button type="button" class="link-btn" id="reopenNameModalBtn">
+                        ↺ Volver a abrir el diálogo de bienvenida
+                    </button>
+                </div>
             </form>
         </div>
     </section>
@@ -100,11 +127,24 @@
 
     <!-- CARRITO (MODAL) -->
     <div class="cart-overlay" id="cartOverlay"></div>
-    <aside class="cart" id="cart">
+    <aside class="cart" id="cart" aria-label="Carrito de compras">
         <div class="cart-header">
             <h2>Tu Carrito</h2>
             <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">×</button>
         </div>
+
+        <!-- Aviso de envíos -->
+        <div class="shipping-notice">
+            <span class="shipping-notice-icon" aria-hidden="true">🛵</span>
+            <div class="shipping-notice-text">
+                <strong>Hacemos envíos en toda La Rioja Capital</strong>
+                <span id="shippingProgressText">Envío gratis superando los $30.000</span>
+            </div>
+        </div>
+        <div class="shipping-progress" aria-hidden="true">
+            <div class="shipping-progress-bar" id="shippingProgressBar"></div>
+        </div>
+
         <div class="cart-items" id="cartItems">
             <p class="cart-empty">Tu carrito está vacío.</p>
         </div>
@@ -123,16 +163,17 @@
     </aside>
 
     <!-- MODAL: NOMBRE DEL CLIENTE -->
-    <div class="name-modal-overlay" id="nameModalOverlay">
+    <div class="name-modal-overlay" id="nameModalOverlay" aria-hidden="true">
         <div class="name-modal" role="dialog" aria-modal="true" aria-labelledby="nameModalTitle">
-            <div class="name-modal-icon">🛍️</div>
+            <button class="name-modal-close" id="nameModalClose" aria-label="Cerrar">×</button>
+            <div class="name-modal-icon" aria-hidden="true">🛍️</div>
             <h2 id="nameModalTitle">¡Bienvenido a Falahbar.SnkS!</h2>
             <p>¿Cómo te llamás? Así tu pedido por WhatsApp saldrá con tu nombre.</p>
-            <div class="name-modal-form">
+            <form class="name-modal-form" id="nameModalForm">
                 <input type="text" id="modalUserName" placeholder="Tu nombre, ej: Joaquín" maxlength="40" autocomplete="given-name">
-                <button class="btn btn-primary" id="modalSaveBtn">Guardar y continuar</button>
-            </div>
-            <button class="name-modal-skip" id="modalSkipBtn">Omitir por ahora</button>
+                <button type="submit" class="btn btn-primary" id="modalSaveBtn">Guardar y continuar</button>
+            </form>
+            <button type="button" class="name-modal-skip" id="modalSkipBtn">Omitir por ahora</button>
         </div>
     </div>
 
