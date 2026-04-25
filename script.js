@@ -2,44 +2,90 @@
 // FALAHBAR.SnkS - LÓGICA DE LA TIENDA
 // =============================================
 
-// CATÁLOGO DE PRODUCTOS (precios en pesos argentinos)
-// Podés editar nombres, precios y emojis libremente.
+// =============================================
+// CATÁLOGO DE PRODUCTOS
+// =============================================
+// Estructura: cada producto tiene { id, grupo, nombre, precio, emoji, descripcion? }
+// - `grupo` se usa para mostrar el subtítulo en el catálogo.
+// - `precio` son placeholders cómodos de editar (todos redondos).
+// - `descripcion` es opcional; si falta, el modal muestra un placeholder.
+//
+// NOTA: los precios son placeholders. Actualizalos con los valores reales
+// cuando los tengas. Están agrupados de forma que es fácil buscar y reemplazar.
+// =============================================
+
+const DESC_PLACEHOLDER = 'Descripción próximamente. Un clásico que no falla en Falahbar.SnkS 🍬';
+
 const golosinas = [
-    { id: 'g1',  nombre: 'Alfajor de Chocolate',           precio: 1500, emoji: '🍫' },
-    { id: 'g2',  nombre: 'Alfajor de Dulce de Leche',      precio: 1500, emoji: '🍪' },
-    { id: 'g3',  nombre: 'Alfajor Blanco',                 precio: 1400, emoji: '🤍' },
-    { id: 'g4',  nombre: 'Bocadito con Chocolate de Leche',precio: 800,  emoji: '🍬' },
-    { id: 'g5',  nombre: 'Bocadito con Chocolate Blanco',  precio: 800,  emoji: '🍬' },
-    { id: 'g6',  nombre: 'Gomitas Surtidas',               precio: 900,  emoji: '🍭' },
-    { id: 'g7',  nombre: 'Gomitas Ácidas',                 precio: 950,  emoji: '🍋' },
-    { id: 'g8',  nombre: 'Garrapiñadas de Maní',           precio: 1200, emoji: '🥜' },
-    { id: 'g9',  nombre: 'Garrapiñadas de Almendra',       precio: 1600, emoji: '🌰' },
-    { id: 'g10', nombre: 'Tableta Chocolate con Leche',    precio: 2500, emoji: '🍫' },
-    { id: 'g11', nombre: 'Tableta Chocolate Amargo',       precio: 2800, emoji: '🍫' },
-    { id: 'g12', nombre: 'Chupetines de Frutas',           precio: 400,  emoji: '🍭' },
-    { id: 'g13', nombre: 'Turrón de Maní',                 precio: 1100, emoji: '🥇' },
-    { id: 'g14', nombre: 'Turrón de Chocolate',            precio: 1300, emoji: '🍫' },
-    { id: 'g15', nombre: 'Mix de Caramelos',               precio: 1200, emoji: '🍬' },
-    { id: 'g16', nombre: 'Caja Surtida de Golosinas',      precio: 5500, emoji: '🎁' }
+    // ---------- Caramelos Menthoplus ----------
+    { id: 'mp-frio-mentol',    grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Frío Mentol',      precio: 500, emoji: '❄️' },
+    { id: 'mp-ac-manzana',     grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Ácidos Manzana',   precio: 500, emoji: '🍏' },
+    { id: 'mp-ac-naranja',     grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Ácidos Naranja',   precio: 500, emoji: '🍊' },
+    { id: 'mp-ac-blackcherry', grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Ácidos Black Cherry', precio: 500, emoji: '🍒' },
+    { id: 'mp-c-limon',        grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus C + Limón',        precio: 500, emoji: '🍋' },
+    { id: 'mp-miel',           grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Miel',             precio: 500, emoji: '🍯' },
+    { id: 'mp-cereza',         grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Cereza',           precio: 500, emoji: '🍒' },
+    { id: 'mp-strong',         grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Strong',           precio: 500, emoji: '⚡' },
+    { id: 'mp-mentol',         grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Mentol',           precio: 500, emoji: '🌿' },
+    { id: 'mp-menta',          grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Menta',            precio: 500, emoji: '🌱' },
+
+    // ---------- Caramelos Menthoplus Sin Azúcar ----------
+    { id: 'mpsa-mentol',  grupo: 'Caramelos Menthoplus Sin Azúcar', nombre: 'Menthoplus S/A Mentol',  precio: 550, emoji: '🌿' },
+    { id: 'mpsa-durazno', grupo: 'Caramelos Menthoplus Sin Azúcar', nombre: 'Menthoplus S/A Durazno', precio: 550, emoji: '🍑' },
+    { id: 'mpsa-sandia',  grupo: 'Caramelos Menthoplus Sin Azúcar', nombre: 'Menthoplus S/A Sandía',  precio: 550, emoji: '🍉' },
+    { id: 'mpsa-cherry',  grupo: 'Caramelos Menthoplus Sin Azúcar', nombre: 'Menthoplus S/A Cherry',  precio: 550, emoji: '🍒' },
+    { id: 'mpsa-strong',  grupo: 'Caramelos Menthoplus Sin Azúcar', nombre: 'Menthoplus S/A Strong',  precio: 550, emoji: '⚡' },
+
+    // ---------- Chicles Topline ----------
+    { id: 'tl-seven-bubblefun',    grupo: 'Chicles Topline', nombre: 'Topline Seven Bubble Fun',    precio: 1000, emoji: '🫧' },
+    { id: 'tl-seven-mentol',       grupo: 'Chicles Topline', nombre: 'Topline Seven Mentol',       precio: 1000, emoji: '🌿' },
+    { id: 'tl-seven-mandarina',    grupo: 'Chicles Topline', nombre: 'Topline Seven Mandarina',    precio: 1000, emoji: '🍊' },
+    { id: 'tl-seven-menta',        grupo: 'Chicles Topline', nombre: 'Topline Seven Menta',        precio: 1000, emoji: '🌱' },
+    { id: 'tl-seven-violetcherry', grupo: 'Chicles Topline', nombre: 'Topline Seven Violet Cherry',precio: 1000, emoji: '🍒' },
+    { id: 'tl-sandia-menta',       grupo: 'Chicles Topline', nombre: 'Topline Sandía Menta',       precio: 1000, emoji: '🍉' },
+    { id: 'tl-seven-sandia',       grupo: 'Chicles Topline', nombre: 'Topline Seven Sandía',       precio: 1000, emoji: '🍉' },
+    { id: 'tl-strong',             grupo: 'Chicles Topline', nombre: 'Topline Strong',             precio: 1000, emoji: '⚡' },
+    { id: 'tl-fruta',              grupo: 'Chicles Topline', nombre: 'Topline Fruta',              precio: 1000, emoji: '🍓' },
+    { id: 'tl-menta',              grupo: 'Chicles Topline', nombre: 'Topline Menta',              precio: 1000, emoji: '🌱' },
+    { id: 'tl-seven-clickfresh',   grupo: 'Chicles Topline', nombre: 'Topline Seven Click Fresh',  precio: 1000, emoji: '💨' },
+    { id: 'tl-seven-strong',       grupo: 'Chicles Topline', nombre: 'Topline Seven Strong',       precio: 1000, emoji: '⚡' },
+    { id: 'tl-seven-frutilla',     grupo: 'Chicles Topline', nombre: 'Topline Seven Frutilla',     precio: 1000, emoji: '🍓' },
+
+    // ---------- Chupetines ----------
+    { id: 'chp-cebollitas-ddl',   grupo: 'Chupetines', nombre: 'Chupetín Cebollitas Dulce de Leche', precio: 500,  emoji: '🍭' },
+    { id: 'chp-picodulce-pote',   grupo: 'Chupetines', nombre: 'Chupetín Pico Dulce (pote)',         precio: 2500, emoji: '🍬' },
+    { id: 'chp-picodulce-frut',   grupo: 'Chupetines', nombre: 'Chupetín Pico Dulce Frut (caja)',    precio: 2500, emoji: '🍓' },
+    { id: 'chp-flynnpaff-emoji',  grupo: 'Chupetines', nombre: 'Chupetín Flynn Paff Emoji',          precio: 600,  emoji: '😛' },
+    { id: 'chp-flynnpaff-sandia', grupo: 'Chupetines', nombre: 'Chupetín Flynn Paff Sandía Melón',   precio: 600,  emoji: '🍉' },
+
+    // ---------- Alfajores Fantoche ----------
+    { id: 'alf-raul-simple-blanco', grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Pescado Raúl Simple Blanco', precio: 1500, emoji: '🤍', videoId: 1 },
+    { id: 'alf-raul-simple-negro',  grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Pescado Raúl Simple Negro',  precio: 1500, emoji: '🍫', videoId: 1 },
+    { id: 'alf-super-triple',       grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Super Triple',      precio: 2500, emoji: '🍪' },
+    { id: 'alf-triple-redvelvet',   grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Triple Red Velvet', precio: 2500, emoji: '❤️' },
+    { id: 'alf-cuadruple-choco',    grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Cuádruple Chocolate', precio: 3500, emoji: '🍫' },
+    { id: 'alf-triple-blanco',      grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Triple Blanco',     precio: 2500, emoji: '🤍' },
+    { id: 'alf-triple-choco',       grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Triple Chocolate',  precio: 2500, emoji: '🍫' }
 ];
 
-const snacks = [
-    { id: 's1',  nombre: 'Pop Corn Clásico',          precio: 900,  emoji: '🍿' },
-    { id: 's2',  nombre: 'Pop Corn con Queso',        precio: 1100, emoji: '🧀' },
-    { id: 's3',  nombre: 'Pop Corn Dulce',            precio: 1000, emoji: '🍯' },
-    { id: 's4',  nombre: 'Palitos Salados',           precio: 700,  emoji: '🥨' },
-    { id: 's5',  nombre: 'Chizitos',                  precio: 900,  emoji: '🧡' },
-    { id: 's6',  nombre: 'Cheetos',                   precio: 1000, emoji: '🔥' },
-    { id: 's7',  nombre: 'Papas Fritas Clásicas',     precio: 1200, emoji: '🥔' },
-    { id: 's8',  nombre: 'Papas Fritas con Sabor',    precio: 1300, emoji: '🌶️' },
-    { id: 's9',  nombre: 'Papas Onduladas',           precio: 1400, emoji: '🥔' },
-    { id: 's10', nombre: 'Maní Salado',               precio: 800,  emoji: '🥜' },
-    { id: 's11', nombre: 'Maní con Miel',             precio: 1000, emoji: '🍯' },
-    { id: 's12', nombre: 'Mix de Frutos Secos',       precio: 2200, emoji: '🌰' },
-    { id: 's13', nombre: 'Crackers',                  precio: 800,  emoji: '🍘' },
-    { id: 's14', nombre: 'Tostadas',                  precio: 700,  emoji: '🍞' },
-    { id: 's15', nombre: 'Pistachos',                 precio: 2800, emoji: '🌿' },
-    { id: 's16', nombre: 'Caja Surtida de Snacks',    precio: 5500, emoji: '🎁' }
+// Por ahora, snacks salados queda vacío a la espera de carga real.
+// Se renderiza como "Próximamente" sin romper nada del resto de la web.
+const snacks = [];
+
+// Gaseosas y bebidas - productos placeholder hasta cargar los reales.
+// Precios redondos como referencia; actualizalos cuando los confirmes.
+const gaseosas = [
+    { id: 'bb-coca-500',     grupo: 'Gaseosas', nombre: 'Coca-Cola 500ml',          precio: 1500, emoji: '🥤' },
+    { id: 'bb-coca-zero-500',grupo: 'Gaseosas', nombre: 'Coca-Cola Zero 500ml',     precio: 1500, emoji: '🥤' },
+    { id: 'bb-coca-225',     grupo: 'Gaseosas', nombre: 'Coca-Cola 2.25L',          precio: 4500, emoji: '🧃' },
+    { id: 'bb-sprite-500',   grupo: 'Gaseosas', nombre: 'Sprite 500ml',             precio: 1400, emoji: '🥤' },
+    { id: 'bb-fanta-500',    grupo: 'Gaseosas', nombre: 'Fanta Naranja 500ml',      precio: 1400, emoji: '🍊' },
+    { id: 'bb-pepsi-500',    grupo: 'Gaseosas', nombre: 'Pepsi 500ml',              precio: 1300, emoji: '🥤' },
+    { id: 'bb-7up-500',      grupo: 'Gaseosas', nombre: '7Up 500ml',                precio: 1300, emoji: '🥤' },
+    { id: 'bb-paso-nar-500', grupo: 'Gaseosas', nombre: 'Paso de los Toros 500ml',  precio: 1300, emoji: '🍋' },
+    { id: 'bb-agua-500',     grupo: 'Aguas',    nombre: 'Agua Mineral 500ml',       precio: 1000, emoji: '💧' },
+    { id: 'bb-agua-sab-500', grupo: 'Aguas',    nombre: 'Agua Saborizada 500ml',    precio: 1200, emoji: '🍋' },
+    { id: 'bb-agua-225',     grupo: 'Aguas',    nombre: 'Agua Mineral 2.25L',       precio: 2500, emoji: '💧' }
 ];
 
 // =============================================
@@ -87,9 +133,24 @@ function saveCartToStorage() {
 function loadCartFromStorage() {
     try {
         const raw = localStorage.getItem(STORAGE_KEY_CART);
-        if (raw) {
-            const parsed = JSON.parse(raw);
-            if (Array.isArray(parsed)) cart = parsed;
+        if (!raw) return;
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) return;
+
+        // Filtro ítems huérfanos (ids viejos que ya no están en el catálogo).
+        // Esto protege contra carritos persistidos de versiones anteriores
+        // (ej. g1..g16, s1..s16) que romperían el renderizado/total.
+        const validIds = new Set([...golosinas, ...snacks, ...gaseosas].map(p => p.id));
+        cart = parsed.filter(item =>
+            item && typeof item === 'object'
+            && item.id && validIds.has(item.id)
+            && typeof item.precio === 'number'
+            && typeof item.qty === 'number' && item.qty > 0
+        );
+
+        // Si limpiamos algo, persistimos el carrito saneado
+        if (cart.length !== parsed.length) {
+            try { localStorage.setItem(STORAGE_KEY_CART, JSON.stringify(cart)); } catch (_) {}
         }
     } catch (_) {
         cart = [];
@@ -99,22 +160,126 @@ function loadCartFromStorage() {
 loadCartFromStorage();
 
 // =============================================
-// RENDERIZAR PRODUCTOS
+// RENDERIZAR PRODUCTOS (grilla plana + chips de filtro opcional)
 // =============================================
-function renderProducts(list, containerId) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
-
-    container.innerHTML = list.map(p => `
-        <div class="product-card">
-            <div class="product-emoji" aria-hidden="true">${p.emoji}</div>
-            <h3>${p.nombre}</h3>
+function productCardHTML(p) {
+    // Cada tarjeta es clickeable para abrir el modal de detalle.
+    // El botón "Agregar" sigue funcionando por delegación y evita abrir
+    // el modal al hacer click encima.
+    const videoBadge = (p.videoId != null)
+        ? `<span class="product-video-badge" aria-label="Tiene video" title="Tiene video">🎬</span>`
+        : '';
+    return `
+        <div class="product-card"
+             data-product-id="${escapeHtml(p.id)}"
+             data-product-group="${escapeHtml(p.grupo || '')}"
+             role="button" tabindex="0"
+             aria-label="Ver ${escapeHtml(p.nombre)}">
+            ${videoBadge}
+            <div class="product-emoji" aria-hidden="true">${p.emoji || '🍬'}</div>
+            <h3>${escapeHtml(p.nombre)}</h3>
             <div class="product-price">$${p.precio.toLocaleString('es-AR')}</div>
-            <button class="add-to-cart" data-id="${p.id}" aria-label="Agregar ${p.nombre} al carrito">
+            <div class="product-photo-placeholder" aria-hidden="true">📷 Foto próximamente</div>
+            <button class="add-to-cart" data-id="${escapeHtml(p.id)}" aria-label="Agregar ${escapeHtml(p.nombre)} al carrito">
                 Agregar
             </button>
         </div>
-    `).join('');
+    `;
+}
+
+/**
+ * Renderiza productos como una grilla plana en el contenedor.
+ * @param {Array} list - Productos a renderizar.
+ * @param {String} containerId - Id del div donde renderizar las tarjetas.
+ * @param {Object} [options]
+ * @param {String} [options.chipsContainerId] - Si se pasa, renderiza chips de filtro ahí
+ *                                              usando el campo `grupo` de cada producto.
+ */
+function renderProducts(list, containerId, options = {}) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    // Lista vacía → placeholder "Próximamente"
+    if (!list || list.length === 0) {
+        container.innerHTML = `
+            <div class="products-empty">
+                <div class="products-empty-icon" aria-hidden="true">🕒</div>
+                <h3>Próximamente</h3>
+                <p>Estamos cargando los productos de esta sección. Muy pronto los vas a ver acá.</p>
+            </div>
+        `;
+        // Si había chips de una lista anterior, limpiarlos
+        if (options.chipsContainerId) {
+            const chipsEl = document.getElementById(options.chipsContainerId);
+            if (chipsEl) chipsEl.innerHTML = '';
+        }
+        return;
+    }
+
+    // Grilla plana, sin headers de subcategoría
+    container.innerHTML = list.map(productCardHTML).join('');
+
+    // Si pidieron chips de filtro, los armamos
+    if (options.chipsContainerId) {
+        renderSubgroupChips(list, options.chipsContainerId, containerId);
+    }
+}
+
+/**
+ * Chips de filtro por subgrupo (ej: Caramelos, Chicles…).
+ * Click en un chip filtra visualmente las tarjetas del grid asociado.
+ * Combina con la búsqueda de texto (clases is-hidden e is-hidden-filter).
+ */
+function renderSubgroupChips(list, chipsContainerId, gridContainerId) {
+    const chipsContainer = document.getElementById(chipsContainerId);
+    if (!chipsContainer) return;
+
+    // Grupos únicos en orden de aparición
+    const groups = [];
+    const seen = new Set();
+    list.forEach(p => {
+        if (p.grupo && !seen.has(p.grupo)) {
+            seen.add(p.grupo);
+            groups.push(p.grupo);
+        }
+    });
+
+    // Si solo hay un grupo (o ninguno), no tiene sentido mostrar chips
+    if (groups.length <= 1) {
+        chipsContainer.innerHTML = '';
+        return;
+    }
+
+    const chipsHTML = [
+        `<button type="button" class="filter-chip is-active" data-filter="*">Todos</button>`,
+        ...groups.map(g =>
+            `<button type="button" class="filter-chip" data-filter="${escapeHtml(g)}">${escapeHtml(g)}</button>`
+        )
+    ].join('');
+
+    chipsContainer.innerHTML = chipsHTML;
+
+    // Marcar que ya tiene listener (evitar múltiples bindings si se re-renderiza)
+    if (chipsContainer.dataset.bound === '1') return;
+    chipsContainer.dataset.bound = '1';
+
+    chipsContainer.addEventListener('click', (e) => {
+        const chip = e.target.closest('.filter-chip');
+        if (!chip) return;
+
+        const filter = chip.dataset.filter;
+        const gridEl = document.getElementById(gridContainerId);
+        if (!gridEl) return;
+
+        chipsContainer.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('is-active'));
+        chip.classList.add('is-active');
+
+        gridEl.querySelectorAll('.product-card').forEach(card => {
+            const cardGroup = card.dataset.productGroup || '';
+            const matches = filter === '*' || cardGroup === filter;
+            card.classList.toggle('is-hidden-filter', !matches);
+        });
+    });
 }
 
 // =============================================
@@ -164,8 +329,10 @@ function renderShortCard(item) {
     // Video propio alojado (preview autoplay muteada + loop, tap para ver en Shorts)
     if (item.videoUrl) {
         const poster = item.thumbnail ? ` poster="${escapeHtml(item.thumbnail)}"` : '';
+        // Pasamos el id del short en el hash para que shorts.html abra el video correcto.
+        const hrefTarget = item.id != null ? `shorts.html#short-${encodeURIComponent(item.id)}` : 'shorts.html';
         return `
-            <a class="short-card short-card--video" href="shorts.html" aria-label="${title || 'Ver en Shorts'}">
+            <a class="short-card short-card--video" href="${hrefTarget}" aria-label="${title || 'Ver en Shorts'}">
                 <video${poster} muted loop playsinline preload="metadata" autoplay>
                     <source src="${escapeHtml(item.videoUrl)}">
                 </video>
@@ -467,7 +634,7 @@ function showCartToast(nombre) {
 // FUNCIONES DEL CARRITO
 // =============================================
 function findProduct(id) {
-    return [...golosinas, ...snacks].find(p => p.id === id);
+    return [...golosinas, ...snacks, ...gaseosas].find(p => p.id === id);
 }
 
 function addToCart(id, btnEl) {
@@ -1024,10 +1191,244 @@ if (reopenBtn) {
 })();
 
 // =============================================
+// BUSCADOR DE PRODUCTOS
+// Filtra tarjetas visibles por nombre (y grupo) en golosinas + snacks.
+// Esconde subcategorías que quedan sin resultados.
+// =============================================
+(function initProductSearch() {
+    const input    = document.getElementById('productSearch');
+    const clearBtn = document.getElementById('searchClear');
+    const statusEl = document.getElementById('searchStatus');
+
+    if (!input) return; // No estamos en el home
+
+    // Los grids que queremos cubrir con la búsqueda.
+    // Cada uno tiene un "empty state" opcional.
+    const targets = [
+        { gridId: 'golosinasGrid', emptyId: 'golosinasEmpty', dataLen: () => golosinas.length },
+        { gridId: 'snacksGrid',    emptyId: 'snacksEmpty',    dataLen: () => snacks.length },
+        { gridId: 'gaseosasGrid',  emptyId: 'gaseosasEmpty',  dataLen: () => gaseosas.length }
+    ];
+
+    function normalize(s) {
+        return String(s || '')
+            .toLowerCase()
+            .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // saca acentos
+            .trim();
+    }
+
+    function applyFilter(rawQuery) {
+        const q = normalize(rawQuery);
+        const filtering = q.length > 0;
+
+        if (clearBtn) clearBtn.hidden = !filtering;
+
+        let totalVisibles = 0;
+
+        targets.forEach(t => {
+            const grid = document.getElementById(t.gridId);
+            if (!grid) return;
+            const cards = grid.querySelectorAll('.product-card');
+            let countInGrid = 0;
+
+            cards.forEach(card => {
+                const nombre = normalize(card.querySelector('h3')?.textContent);
+                const grupo  = normalize(card.dataset.productGroup);
+                const matches = !filtering || nombre.includes(q) || grupo.includes(q);
+                card.classList.toggle('is-hidden', !matches);
+                if (matches) countInGrid++;
+            });
+
+            const emptyEl = document.getElementById(t.emptyId);
+            if (emptyEl) {
+                // Mostrar empty state solo si estamos filtrando, no matchea nada,
+                // y la sección sí tiene productos cargados.
+                emptyEl.hidden = !(filtering && countInGrid === 0 && t.dataLen() > 0);
+            }
+
+            totalVisibles += countInGrid;
+        });
+
+        if (statusEl) {
+            if (!filtering) {
+                statusEl.textContent = '';
+            } else if (totalVisibles === 0) {
+                statusEl.textContent = `Sin resultados para "${rawQuery.trim()}".`;
+            } else {
+                statusEl.textContent =
+                    totalVisibles === 1
+                        ? '1 producto encontrado'
+                        : `${totalVisibles} productos encontrados`;
+            }
+        }
+    }
+
+    let debounceTimer;
+    input.addEventListener('input', (e) => {
+        clearTimeout(debounceTimer);
+        const value = e.target.value;
+        debounceTimer = setTimeout(() => applyFilter(value), 80);
+    });
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+            input.value = '';
+            applyFilter('');
+            input.focus();
+        });
+    }
+
+    applyFilter(input.value);
+})();
+
+// =============================================
+// MODAL: DETALLE DE PRODUCTO
+// Se abre al tocar una tarjeta (no al tocar "Agregar").
+// =============================================
+(function initProductModal() {
+    const overlay = document.getElementById('productModalOverlay');
+    if (!overlay) return; // Esta página no tiene modal de producto
+
+    const closeBtn  = document.getElementById('productModalClose');
+    const titleEl   = document.getElementById('productModalTitle');
+    const descEl    = document.getElementById('productModalDesc');
+    const priceEl   = document.getElementById('productModalPrice');
+    const groupEl   = document.getElementById('productModalGroup');
+    const emojiEl   = document.getElementById('productModalEmoji');
+    const qtyValEl  = document.getElementById('productModalQtyValue');
+    const qtyMinus  = document.getElementById('productModalQtyMinus');
+    const qtyPlus   = document.getElementById('productModalQtyPlus');
+    const addBtn    = document.getElementById('productModalAdd');
+    const videoLink = document.getElementById('productModalVideoLink');
+
+    let currentProduct = null;
+    let currentQty = 1;
+
+    function updateQtyUI() {
+        if (qtyValEl) qtyValEl.textContent = String(currentQty);
+        if (qtyMinus) qtyMinus.disabled = currentQty <= 1;
+    }
+
+    function openModal(product) {
+        if (!product) return;
+        currentProduct = product;
+        currentQty = 1;
+
+        if (titleEl) titleEl.textContent = product.nombre;
+        if (descEl)  descEl.textContent  = product.descripcion || DESC_PLACEHOLDER;
+        if (priceEl) priceEl.textContent = '$' + product.precio.toLocaleString('es-AR');
+        if (groupEl) groupEl.textContent = product.grupo || '';
+        if (emojiEl) emojiEl.textContent = product.emoji || '🍬';
+
+        // Link al short asociado (si el producto tiene videoId)
+        if (videoLink) {
+            if (product.videoId != null) {
+                videoLink.href = 'shorts.html#short-' + encodeURIComponent(product.videoId);
+                videoLink.hidden = false;
+            } else {
+                videoLink.href = '#';
+                videoLink.hidden = true;
+            }
+        }
+
+        updateQtyUI();
+
+        overlay.classList.add('active');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('no-scroll');
+    }
+
+    function closeModal() {
+        overlay.classList.remove('active');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('no-scroll');
+        currentProduct = null;
+    }
+
+    // Abrir al click en tarjeta (evitando el botón Agregar)
+    document.addEventListener('click', (e) => {
+        // Si clickeó el botón Agregar dentro de la tarjeta, que no abra el modal
+        if (e.target.closest('.add-to-cart')) return;
+
+        const card = e.target.closest('.product-card');
+        if (!card) return;
+
+        const id = card.dataset.productId;
+        const product = findProduct(id);
+        if (product) openModal(product);
+    });
+
+    // Abrir con Enter o Espacio (accesibilidad)
+    document.addEventListener('keydown', (e) => {
+        if ((e.key === 'Enter' || e.key === ' ') && document.activeElement
+            && document.activeElement.classList
+            && document.activeElement.classList.contains('product-card')) {
+            e.preventDefault();
+            const id = document.activeElement.dataset.productId;
+            const product = findProduct(id);
+            if (product) openModal(product);
+        }
+    });
+
+    // Cierre
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) closeModal();
+    });
+
+    // Qty
+    if (qtyMinus) qtyMinus.addEventListener('click', () => {
+        if (currentQty > 1) { currentQty--; updateQtyUI(); }
+    });
+    if (qtyPlus) qtyPlus.addEventListener('click', () => {
+        currentQty++; updateQtyUI();
+    });
+
+    // Agregar desde el modal (sumando la cantidad elegida)
+    if (addBtn) addBtn.addEventListener('click', () => {
+        if (!currentProduct) return;
+        for (let i = 0; i < currentQty; i++) {
+            addToCart(currentProduct.id);
+        }
+        closeModal();
+    });
+})();
+
+// =============================================
+// SHORTS: abrir el video correcto desde home
+// Si la URL trae #short-X, arrancamos el feed en ese reel.
+// =============================================
+function scrollReelsToHash() {
+    const feed = document.getElementById('reelsFeed');
+    if (!feed) return;
+    const hash = window.location.hash || '';
+    const match = hash.match(/^#short-(\d+)$/);
+    if (!match) return;
+
+    const targetId = Number(match[1]);
+    const idx = shortsData.findIndex(s => Number(s.id) === targetId);
+    if (idx < 0) return;
+
+    const reels = feed.querySelectorAll('.reel');
+    const targetReel = reels[idx];
+    if (!targetReel) return;
+
+    // Esperar un tick a que IntersectionObserver se enganche
+    requestAnimationFrame(() => {
+        targetReel.scrollIntoView({ behavior: 'auto', block: 'start' });
+    });
+}
+
+// =============================================
 // BOOT: render inicial
 // =============================================
-renderProducts(golosinas, 'golosinasGrid');
-renderProducts(snacks, 'snacksGrid');
+renderProducts(golosinas, 'golosinasGrid', { chipsContainerId: 'golosinasFilters' });
+renderProducts(snacks,    'snacksGrid');
+renderProducts(gaseosas,  'gaseosasGrid',  { chipsContainerId: 'gaseosasFilters' });
 renderShorts('homeShortsScroller', { limit: 5 });     // preview horizontal en home
 renderReels('reelsFeed');                             // feed inmersivo estilo TikTok / Reels en shorts.html
+scrollReelsToHash();                                  // si venimos con #short-N, abrimos ese reel
 updateCartUI(); // refleja el carrito persistido (incluso en páginas sin carrito, para el contador)

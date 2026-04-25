@@ -1,0 +1,768 @@
+/* =====================================================
+ * FALAHBAR.SnkS - styles-extra.css
+ * Estilos para componentes NUEVOS (buscador, modal de producto,
+ * subcategorías, placeholders). NO toca los estilos de styles.css.
+ *
+ * Usa las variables CSS que ya tengas definidas en styles.css
+ * (--color-primary, --color-secondary, etc). Si no están definidas,
+ * caen a valores por defecto de la paleta crema/beige/marrón/dorado.
+ * ===================================================== */
+
+:root {
+    --fx-cream:    var(--color-bg, #faf5ef);
+    --fx-beige:    var(--color-beige, #e9ddc7);
+    --fx-brown:    var(--color-primary, #8b5e34);
+    --fx-brown-dk: var(--color-primary-dark, #6b4422);
+    --fx-gold:     var(--color-gold, #c8a168);
+    --fx-text:     var(--color-text, #4a3b2e);
+    --fx-text-mut: var(--color-muted, #8a7766);
+    --fx-white:    #ffffff;
+    --fx-error:    var(--color-error, #c0392b);
+    --fx-shadow:   0 10px 30px rgba(60, 42, 27, 0.18);
+    --fx-shadow-sm:0 4px 12px rgba(60, 42, 27, 0.10);
+    --fx-radius:   16px;
+}
+
+/* =========================================
+ * BUSCADOR
+ * ========================================= */
+.search-section {
+    padding: 28px 0 8px;
+    position: sticky;
+    top: 64px;
+    z-index: 20;
+    background: linear-gradient(
+        to bottom,
+        var(--fx-cream) 0%,
+        var(--fx-cream) 70%,
+        rgba(250, 245, 239, 0) 100%
+    );
+    backdrop-filter: blur(4px);
+}
+
+.search-box {
+    position: relative;
+    max-width: 640px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    background: var(--fx-white);
+    border: 1.5px solid var(--fx-beige);
+    border-radius: 999px;
+    padding: 6px 16px 6px 44px;
+    box-shadow: var(--fx-shadow-sm);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.search-box:focus-within {
+    border-color: var(--fx-gold);
+    box-shadow: 0 0 0 4px rgba(200, 161, 104, 0.15), var(--fx-shadow-sm);
+    transform: translateY(-1px);
+}
+
+.search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    opacity: 0.7;
+}
+
+.search-input {
+    flex: 1;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: 16px;
+    font-family: inherit;
+    color: var(--fx-text);
+    padding: 10px 0;
+}
+
+.search-input::placeholder {
+    color: var(--fx-text-mut);
+    opacity: 0.8;
+}
+
+/* Cancelar X del search nativo */
+.search-input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.search-clear {
+    border: 0;
+    background: var(--fx-beige);
+    color: var(--fx-brown-dk);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.search-clear:hover {
+    background: var(--fx-gold);
+    color: var(--fx-white);
+    transform: rotate(90deg);
+}
+
+.search-status {
+    max-width: 640px;
+    margin: 10px auto 0;
+    text-align: center;
+    font-size: 14px;
+    color: var(--fx-text-mut);
+    min-height: 20px;
+}
+
+/* Estado vacío por sección */
+.search-empty {
+    text-align: center;
+    padding: 32px 16px;
+    color: var(--fx-text-mut);
+    border: 1.5px dashed var(--fx-beige);
+    border-radius: var(--fx-radius);
+    background: rgba(233, 221, 199, 0.25);
+    margin-top: 16px;
+}
+
+.search-empty-icon {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.search-empty p { margin: 0; }
+
+/* Tarjetas ocultas por filtros (búsqueda o chips) - se combinan */
+.product-card.is-hidden,
+.product-card.is-hidden-filter,
+.product-group.is-hidden {
+    display: none !important;
+}
+
+/* =========================================
+ * CHIPS DE FILTRO (subcategorías)
+ * Grilla plana + chips tipo píldora para filtrar.
+ * ========================================= */
+.filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 8px 0 24px;
+    padding: 4px 0;
+    justify-content: center;
+}
+
+.filter-chip {
+    border: 1.5px solid var(--fx-beige);
+    background: var(--fx-white);
+    color: var(--fx-brown-dk);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.22s ease,
+                color 0.22s ease,
+                border-color 0.22s ease,
+                transform 0.15s ease,
+                box-shadow 0.22s ease;
+    box-shadow: var(--fx-shadow-sm);
+}
+
+.filter-chip:hover {
+    border-color: var(--fx-gold);
+    color: var(--fx-brown-dk);
+    transform: translateY(-1px);
+}
+
+.filter-chip.is-active {
+    background: linear-gradient(135deg, var(--fx-brown), var(--fx-brown-dk));
+    color: var(--fx-white);
+    border-color: var(--fx-brown-dk);
+    box-shadow: 0 6px 16px rgba(91, 61, 34, 0.28);
+    transform: translateY(-1px);
+}
+
+.filter-chip.is-active:hover {
+    color: var(--fx-white);
+    border-color: var(--fx-brown-dk);
+}
+
+.filter-chip:focus-visible {
+    outline: 3px solid var(--fx-gold);
+    outline-offset: 2px;
+}
+
+/* =========================================
+ * SUBCATEGORÍAS
+ * ========================================= */
+.product-group {
+    margin-bottom: 32px;
+}
+
+.product-group-title {
+    position: relative;
+    font-size: 22px;
+    color: var(--fx-brown-dk);
+    margin: 8px 0 16px;
+    padding-left: 14px;
+    letter-spacing: 0.2px;
+}
+
+.product-group-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 6px;
+    bottom: 6px;
+    width: 4px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, var(--fx-gold), var(--fx-brown));
+}
+
+.product-group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+/* Sección vacía (snacks sin productos) */
+.products-empty {
+    text-align: center;
+    padding: 48px 24px;
+    border: 1.5px dashed var(--fx-beige);
+    border-radius: var(--fx-radius);
+    background: rgba(255, 255, 255, 0.6);
+    color: var(--fx-text-mut);
+}
+
+.products-empty-icon {
+    font-size: 44px;
+    margin-bottom: 8px;
+}
+
+.products-empty h3 {
+    color: var(--fx-brown-dk);
+    margin: 8px 0 4px;
+}
+
+.products-empty p {
+    margin: 0;
+    max-width: 420px;
+    margin-inline: auto;
+}
+
+/* =========================================
+ * TARJETAS (refinamiento para click-to-open)
+ * Solo toca comportamiento; no pisa estilos base.
+ * ========================================= */
+.product-card {
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--fx-shadow);
+}
+
+.product-card:focus-visible {
+    outline: 3px solid var(--fx-gold);
+    outline-offset: 3px;
+}
+
+.product-photo-placeholder {
+    margin: 6px 0 10px;
+    font-size: 11px;
+    color: var(--fx-text-mut);
+    letter-spacing: 0.3px;
+    opacity: 0.75;
+}
+
+/* Evitar que el botón Agregar propague el click al card */
+.product-card .add-to-cart {
+    position: relative;
+    z-index: 2;
+}
+
+/* Badge de video en la esquina de la tarjeta */
+.product-card {
+    position: relative; /* para el badge */
+}
+
+.product-video-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, var(--fx-brown), var(--fx-brown-dk));
+    color: var(--fx-white);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    box-shadow: 0 4px 10px rgba(91, 61, 34, 0.35);
+    z-index: 3;
+    animation: fx-video-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes fx-video-pulse {
+    0%, 100% { transform: scale(1);   box-shadow: 0 4px 10px rgba(91, 61, 34, 0.35); }
+    50%      { transform: scale(1.08);box-shadow: 0 6px 16px rgba(200, 161, 104, 0.5); }
+}
+
+/* =========================================
+ * MODAL: DETALLE DE PRODUCTO
+ * ========================================= */
+.product-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(32, 20, 10, 0.55);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 1000;
+}
+
+.product-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.product-modal {
+    background: var(--fx-white);
+    color: var(--fx-text);
+    border-radius: 20px;
+    box-shadow: 0 30px 80px rgba(60, 42, 27, 0.35);
+    width: 100%;
+    max-width: 440px;
+    overflow: hidden;
+    position: relative;
+    transform: scale(0.92) translateY(16px);
+    opacity: 0;
+    transition: transform 0.32s cubic-bezier(0.2, 0.9, 0.25, 1.1),
+                opacity 0.25s ease;
+}
+
+.product-modal-overlay.active .product-modal {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+.product-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--fx-brown-dk);
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.product-modal-close:hover {
+    background: var(--fx-gold);
+    color: var(--fx-white);
+    transform: rotate(90deg);
+}
+
+.product-modal-hero {
+    position: relative;
+    background: linear-gradient(135deg, var(--fx-beige), var(--fx-cream));
+    padding: 44px 24px 28px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.product-modal-hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200, 161, 104, 0.35), transparent 70%);
+    pointer-events: none;
+}
+
+.product-modal-emoji {
+    font-size: 96px;
+    line-height: 1;
+    filter: drop-shadow(0 6px 12px rgba(60, 42, 27, 0.2));
+    position: relative;
+}
+
+.product-modal-photo-placeholder {
+    position: relative;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--fx-brown-dk);
+    letter-spacing: 0.5px;
+    opacity: 0.7;
+}
+
+.product-modal-body {
+    padding: 22px 24px 26px;
+}
+
+.product-modal-group {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--fx-brown);
+    background: var(--fx-beige);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+}
+
+.product-modal-body h2 {
+    margin: 2px 0 6px;
+    color: var(--fx-text);
+    font-size: 22px;
+    line-height: 1.25;
+}
+
+.product-modal-desc {
+    margin: 0 0 16px;
+    color: var(--fx-text-mut);
+    font-size: 14.5px;
+    line-height: 1.5;
+}
+
+.product-modal-video-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    margin-bottom: 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fx-brown-dk);
+    background: linear-gradient(135deg, var(--fx-beige), var(--fx-cream));
+    border: 1.5px solid var(--fx-gold);
+    box-shadow: var(--fx-shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.product-modal-video-link:hover {
+    transform: translateY(-1px);
+    background: linear-gradient(135deg, var(--fx-gold), #dcb877);
+    color: var(--fx-white);
+    box-shadow: 0 8px 20px rgba(200, 161, 104, 0.4);
+}
+
+.product-modal-video-link[hidden] { display: none; }
+
+.product-modal-price {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--fx-brown-dk);
+    margin-bottom: 18px;
+}
+
+.product-modal-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.product-modal-qty {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--fx-beige);
+    border-radius: 999px;
+    padding: 4px;
+}
+
+.product-modal-qty .qty-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 0;
+    background: var(--fx-white);
+    color: var(--fx-brown-dk);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.product-modal-qty .qty-btn:hover:not(:disabled) {
+    background: var(--fx-gold);
+    color: var(--fx-white);
+    transform: scale(1.05);
+}
+
+.product-modal-qty .qty-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.product-modal-qty .qty-value {
+    min-width: 28px;
+    text-align: center;
+    font-weight: 700;
+    color: var(--fx-brown-dk);
+}
+
+.product-modal-add {
+    flex: 1;
+    min-width: 160px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/* Pequeño ajuste responsive del modal */
+@media (max-width: 480px) {
+    .product-modal-emoji { font-size: 80px; }
+    .product-modal-body h2 { font-size: 19px; }
+    .product-modal-price { font-size: 22px; }
+    .product-modal-actions { gap: 10px; }
+}
+
+/* =========================================
+ * BLOQUEO DE SCROLL COMPARTIDO
+ * (por si styles.css no lo tiene)
+ * ========================================= */
+body.no-scroll { overflow: hidden; }
+
+/* =====================================================
+ * SHORTS / REELS - UNIFICACIÓN DE PALETA
+ * Overrides de la versión oscura original para que el
+ * feed de shorts se sienta parte de la misma web cálida.
+ * La zona del video (.reel-media) mantiene fondo neutro
+ * oscuro para que el video no se vea "flotando" sobre
+ * crema, pero todo el marco (header, placeholders, hint,
+ * reel de cierre, acciones laterales) pasa a crema/beige/
+ * marrón/dorado.
+ * ===================================================== */
+
+/* Fondo general del modo reels */
+.body-reels {
+    background-color: var(--fx-cream) !important;
+}
+
+.reels-viewport {
+    background-color: var(--fx-cream) !important;
+}
+
+/* Header: de vidrio oscuro → vidrio crema */
+.header--reels {
+    background-color: rgba(255, 251, 245, 0.82) !important;
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    border-bottom: 1px solid rgba(184, 148, 77, 0.22) !important;
+}
+
+.header--reels .nav-links a {
+    color: var(--fx-brown-dk) !important;
+}
+
+.header--reels .nav-links a:hover,
+.header--reels .nav-links a.active {
+    color: var(--fx-brown) !important;
+}
+
+.header--reels .nav-toggle span {
+    background-color: var(--fx-brown-dk) !important;
+}
+
+.header--reels .cart-btn {
+    background-color: rgba(184, 148, 77, 0.18) !important;
+    color: var(--fx-brown-dk) !important;
+}
+
+.header--reels .cart-btn:hover {
+    background-color: rgba(184, 148, 77, 0.32) !important;
+}
+
+/* Cada reel: el "marco" alrededor del video pasa a crema,
+   pero el área donde se reproduce el video conserva un
+   fondo neutro oscuro para letterbox consistente. */
+.reel {
+    background-color: var(--fx-cream) !important;
+}
+
+.reel-media {
+    /* Marrón muy muy oscuro en lugar de negro puro -
+       se funde mejor con la paleta sin perder contraste. */
+    background-color: #1e140c !important;
+    border-radius: 18px;
+    box-shadow:
+        0 10px 30px rgba(91, 61, 34, 0.28),
+        0 2px 6px rgba(91, 61, 34, 0.18);
+}
+
+/* Suavizo el gradiente sobre el video:
+   arriba queda sin gradiente (limpio), abajo queda un
+   gradiente marrón oscuro sutil para legibilidad del texto. */
+.reel-gradient {
+    background:
+        linear-gradient(to top, rgba(30, 20, 12, 0.72) 0%, rgba(30, 20, 12, 0) 42%) !important;
+}
+
+/* Indicador de play central: dorado translúcido */
+.reel-play-indicator {
+    background-color: rgba(91, 61, 34, 0.55) !important;
+    border: 1px solid rgba(255, 251, 245, 0.3);
+}
+
+/* Brand chip sobre el video: fondo crema translúcido en vez de texto blanco plano */
+.reel-brand strong {
+    color: var(--fx-cream) !important;
+    text-shadow: 0 1px 6px rgba(30, 20, 12, 0.75) !important;
+}
+
+.reel-brand-logo {
+    background-color: var(--fx-cream) !important;
+    border: 2px solid rgba(200, 161, 104, 0.6) !important;
+    box-shadow: 0 2px 10px rgba(30, 20, 12, 0.4) !important;
+}
+
+.reel-title {
+    color: var(--fx-cream) !important;
+    text-shadow: 0 1px 6px rgba(30, 20, 12, 0.8) !important;
+}
+
+/* CTA "Ver productos →" usando el dorado de la marca */
+.reel-cta {
+    background-color: rgba(200, 161, 104, 0.88) !important;
+    border: 1px solid var(--fx-gold) !important;
+    color: var(--fx-white) !important;
+    font-weight: 700;
+}
+
+.reel-cta:hover {
+    background-color: var(--fx-brown) !important;
+    border-color: var(--fx-brown-dk) !important;
+}
+
+/* Botones laterales: marrón oscuro translúcido + acento dorado */
+.reel-action {
+    background-color: rgba(60, 42, 27, 0.55) !important;
+    border: 1px solid rgba(200, 161, 104, 0.35) !important;
+    color: var(--fx-cream) !important;
+}
+
+.reel-action:hover {
+    background-color: rgba(200, 161, 104, 0.75) !important;
+    border-color: var(--fx-gold) !important;
+}
+
+.reel-action.is-unmuted {
+    background-color: var(--fx-gold) !important;
+    border-color: var(--fx-gold) !important;
+}
+
+/* Placeholders y reel de cierre: de dark gradient → gradient cálido claro */
+.reel--placeholder {
+    background:
+        radial-gradient(circle at 30% 25%, rgba(200, 161, 104, 0.35), transparent 55%),
+        radial-gradient(circle at 75% 80%, rgba(184, 148, 77, 0.22), transparent 50%),
+        linear-gradient(180deg, var(--fx-cream) 0%, var(--fx-beige) 100%) !important;
+}
+
+.reel-placeholder-inner {
+    color: var(--fx-brown-dk) !important;
+}
+
+.reel-placeholder-inner h3 {
+    color: var(--fx-brown-dk) !important;
+}
+
+.reel-placeholder-inner p {
+    color: var(--fx-text-mut) !important;
+}
+
+.reel-placeholder-icon {
+    /* Sombra cálida en lugar de negro duro */
+    filter: drop-shadow(0 6px 18px rgba(91, 61, 34, 0.35)) !important;
+}
+
+.reel-placeholder-inner .btn-secondary {
+    border-color: var(--fx-brown) !important;
+    color: var(--fx-brown-dk) !important;
+    background-color: transparent !important;
+}
+
+.reel-placeholder-inner .btn-secondary:hover {
+    background-color: var(--fx-brown) !important;
+    border-color: var(--fx-brown-dk) !important;
+    color: var(--fx-cream) !important;
+}
+
+.reel--end {
+    background:
+        radial-gradient(circle at 50% 40%, rgba(200, 161, 104, 0.35), transparent 60%),
+        linear-gradient(180deg, var(--fx-cream) 0%, var(--fx-beige) 100%) !important;
+}
+
+.reel-end-inner {
+    color: var(--fx-brown-dk) !important;
+}
+
+.reel-end-inner h2 {
+    color: var(--fx-brown-dk) !important;
+}
+
+.reel-end-inner p {
+    color: var(--fx-text-mut) !important;
+}
+
+.reel-end-logo {
+    filter: drop-shadow(0 8px 20px rgba(91, 61, 34, 0.3)) !important;
+}
+
+.reel-end-buttons .btn-secondary {
+    border-color: var(--fx-brown) !important;
+    color: var(--fx-brown-dk) !important;
+    background: transparent !important;
+}
+
+.reel-end-buttons .btn-secondary:hover {
+    background-color: var(--fx-brown) !important;
+    border-color: var(--fx-brown-dk) !important;
+    color: var(--fx-cream) !important;
+}
+
+/* Hint "Deslizá para ver más" */
+.reels-hint {
+    background-color: rgba(60, 42, 27, 0.78) !important;
+    border: 1px solid rgba(200, 161, 104, 0.5) !important;
+    color: var(--fx-cream) !important;
+}

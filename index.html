@@ -8,6 +8,7 @@
     <title>Falahbar.SnkS - Golosinas y SnkS</title>
     <link rel="icon" type="image/png" href="logo.png">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-extra.css">
 </head>
 <body>
     <!-- HEADER / NAVEGACIÓN -->
@@ -22,7 +23,8 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="active">Inicio</a></li>
                 <li><a href="#golosinas">Golosinas</a></li>
-                <li><a href="#snacks">SnkS</a></li>
+                <li><a href="#snacks">Snacks</a></li>
+                <li><a href="#gaseosas">Gaseosas</a></li>
                 <li><a href="shorts.html">Shorts</a></li>
                 <li><a href="about.html">Sobre Nosotros</a></li>
                 <li><a href="contact.html">Contacto</a></li>
@@ -44,8 +46,8 @@
                 SnkS salados a domicilio en La Rioja.
             </p>
             <div class="hero-buttons">
-                <a href="#golosinas" class="btn btn-primary">Ver productos</a>
-                <a href="#snacks" class="btn btn-secondary">Ver SnkS</a>
+                <a href="#golosinas" class="btn btn-primary">Ver golosinas</a>
+                <a href="#gaseosas" class="btn btn-secondary">Ver gaseosas</a>
             </div>
         </div>
     </section>
@@ -64,13 +66,34 @@
         </div>
     </section>
 
+    <!-- BUSCADOR DE PRODUCTOS -->
+    <section class="search-section" aria-label="Buscar productos">
+        <div class="container">
+            <div class="search-box">
+                <span class="search-icon" aria-hidden="true">🔍</span>
+                <input type="search" id="productSearch" class="search-input"
+                       placeholder="Buscar en el catálogo… (ej: Menthoplus, Topline, Alfajor)"
+                       autocomplete="off" aria-label="Buscar productos">
+                <button type="button" class="search-clear" id="searchClear" aria-label="Limpiar búsqueda" hidden>×</button>
+            </div>
+            <p class="search-status" id="searchStatus" aria-live="polite"></p>
+        </div>
+    </section>
+
     <!-- GOLOSINAS -->
     <section class="products" id="golosinas">
         <div class="container">
-            <h2 class="section-title">Golosinas y Chocolates</h2>
-            <p class="section-subtitle">Dulzura en cada bocado</p>
+            <h2 class="section-title">Golosinas</h2>
+            <p class="section-subtitle">Caramelos, chicles, chupetines y alfajores</p>
+            <div class="filter-chips" id="golosinasFilters" role="tablist" aria-label="Filtrar golosinas">
+                <!-- Los chips se cargan desde script.js -->
+            </div>
             <div class="products-grid" id="golosinasGrid">
                 <!-- Los productos se cargan desde script.js -->
+            </div>
+            <div class="search-empty" id="golosinasEmpty" hidden>
+                <div class="search-empty-icon" aria-hidden="true">🧐</div>
+                <p>No encontramos golosinas con ese término.</p>
             </div>
         </div>
     </section>
@@ -78,10 +101,32 @@
     <!-- SNACKS -->
     <section class="products products-alt" id="snacks">
         <div class="container">
-            <h2 class="section-title">SnkS Salados</h2>
+            <h2 class="section-title">Snacks</h2>
             <p class="section-subtitle">Para los que aman lo salado</p>
             <div class="products-grid" id="snacksGrid">
                 <!-- Los productos se cargan desde script.js -->
+            </div>
+            <div class="search-empty" id="snacksEmpty" hidden>
+                <div class="search-empty-icon" aria-hidden="true">🧐</div>
+                <p>No encontramos snacks con ese término.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GASEOSAS -->
+    <section class="products" id="gaseosas">
+        <div class="container">
+            <h2 class="section-title">Gaseosas y Bebidas</h2>
+            <p class="section-subtitle">Para acompañar todo lo demás</p>
+            <div class="filter-chips" id="gaseosasFilters" role="tablist" aria-label="Filtrar bebidas">
+                <!-- Los chips se cargan desde script.js -->
+            </div>
+            <div class="products-grid" id="gaseosasGrid">
+                <!-- Los productos se cargan desde script.js -->
+            </div>
+            <div class="search-empty" id="gaseosasEmpty" hidden>
+                <div class="search-empty-icon" aria-hidden="true">🧐</div>
+                <p>No encontramos bebidas con ese término.</p>
             </div>
         </div>
     </section>
@@ -161,6 +206,37 @@
             </button>
         </div>
     </aside>
+
+    <!-- MODAL: DETALLE DE PRODUCTO -->
+    <div class="product-modal-overlay" id="productModalOverlay" aria-hidden="true">
+        <div class="product-modal" role="dialog" aria-modal="true" aria-labelledby="productModalTitle">
+            <button class="product-modal-close" id="productModalClose" aria-label="Cerrar">×</button>
+            <div class="product-modal-hero">
+                <div class="product-modal-emoji" id="productModalEmoji" aria-hidden="true">🍬</div>
+                <div class="product-modal-photo-placeholder">📷 Foto próximamente</div>
+            </div>
+            <div class="product-modal-body">
+                <span class="product-modal-group" id="productModalGroup"></span>
+                <h2 id="productModalTitle">Nombre del producto</h2>
+                <p class="product-modal-desc" id="productModalDesc">Descripción</p>
+                <a href="#" class="product-modal-video-link" id="productModalVideoLink" hidden>
+                    <span aria-hidden="true">🎬</span>
+                    <span>Ver video del producto</span>
+                </a>
+                <div class="product-modal-price" id="productModalPrice">$0</div>
+                <div class="product-modal-actions">
+                    <div class="product-modal-qty">
+                        <button type="button" class="qty-btn" id="productModalQtyMinus" aria-label="Restar uno">−</button>
+                        <span class="qty-value" id="productModalQtyValue">1</span>
+                        <button type="button" class="qty-btn" id="productModalQtyPlus" aria-label="Sumar uno">+</button>
+                    </div>
+                    <button type="button" class="btn btn-primary product-modal-add" id="productModalAdd">
+                        Agregar al carrito
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- MODAL: NOMBRE DEL CLIENTE -->
     <div class="name-modal-overlay" id="nameModalOverlay" aria-hidden="true">
