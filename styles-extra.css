@@ -665,6 +665,10 @@ body.no-scroll { overflow: hidden; }
     border: 1px solid var(--fx-gold) !important;
     color: var(--fx-white) !important;
     font-weight: 700;
+    max-width: min(86vw, 320px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .reel-cta:hover {
@@ -765,4 +769,318 @@ body.no-scroll { overflow: hidden; }
     background-color: rgba(60, 42, 27, 0.78) !important;
     border: 1px solid rgba(200, 161, 104, 0.5) !important;
     color: var(--fx-cream) !important;
+}
+
+/* Pulso dorado cuando el botón 🛒 del reel agrega un producto al carrito */
+.reel-action--added {
+    animation: fx-reel-add-pulse 0.7s ease;
+}
+
+@keyframes fx-reel-add-pulse {
+    0%   { transform: scale(1);    background-color: var(--fx-gold) !important; }
+    40%  { transform: scale(1.16); background-color: #e8c887 !important; }
+    100% { transform: scale(1);    background-color: rgba(60, 42, 27, 0.55) !important; }
+}
+
+/* =====================================================
+ * CARRITO - DATOS DE ENTREGA (dirección + ubicación)
+ * Bloque que va entre la lista de productos y el footer.
+ * ===================================================== */
+/* Wrapper scrolleable que une la lista de productos + datos de entrega
+   en un mismo flujo, así el usuario puede deslizar y ver todo de corrido. */
+.cart-scroll {
+    flex: 1;
+    min-height: 0;            /* clave para que el flex hijo pueda achicar y scrollear */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Anulo el scroll propio de cart-items: ahora forma parte de .cart-scroll */
+.cart-scroll > .cart-items {
+    flex: 0 0 auto;
+    overflow: visible;
+}
+
+.cart-delivery {
+    padding: 18px 24px 18px;
+    border-top: 1px solid var(--fx-beige);
+    background: linear-gradient(180deg, rgba(255, 251, 245, 0) 0%, rgba(245, 233, 212, 0.55) 100%);
+    flex: 0 0 auto;
+}
+
+.cart-delivery-title {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--fx-brown-dk);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.2px;
+}
+
+.cart-delivery-hint {
+    margin: 0 0 14px;
+    font-size: 13px;
+    color: var(--fx-text-mut);
+    line-height: 1.4;
+}
+
+.cart-delivery-hint strong {
+    color: var(--fx-brown-dk);
+    font-weight: 700;
+}
+
+.cart-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.cart-field label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--fx-brown-dk);
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+}
+
+.cart-field-hint {
+    font-weight: 500;
+    font-size: 11px;
+    color: var(--fx-text-mut);
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.cart-field input {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 12px;
+    border: 1.5px solid var(--fx-beige);
+    background: var(--fx-white);
+    font-family: inherit;
+    font-size: 14.5px;
+    color: var(--fx-text);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    outline: 0;
+}
+
+.cart-field input::placeholder {
+    color: var(--fx-text-mut);
+    opacity: 0.75;
+}
+
+.cart-field input:focus {
+    border-color: var(--fx-gold);
+    box-shadow: 0 0 0 3px rgba(200, 161, 104, 0.18);
+}
+
+.cart-field input.is-error {
+    border-color: var(--fx-error);
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.15);
+    animation: fx-input-shake 0.4s ease;
+}
+
+@keyframes fx-input-shake {
+    0%, 100% { transform: translateX(0); }
+    25%      { transform: translateX(-4px); }
+    50%      { transform: translateX(4px); }
+    75%      { transform: translateX(-2px); }
+}
+
+/* Botón "Usar mi ubicación" */
+.btn-geo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 11px 16px;
+    margin-top: 4px;
+    border-radius: 999px;
+    border: 1.5px solid var(--fx-gold);
+    background: linear-gradient(135deg, var(--fx-cream), var(--fx-beige));
+    color: var(--fx-brown-dk);
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+    box-shadow: var(--fx-shadow-sm);
+}
+
+.btn-geo:hover:not(:disabled) {
+    transform: translateY(-1px);
+    background: linear-gradient(135deg, var(--fx-gold), #dcb877);
+    color: var(--fx-white);
+    box-shadow: 0 8px 20px rgba(200, 161, 104, 0.35);
+}
+
+.btn-geo:disabled {
+    opacity: 0.7;
+    cursor: progress;
+}
+
+/* Palpite cuando el usuario intenta enviar sin dirección ni ubicación */
+.btn-geo.is-pulsing {
+    animation: fx-geo-pulse 0.7s ease-in-out 3;
+    border-color: var(--fx-error);
+}
+
+@keyframes fx-geo-pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow:
+            0 0 0 0 rgba(192, 57, 43, 0.55),
+            var(--fx-shadow-sm);
+    }
+    50% {
+        transform: scale(1.04);
+        box-shadow:
+            0 0 0 12px rgba(192, 57, 43, 0),
+            0 8px 22px rgba(200, 161, 104, 0.45);
+    }
+}
+
+.btn-geo .btn-geo-icon {
+    font-size: 16px;
+}
+
+.btn-geo .btn-geo-spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(91, 61, 34, 0.25);
+    border-top-color: var(--fx-brown-dk);
+    border-radius: 50%;
+    animation: fx-spin 0.8s linear infinite;
+}
+
+.btn-geo.is-loading .btn-geo-icon { display: none; }
+.btn-geo.is-loading .btn-geo-spinner { display: inline-block; }
+.btn-geo.is-loading .btn-geo-label::after {
+    content: '…';
+}
+.btn-geo.is-loading .btn-geo-label {
+    /* Reemplazo "Usar mi ubicación" por "Buscando ubicación" mientras carga */
+    font-size: 0;
+}
+.btn-geo.is-loading .btn-geo-label::before {
+    content: 'Buscando ubicación';
+    font-size: 14.5px;
+}
+
+@keyframes fx-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Status del módulo de geolocalización */
+.cart-geo-status {
+    margin: 10px 0 0;
+    font-size: 13px;
+    line-height: 1.4;
+    min-height: 18px;
+    color: var(--fx-text-mut);
+}
+
+.cart-geo-status.is-info  { color: var(--fx-brown-dk); }
+.cart-geo-status.is-ok    { color: #1f7a3a; }
+.cart-geo-status.is-error { color: var(--fx-error); }
+
+/* Tarjeta de ubicación capturada */
+.cart-geo-card {
+    margin-top: 12px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 12px 12px 14px;
+    border: 1.5px solid var(--fx-gold);
+    border-radius: var(--fx-radius);
+    background: linear-gradient(135deg, #fff8e8, #fbe6c5);
+    box-shadow: var(--fx-shadow-sm);
+    position: relative;
+    animation: fx-geo-pop 0.3s ease;
+}
+
+@keyframes fx-geo-pop {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.cart-geo-card[hidden] { display: none; }
+
+.cart-geo-card-icon {
+    font-size: 22px;
+    line-height: 1;
+    margin-top: 2px;
+    filter: drop-shadow(0 2px 4px rgba(91, 61, 34, 0.18));
+}
+
+.cart-geo-card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+}
+
+.cart-geo-card-body strong {
+    color: var(--fx-brown-dk);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.cart-geo-coords {
+    font-size: 12px;
+    color: var(--fx-text-mut);
+    font-variant-numeric: tabular-nums;
+    word-break: break-all;
+}
+
+.cart-geo-link {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--fx-brown-dk);
+    text-decoration: none;
+    margin-top: 2px;
+    align-self: flex-start;
+}
+
+.cart-geo-link:hover {
+    text-decoration: underline;
+    color: var(--fx-brown);
+}
+
+.cart-geo-clear {
+    border: 0;
+    background: rgba(91, 61, 34, 0.12);
+    color: var(--fx-brown-dk);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background-color 0.2s ease, transform 0.2s ease, color 0.2s ease;
+    flex-shrink: 0;
+}
+
+.cart-geo-clear:hover {
+    background: var(--fx-error);
+    color: var(--fx-white);
+    transform: rotate(90deg);
+}
+
+@media (max-width: 380px) {
+    .cart-delivery {
+        padding: 14px 18px 4px;
+    }
 }

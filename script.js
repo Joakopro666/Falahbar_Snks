@@ -17,6 +17,25 @@
 const DESC_PLACEHOLDER = 'Descripción próximamente. Un clásico que no falla en Falahbar.SnkS 🍬';
 
 const golosinas = [
+    // ---------- Chupetines ----------
+    { id: 'chp-cebollitas-ddl',   grupo: 'Chupetines', nombre: 'Chupetín Cebollitas Dulce de Leche', precio: 500,  emoji: '🍭' },
+    { id: 'chp-picodulce-pote',   grupo: 'Chupetines', nombre: 'Chupetín Pico Dulce (pote)',         precio: 2500, emoji: '🍬' },
+    { id: 'chp-picodulce-frut',   grupo: 'Chupetines', nombre: 'Chupetín Pico Dulce Frut (caja)',    precio: 2500, emoji: '🍓' },
+    { id: 'chp-flynnpaff-emoji',  grupo: 'Chupetines', nombre: 'Chupetín Flynn Paff Emoji',          precio: 600,  emoji: '😛' },
+    { id: 'chp-flynnpaff-sandia', grupo: 'Chupetines', nombre: 'Chupetín Flynn Paff Sandía Melón',   precio: 600,  emoji: '🍉' },
+
+    // ---------- Alfajores Fantoche ----------
+    { id: 'alf-raul-simple-blanco', grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Pescado Raúl Simple Blanco', precio: 1500, emoji: '🤍', videoId: 1 },
+    { id: 'alf-raul-simple-negro',  grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Pescado Raúl Simple Negro',  precio: 1500, emoji: '🍫', videoId: 1 },
+    { id: 'alf-super-triple',       grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Super Triple',      precio: 2500, emoji: '🍪', videoId: 2 },
+    { id: 'alf-triple-redvelvet',   grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Triple Red Velvet', precio: 2500, emoji: '❤️', videoId: 3 },
+    { id: 'alf-cuadruple-choco',    grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Cuádruple Chocolate', precio: 3500, emoji: '🍫' },
+    { id: 'alf-triple-blanco',      grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Triple Blanco',     precio: 2500, emoji: '🤍' },
+    { id: 'alf-triple-choco',       grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Triple Chocolate',  precio: 2500, emoji: '🍫' }
+];
+
+// Snacks: caramelos, chicles y similares (productos para picar / masticar).
+const snacks = [
     // ---------- Caramelos Menthoplus ----------
     { id: 'mp-frio-mentol',    grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Frío Mentol',      precio: 500, emoji: '❄️' },
     { id: 'mp-ac-manzana',     grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Ácidos Manzana',   precio: 500, emoji: '🍏' },
@@ -49,28 +68,8 @@ const golosinas = [
     { id: 'tl-menta',              grupo: 'Chicles Topline', nombre: 'Topline Menta',              precio: 1000, emoji: '🌱' },
     { id: 'tl-seven-clickfresh',   grupo: 'Chicles Topline', nombre: 'Topline Seven Click Fresh',  precio: 1000, emoji: '💨' },
     { id: 'tl-seven-strong',       grupo: 'Chicles Topline', nombre: 'Topline Seven Strong',       precio: 1000, emoji: '⚡' },
-    { id: 'tl-seven-frutilla',     grupo: 'Chicles Topline', nombre: 'Topline Seven Frutilla',     precio: 1000, emoji: '🍓' },
-
-    // ---------- Chupetines ----------
-    { id: 'chp-cebollitas-ddl',   grupo: 'Chupetines', nombre: 'Chupetín Cebollitas Dulce de Leche', precio: 500,  emoji: '🍭' },
-    { id: 'chp-picodulce-pote',   grupo: 'Chupetines', nombre: 'Chupetín Pico Dulce (pote)',         precio: 2500, emoji: '🍬' },
-    { id: 'chp-picodulce-frut',   grupo: 'Chupetines', nombre: 'Chupetín Pico Dulce Frut (caja)',    precio: 2500, emoji: '🍓' },
-    { id: 'chp-flynnpaff-emoji',  grupo: 'Chupetines', nombre: 'Chupetín Flynn Paff Emoji',          precio: 600,  emoji: '😛' },
-    { id: 'chp-flynnpaff-sandia', grupo: 'Chupetines', nombre: 'Chupetín Flynn Paff Sandía Melón',   precio: 600,  emoji: '🍉' },
-
-    // ---------- Alfajores Fantoche ----------
-    { id: 'alf-raul-simple-blanco', grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Pescado Raúl Simple Blanco', precio: 1500, emoji: '🤍', videoId: 1 },
-    { id: 'alf-raul-simple-negro',  grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Pescado Raúl Simple Negro',  precio: 1500, emoji: '🍫', videoId: 1 },
-    { id: 'alf-super-triple',       grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Super Triple',      precio: 2500, emoji: '🍪' },
-    { id: 'alf-triple-redvelvet',   grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Triple Red Velvet', precio: 2500, emoji: '❤️' },
-    { id: 'alf-cuadruple-choco',    grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Cuádruple Chocolate', precio: 3500, emoji: '🍫' },
-    { id: 'alf-triple-blanco',      grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Triple Blanco',     precio: 2500, emoji: '🤍' },
-    { id: 'alf-triple-choco',       grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Triple Chocolate',  precio: 2500, emoji: '🍫' }
+    { id: 'tl-seven-frutilla',     grupo: 'Chicles Topline', nombre: 'Topline Seven Frutilla',     precio: 1000, emoji: '🍓' }
 ];
-
-// Por ahora, snacks salados queda vacío a la espera de carga real.
-// Se renderiza como "Próximamente" sin romper nada del resto de la web.
-const snacks = [];
 
 // Gaseosas y bebidas - productos placeholder hasta cargar los reales.
 // Precios redondos como referencia; actualizalos cuando los confirmes.
@@ -118,6 +117,22 @@ const FREE_SHIPPING_THRESHOLD = 30000; // Envío gratis superando este monto
 const STORAGE_KEY_USER             = 'falahbar_snks_user_name';
 const STORAGE_KEY_CART             = 'falahbar_snks_cart';
 const STORAGE_KEY_MODAL_DISMISSED  = 'falahbar_snks_modal_dismissed';
+const STORAGE_KEY_DELIVERY         = 'falahbar_snks_delivery';
+
+// =============================================
+// ESTADO DE ENTREGA (dirección + ubicación)
+// Vive en memoria mientras la página está abierta y se persiste a localStorage.
+// =============================================
+let geoState = {
+    link:    '',     // URL de Google Maps ya armada
+    lat:     null,
+    lng:     null,
+    ready:   false   // true si tenemos coordenadas válidas
+};
+let deliveryState = {
+    address:   '',
+    reference: ''
+};
 
 // =============================================
 // ESTADO DEL CARRITO (con persistencia)
@@ -421,6 +436,30 @@ function renderReelItem(item, index) {
     const title = item.title ? escapeHtml(item.title) : '';
     const poster = item.thumbnail ? ` poster="${escapeHtml(item.thumbnail)}"` : '';
 
+    // Producto promocionado (primer producto cuyo videoId coincide con el id del short)
+    const promoted = (item.id != null)
+        ? [...golosinas, ...snacks, ...gaseosas].find(p => Number(p.videoId) === Number(item.id))
+        : null;
+
+    // CTA: si hay producto promocionado, abre su modal en home; si no, va a la sección golosinas
+    const ctaHref = promoted
+        ? `index.html#product-${encodeURIComponent(promoted.id)}`
+        : 'index.html#golosinas';
+    const ctaText = promoted
+        ? `Ver ${escapeHtml(promoted.nombre)} →`
+        : 'Ver productos →';
+
+    // Acción del 🛒: si hay producto, suma ese producto al carrito; si no, va al carrito de home
+    const cartActionHTML = promoted
+        ? `<button class="reel-action" data-action="add-to-cart" data-product-id="${escapeHtml(promoted.id)}" aria-label="Agregar ${escapeHtml(promoted.nombre)} al carrito">
+                <span class="reel-action-icon">🛒</span>
+                <span class="reel-action-label">Agregar</span>
+            </button>`
+        : `<a class="reel-action" href="index.html#cart" aria-label="Ver carrito">
+                <span class="reel-action-icon">🛒</span>
+                <span class="reel-action-label">Carrito</span>
+            </a>`;
+
     return `
         <article class="reel" data-index="${index}">
             <div class="reel-media">
@@ -435,7 +474,7 @@ function renderReelItem(item, index) {
                         <strong>Falahbar.SnkS</strong>
                     </div>
                     ${title ? `<p class="reel-title">${title}</p>` : ''}
-                    <a href="index.html#golosinas" class="reel-cta">Ver productos →</a>
+                    <a href="${ctaHref}" class="reel-cta">${ctaText}</a>
                 </div>
 
                 <div class="reel-actions">
@@ -447,10 +486,7 @@ function renderReelItem(item, index) {
                         <span class="reel-action-icon">📤</span>
                         <span class="reel-action-label">Compartir</span>
                     </button>
-                    <a class="reel-action" href="index.html#cart" aria-label="Ver carrito">
-                        <span class="reel-action-icon">🛒</span>
-                        <span class="reel-action-label">Carrito</span>
-                    </a>
+                    ${cartActionHTML}
                 </div>
             </div>
         </article>
@@ -528,6 +564,20 @@ function initReelsBehavior(container) {
                 globalMuted = !globalMuted;
                 videos.forEach(v => { v.muted = globalMuted; });
                 updateMuteIcons();
+                return;
+            }
+
+            if (action === 'add-to-cart') {
+                e.preventDefault();
+                const pid = actionBtn.dataset.productId;
+                if (pid) {
+                    addToCart(pid, actionBtn);
+                    // Feedback visual extra: pulso dorado momentáneo
+                    actionBtn.classList.remove('reel-action--added');
+                    void actionBtn.offsetWidth;
+                    actionBtn.classList.add('reel-action--added');
+                    setTimeout(() => actionBtn.classList.remove('reel-action--added'), 700);
+                }
                 return;
             }
 
@@ -803,12 +853,222 @@ if (cartEl && window.location.hash === '#cart') {
 }
 
 // =============================================
+// MÓDULO DE ENTREGA: dirección + ubicación
+// =============================================
+
+// --- Persistencia ---
+function saveDeliveryToStorage() {
+    try {
+        const payload = {
+            address:   deliveryState.address || '',
+            reference: deliveryState.reference || '',
+            lat:       geoState.lat,
+            lng:       geoState.lng,
+            link:      geoState.link || '',
+            ready:     !!geoState.ready
+        };
+        localStorage.setItem(STORAGE_KEY_DELIVERY, JSON.stringify(payload));
+    } catch (_) {}
+}
+
+function loadDeliveryFromStorage() {
+    try {
+        const raw = localStorage.getItem(STORAGE_KEY_DELIVERY);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        if (!data || typeof data !== 'object') return;
+        deliveryState.address   = String(data.address   || '').trim();
+        deliveryState.reference = String(data.reference || '').trim();
+        if (data.ready && data.link && typeof data.lat === 'number' && typeof data.lng === 'number') {
+            geoState.lat   = data.lat;
+            geoState.lng   = data.lng;
+            geoState.link  = String(data.link);
+            geoState.ready = true;
+        }
+    } catch (_) {}
+}
+
+loadDeliveryFromStorage();
+
+// --- API del navegador envuelta en Promise ---
+function requestGeo(highAccuracy, timeout) {
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+            enableHighAccuracy: highAccuracy,
+            timeout: timeout,
+            maximumAge: highAccuracy ? 0 : 30000
+        });
+    });
+}
+
+// Dos intentos: primero GPS (alta precisión, mobile), después red/Wi-Fi (rápido en PC).
+async function getLocation() {
+    if (!navigator.geolocation) {
+        throw new Error('Tu navegador no soporta geolocalización.');
+    }
+    if (!window.isSecureContext && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+        throw new Error('Necesitás abrir la página por HTTPS para usar la ubicación.');
+    }
+    try {
+        return await requestGeo(true, 20000);
+    } catch (firstErr) {
+        if (firstErr && firstErr.code === 1) throw firstErr; // sin permiso → no reintentar
+        return await requestGeo(false, 12000);
+    }
+}
+
+function positionError(err) {
+    if (!err) return 'No se pudo obtener la ubicación.';
+    if (err.code === 1) return 'No diste permiso. Activalo desde el candadito del navegador y volvé a intentar.';
+    if (err.code === 2) return 'No se pudo detectar tu ubicación. Probá con GPS / Wi-Fi activado.';
+    if (err.code === 3) return 'La ubicación tardó demasiado. Probá de nuevo.';
+    return err.message || 'No se pudo obtener la ubicación.';
+}
+
+// --- UI del bloque de entrega ---
+(function initDeliveryUI() {
+    const addressInput   = document.getElementById('cartAddressInput');
+    const referenceInput = document.getElementById('cartReferenceInput');
+    const useLocationBtn = document.getElementById('useLocationBtn');
+    const statusEl       = document.getElementById('cartGeoStatus');
+    const card           = document.getElementById('cartGeoCard');
+    const cardCoords     = document.getElementById('cartGeoCoords');
+    const cardLink       = document.getElementById('cartGeoLink');
+    const cardClear      = document.getElementById('cartGeoClear');
+
+    // Si no estamos en la home, esta sección no existe.
+    if (!useLocationBtn) return;
+
+    function setStatus(text, kind) {
+        if (!statusEl) return;
+        statusEl.textContent = text || '';
+        statusEl.classList.remove('is-info', 'is-ok', 'is-error');
+        if (kind === 'info')  statusEl.classList.add('is-info');
+        if (kind === 'ok')    statusEl.classList.add('is-ok');
+        if (kind === 'error') statusEl.classList.add('is-error');
+    }
+
+    function setBtnLoading(isLoading) {
+        useLocationBtn.disabled = !!isLoading;
+        useLocationBtn.classList.toggle('is-loading', !!isLoading);
+    }
+
+    function renderGeoCard() {
+        if (!card) return;
+        if (!geoState.ready) {
+            card.hidden = true;
+            return;
+        }
+        if (cardCoords) {
+            cardCoords.textContent =
+                `Lat ${geoState.lat.toFixed(5)}, Lng ${geoState.lng.toFixed(5)}`;
+        }
+        if (cardLink) cardLink.href = geoState.link;
+        card.hidden = false;
+    }
+
+    function clearGeo() {
+        geoState = { link: '', lat: null, lng: null, ready: false };
+        renderGeoCard();
+        setStatus('', '');
+        saveDeliveryToStorage();
+    }
+
+    // Hidratar inputs desde estado persistido
+    if (addressInput)   addressInput.value   = deliveryState.address   || '';
+    if (referenceInput) referenceInput.value = deliveryState.reference || '';
+    renderGeoCard();
+    if (geoState.ready) setStatus('✅ Ubicación guardada de un pedido anterior.', 'ok');
+
+    // Inputs: persistir al escribir
+    if (addressInput) {
+        addressInput.addEventListener('input', () => {
+            deliveryState.address = addressInput.value.trim();
+            saveDeliveryToStorage();
+        });
+    }
+    if (referenceInput) {
+        referenceInput.addEventListener('input', () => {
+            deliveryState.reference = referenceInput.value.trim();
+            saveDeliveryToStorage();
+        });
+    }
+
+    // Botón "Usar mi ubicación"
+    useLocationBtn.addEventListener('click', async () => {
+        setBtnLoading(true);
+        setStatus('Buscando tu ubicación…', 'info');
+        try {
+            const pos  = await getLocation();
+            const lat  = pos.coords.latitude;
+            const lng  = pos.coords.longitude;
+            const link = `https://www.google.com/maps?q=${lat},${lng}`;
+            geoState = { link, lat, lng, ready: true };
+            renderGeoCard();
+            setStatus('✅ Listo. La ubicación se va a incluir en el pedido.', 'ok');
+            saveDeliveryToStorage();
+        } catch (err) {
+            const msg = (err && typeof err.code === 'number') ? positionError(err) : (err.message || 'No se pudo obtener la ubicación.');
+            setStatus('⚠️ ' + msg, 'error');
+        } finally {
+            setBtnLoading(false);
+        }
+    });
+
+    // Botón "x" para quitar la ubicación
+    if (cardClear) {
+        cardClear.addEventListener('click', clearGeo);
+    }
+})();
+
+// =============================================
 // ENVIAR PEDIDO POR WHATSAPP
 // =============================================
 const sendBtn = document.getElementById('sendWhatsApp');
 if (sendBtn) {
     sendBtn.addEventListener('click', () => {
         if (cart.length === 0) return;
+
+        // Validación: necesitamos al menos dirección o ubicación
+        const addressInput = document.getElementById('cartAddressInput');
+        const refInput     = document.getElementById('cartReferenceInput');
+        const statusEl     = document.getElementById('cartGeoStatus');
+        const address      = addressInput ? addressInput.value.trim() : '';
+        const reference    = refInput     ? refInput.value.trim()     : '';
+        const hasGeo       = !!(geoState.ready && geoState.link);
+        const hasAddress   = address.length > 0;
+
+        if (!hasGeo && !hasAddress) {
+            if (statusEl) {
+                statusEl.textContent = '⚠️ Necesitamos tu dirección o tu ubicación para enviarte el pedido.';
+                statusEl.classList.remove('is-info', 'is-ok');
+                statusEl.classList.add('is-error');
+            }
+            if (addressInput) {
+                addressInput.classList.add('is-error');
+                setTimeout(() => addressInput.classList.remove('is-error'), 2000);
+            }
+            // Palpitar el botón "Usar mi ubicación" para llamar la atención
+            const geoBtn = document.getElementById('useLocationBtn');
+            if (geoBtn) {
+                geoBtn.classList.remove('is-pulsing');
+                void geoBtn.offsetWidth; // reinicia la animación
+                geoBtn.classList.add('is-pulsing');
+                // Scrolleo el botón a la vista por si quedó fuera del viewport del carrito
+                geoBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                setTimeout(() => geoBtn.classList.remove('is-pulsing'), 2400);
+            }
+            // Foco al input al final, así el usuario puede escribir si prefiere esa vía
+            if (addressInput) {
+                setTimeout(() => addressInput.focus({ preventScroll: true }), 600);
+            }
+            return;
+        }
+
+        // Sincronizo estado por las dudas (input puede haber cambiado sin disparar 'input')
+        deliveryState.address   = address;
+        deliveryState.reference = reference;
+        saveDeliveryToStorage();
 
         const savedUserName = getSavedUserName();
         let message = savedUserName
@@ -824,10 +1084,17 @@ if (sendBtn) {
         if (total >= FREE_SHIPPING_THRESHOLD) {
             message += `Envío: GRATIS (por superar $${FREE_SHIPPING_THRESHOLD.toLocaleString('es-AR')}) 🎉\n`;
         }
+
+        // Datos de entrega
+        message += `\n📍 Datos de entrega:\n`;
+        if (hasAddress)         message += `Dirección: ${address}\n`;
+        if (reference.length)   message += `Referencia: ${reference}\n`;
+        if (hasGeo)             message += `Ubicación en mapa: ${geoState.link}\n`;
+
         message += `\nGracias!`;
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-        window.open(url, '_blank');
+        window.open(url, '_blank', 'noopener');
     });
 }
 
@@ -1395,6 +1662,21 @@ if (reopenBtn) {
         }
         closeModal();
     });
+
+    // Si llegamos con #product-XXX (ej. desde un reel), abrir el modal de ese producto
+    function openModalFromHash() {
+        const hash = window.location.hash || '';
+        const m = hash.match(/^#product-(.+)$/);
+        if (!m) return;
+        const id = decodeURIComponent(m[1]);
+        const product = findProduct(id);
+        if (!product) return;
+        // Limpio el hash para que no se reabra al recargar
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+        // Pequeño delay para que primero rendericen las grillas
+        setTimeout(() => openModal(product), 250);
+    }
+    openModalFromHash();
 })();
 
 // =============================================
@@ -1426,7 +1708,7 @@ function scrollReelsToHash() {
 // BOOT: render inicial
 // =============================================
 renderProducts(golosinas, 'golosinasGrid', { chipsContainerId: 'golosinasFilters' });
-renderProducts(snacks,    'snacksGrid');
+renderProducts(snacks,    'snacksGrid',    { chipsContainerId: 'snacksFilters' });
 renderProducts(gaseosas,  'gaseosasGrid',  { chipsContainerId: 'gaseosasFilters' });
 renderShorts('homeShortsScroller', { limit: 5 });     // preview horizontal en home
 renderReels('reelsFeed');                             // feed inmersivo estilo TikTok / Reels en shorts.html

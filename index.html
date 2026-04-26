@@ -102,7 +102,10 @@
     <section class="products products-alt" id="snacks">
         <div class="container">
             <h2 class="section-title">Snacks</h2>
-            <p class="section-subtitle">Para los que aman lo salado</p>
+            <p class="section-subtitle">Caramelos, chicles y para picar entre horas</p>
+            <div class="filter-chips" id="snacksFilters" role="tablist" aria-label="Filtrar snacks">
+                <!-- Los chips se cargan desde script.js -->
+            </div>
             <div class="products-grid" id="snacksGrid">
                 <!-- Los productos se cargan desde script.js -->
             </div>
@@ -134,8 +137,8 @@
     <!-- CTA -->
     <section class="cta">
         <div class="container">
-            <h2>¿Listo para tu pedido?</h2>
-            <p>Agregá tus productos favoritos al carrito y hacé tu pedido por WhatsApp.</p>
+            <h2>¿Ya está listo tu pedido?</h2>
+            <p>Cuando termines de cargar tus productos en el carrito, vas a poder enviar el pedido por WhatsApp en un solo click, directamente desde ahí.</p>
         </div>
     </section>
 
@@ -190,9 +193,57 @@
             <div class="shipping-progress-bar" id="shippingProgressBar"></div>
         </div>
 
+        <div class="cart-scroll" id="cartScroll">
         <div class="cart-items" id="cartItems">
             <p class="cart-empty">Tu carrito está vacío.</p>
         </div>
+
+        <!-- DATOS DE ENTREGA -->
+        <section class="cart-delivery" id="cartDelivery" aria-labelledby="cartDeliveryTitle">
+            <h3 class="cart-delivery-title" id="cartDeliveryTitle">
+                <span aria-hidden="true">📍</span> Datos de entrega
+            </h3>
+            <p class="cart-delivery-hint">
+                Indicanos <strong>al menos uno</strong>: dirección escrita o tu ubicación.
+            </p>
+
+            <div class="cart-field">
+                <label for="cartAddressInput">Dirección</label>
+                <input type="text" id="cartAddressInput"
+                       placeholder="Calle y altura, barrio"
+                       autocomplete="street-address" maxlength="120">
+            </div>
+            <div class="cart-field">
+                <label for="cartReferenceInput">
+                    Referencia <span class="cart-field-hint">(opcional)</span>
+                </label>
+                <input type="text" id="cartReferenceInput"
+                       placeholder="Ej: casa con portón blanco, entre tal y tal"
+                       autocomplete="off" maxlength="160">
+            </div>
+
+            <button type="button" class="btn btn-geo" id="useLocationBtn">
+                <span class="btn-geo-icon" aria-hidden="true">📍</span>
+                <span class="btn-geo-label">Usar mi ubicación</span>
+                <span class="btn-geo-spinner" aria-hidden="true"></span>
+            </button>
+
+            <p class="cart-geo-status" id="cartGeoStatus" aria-live="polite"></p>
+
+            <div class="cart-geo-card" id="cartGeoCard" hidden>
+                <div class="cart-geo-card-icon" aria-hidden="true">✅</div>
+                <div class="cart-geo-card-body">
+                    <strong>Ubicación capturada</strong>
+                    <span class="cart-geo-coords" id="cartGeoCoords"></span>
+                    <a href="#" class="cart-geo-link" id="cartGeoLink"
+                       target="_blank" rel="noopener">Ver en Google Maps →</a>
+                </div>
+                <button type="button" class="cart-geo-clear" id="cartGeoClear"
+                        aria-label="Quitar ubicación">×</button>
+            </div>
+        </section>
+        </div><!-- /.cart-scroll -->
+
         <div class="cart-footer">
             <div class="cart-total">
                 <span>Total:</span>
