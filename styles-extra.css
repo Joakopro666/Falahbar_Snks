@@ -336,8 +336,15 @@
     padding: 20px;
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.25s ease;
+    /* Apertura: el overlay aparece rápido (0.18s) para que ya esté pintado
+       cuando el modal empieza a crecer. Cierre: dura 0.32s, igual que el
+       cierre del modal, así desaparecen en sincronía. */
+    transition: opacity 0.32s ease;
     z-index: 1000;
+}
+
+.product-modal-overlay.active {
+    transition: opacity 0.18s ease;
 }
 
 .product-modal-overlay.active {
@@ -363,6 +370,56 @@
 .product-modal-overlay.active .product-modal {
     transform: scale(1) translateY(0);
     opacity: 1;
+}
+
+/* =========================================
+ * ANIMACIÓN ESTILO MAC: el modal "crece" desde la tarjeta clickeada
+ * Los CSS custom props --origin-tx / --origin-ty los setea el JS
+ * con la posición de la tarjeta relativa al centro de la pantalla.
+ *
+ * Apertura: bounce sutil con cubic-bezier overshoot (0.22, 1.12).
+ * Cierre:   ease-in punchy hacia el origen (curva is-closing).
+ * ========================================= */
+.product-modal.with-origin-anim {
+    transform: translate(var(--origin-tx, 0), var(--origin-ty, 0)) scale(0.18);
+    opacity: 0;
+    transform-origin: center center;
+    transition: transform 0.42s cubic-bezier(0.18, 0.95, 0.22, 1.12),
+                opacity 0.28s ease-out;
+    will-change: transform, opacity;
+}
+
+.product-modal-overlay.active .product-modal.with-origin-anim {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+}
+
+/* Cierre: la "regresión" al origen usa otra curva (ease-in) para que
+   se sienta como tirar el modal hacia su lugar de origen, no como
+   un rebote inverso. Un toque más rápido que la apertura. */
+.product-modal.with-origin-anim.is-closing {
+    transition: transform 0.34s cubic-bezier(0.55, 0.05, 0.7, 0.2),
+                opacity 0.26s ease-in;
+}
+
+/* Cuando el modal NO tiene origin (abierto desde hash, sin click),
+   tiene su animación base: scale 0.92 → 1. Suavizamos el cierre
+   también para que sea consistente. */
+.product-modal.is-closing:not(.with-origin-anim) {
+    transition: transform 0.26s cubic-bezier(0.55, 0.05, 0.7, 0.2),
+                opacity 0.22s ease-in;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .product-modal,
+    .product-modal.with-origin-anim,
+    .product-modal.with-origin-anim.is-closing,
+    .product-modal.is-closing,
+    .product-modal-overlay.active .product-modal,
+    .product-modal-overlay.active .product-modal.with-origin-anim {
+        transition: opacity 0.18s ease !important;
+        transform: none !important;
+    }
 }
 
 .product-modal-close {
@@ -1084,3 +1141,290 @@ body.no-scroll { overflow: hidden; }
         padding: 14px 18px 4px;
     }
 }
+
+/* =====================================================
+ * APARICIÓN ESCALONADA DE TARJETAS (stagger fade-in)
+ * Las tarjetas entran con un pequeño delay según su posición
+ * para crear ese efecto "cascada" suave al cargar la página
+ * o al volver a renderizar una grilla.
+ * ===================================================== */
+@keyframes fx-card-rise {
+    0% {
+        opacity: 0;
+        transform: translateY(18px) scale(0.98);
+        filter: blur(2px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
+}
+
+.products-grid > .product-card,
+.product-group-grid > .product-card {
+    opacity: 0;
+    animation: fx-card-rise 0.55s cubic-bezier(0.2, 0.9, 0.25, 1.05) forwards;
+    animation-delay: calc(var(--fx-card-index, 0) * 55ms);
+}
+
+/* Si el usuario tiene reduce-motion activado, las tarjetas
+   aparecen instantáneamente sin animación. */
+@media (prefers-reduced-motion: reduce) {
+    .products-grid > .product-card,
+    .product-group-grid > .product-card {
+        opacity: 1;
+        animation: none;
+    }
+}
+
+/* ---------------------------------------------------
+ * FILTRADO Y BÚSQUEDA: salida + reentrada con stagger
+ * --------------------------------------------------- */
+
+/* Salida: la tarjeta se desvanece, encoge y se desenfoca un toque.
+   Sigue ocupando lugar mientras dura la animación, así el grid
+   no "salta" feo. Corta para que la respuesta se sienta inmediata. */
+.product-card.is-rejecting {
+    pointer-events: none;
+    animation: fx-card-reject 0.14s ease forwards;
+}
+
+@keyframes fx-card-reject {
+    0% {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+        filter: blur(0);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.88) rotate(-1deg);
+        filter: blur(2px);
+    }
+}
+
+/* Reentrada: las visibles vuelven a aparecer con un stagger BREVE.
+   El delay arranca en 0 (la primera tarjeta entra ya), y se cortó
+   bastante respecto al render inicial (40ms → 20ms). */
+.product-card.is-restaging {
+    animation: fx-card-rise 0.36s cubic-bezier(0.2, 0.95, 0.25, 1.1) backwards;
+    animation-delay: calc(var(--fx-card-index, 0) * 20ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .product-card.is-rejecting,
+    .product-card.is-restaging {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+}
+
+/* =====================================================
+ * TOOLTIPS SOBRE LOS BOTONES DE ACCIÓN DE LOS REELS
+ * Hover/focus → aparece una etiqueta con la descripción.
+ * Mobile-friendly: en pantallas táctiles no hace hover, así
+ * que solo lo mostramos en :focus-visible.
+ * ===================================================== */
+.reel-action {
+    position: relative;
+}
+
+.reel-action[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%) translateX(6px);
+    background: rgba(30, 20, 12, 0.92);
+    color: var(--fx-cream);
+    border: 1px solid rgba(200, 161, 104, 0.45);
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 6px 18px rgba(30, 20, 12, 0.35);
+    z-index: 10;
+}
+
+.reel-action[data-tooltip]::before {
+    content: '';
+    position: absolute;
+    right: calc(100% + 4px);
+    top: 50%;
+    transform: translateY(-50%);
+    border: 6px solid transparent;
+    border-left-color: rgba(30, 20, 12, 0.92);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 10;
+}
+
+@media (hover: hover) {
+    .reel-action[data-tooltip]:hover::after,
+    .reel-action[data-tooltip]:focus-visible::after {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+    .reel-action[data-tooltip]:hover::before,
+    .reel-action[data-tooltip]:focus-visible::before {
+        opacity: 1;
+    }
+}
+
+.reel-action[data-tooltip]:focus-visible::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+
+.reel-action[data-tooltip]:focus-visible::before {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reel-action[data-tooltip]::after,
+    .reel-action[data-tooltip]::before {
+        transition: opacity 0.1s linear;
+    }
+}
+
+/* =====================================================
+ * SCROLL OFFSET PARA ANCLAS BAJO HEADER STICKY
+ * Hace que al saltar a #golosinas, #snacks, etc. la sección
+ * no quede tapada por el header.
+ * ===================================================== */
+section[id] {
+    scroll-margin-top: 88px;
+}
+
+@media (max-width: 768px) {
+    section[id] {
+        scroll-margin-top: 72px;
+    }
+}
+
+/* =====================================================
+ * FOCUS VISIBLE DE BOTONES Y LINKS GENERALES
+ * Outline cálido coherente con la paleta para accesibilidad.
+ * ===================================================== */
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.add-to-cart:focus-visible,
+.cart-btn:focus-visible,
+.nav-links a:focus-visible {
+    outline: 3px solid var(--fx-gold);
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
+/* =====================================================
+ * RIPPLE / PRESS-FEEDBACK SUAVE EN BOTONES
+ * Al apretar un CTA o "Agregar", baja un pelín y rebota.
+ * ===================================================== */
+.btn-primary:active,
+.btn-secondary:active,
+.add-to-cart:active,
+.product-modal-add:active,
+.btn-geo:active:not(:disabled) {
+    transform: translateY(1px) scale(0.98);
+    transition: transform 0.05s linear;
+}
+
+/* =====================================================
+ * NAV ACTIVE — refuerzo visual cuando el observer lo marca
+ * (la regla base ya existe en styles.css; acá la potenciamos
+ * para que se note bien que estás en esa sección).
+ * ===================================================== */
+.nav-links a.active {
+    color: var(--fx-brown-dk) !important;
+    font-weight: 700;
+}
+
+/* =====================================================
+ * SUAVIZADO GLOBAL DE SCROLL
+ * (anclas internas dentro de la misma página)
+ * ===================================================== */
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* =====================================================
+ * APERTURA DEL CARRITO (refuerzo visual)
+ * Si styles.css ya tiene transición, esta queda sutil arriba
+ * para sentirse como un panel "deslizándose" con un toque
+ * cálido (sombra dorada al entrar).
+ * ===================================================== */
+.cart {
+    transition: transform 0.32s cubic-bezier(0.2, 0.9, 0.25, 1.05),
+                box-shadow 0.32s ease;
+}
+
+.cart.active,
+.cart.is-open {
+    box-shadow: -20px 0 60px rgba(60, 42, 27, 0.28),
+                -2px 0 0 rgba(200, 161, 104, 0.35);
+}
+
+.cart-overlay {
+    transition: opacity 0.28s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cart {
+        transition: opacity 0.18s linear;
+    }
+    .cart-overlay {
+        transition: opacity 0.18s linear;
+    }
+}
+
+/* =====================================================
+ * APARICIÓN SUAVE DEL HERO AL CARGAR LA HOME
+ * Una pequeña entrada cálida al primer render: el logo y
+ * los botones del hero "respiran" para arriba.
+ * ===================================================== */
+@keyframes fx-hero-in {
+    0% { opacity: 0; transform: translateY(14px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.hero-logo,
+.hero-subtitle,
+.hero-buttons {
+    animation: fx-hero-in 0.7s cubic-bezier(0.2, 0.9, 0.25, 1.05) backwards;
+}
+
+.hero-subtitle  { animation-delay: 0.08s; }
+.hero-buttons   { animation-delay: 0.16s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-logo,
+    .hero-subtitle,
+    .hero-buttons {
+        animation: none;
+    }
+}
+
+/* =====================================================
+ * APARICIÓN DEL TÍTULO DE CADA SECCIÓN AL ENTRAR EN VIEW
+ * (sutil, no invasivo). Se aplica a section-title y section-subtitle.
+ * ===================================================== */
+.section-title,
+.section-subtitle {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+

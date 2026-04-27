@@ -234,6 +234,12 @@ function renderProducts(list, containerId, options = {}) {
     // Grilla plana, sin headers de subcategoría
     container.innerHTML = list.map(productCardHTML).join('');
 
+    // Asignar --fx-card-index a cada tarjeta para el stagger de animación
+    // (limito a las primeras 24 para que productos lejos no esperen demasiado)
+    Array.from(container.querySelectorAll('.product-card')).forEach((card, i) => {
+        card.style.setProperty('--fx-card-index', String(Math.min(i, 24)));
+    });
+
     // Si pidieron chips de filtro, los armamos
     if (options.chipsContainerId) {
         renderSubgroupChips(list, options.chipsContainerId, containerId);
@@ -289,12 +295,93 @@ function renderSubgroupChips(list, chipsContainerId, gridContainerId) {
         chipsContainer.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('is-active'));
         chip.classList.add('is-active');
 
-        gridEl.querySelectorAll('.product-card').forEach(card => {
+        // Animación facherita: las que se van se desvanecen, las que entran se re-staggerean
+        animatedFilter(gridEl, 'is-hidden-filter', card => {
             const cardGroup = card.dataset.productGroup || '';
-            const matches = filter === '*' || cardGroup === filter;
-            card.classList.toggle('is-hidden-filter', !matches);
-        });
+            return filter === '*' || cardGroup === filter;
+        }, { mode: 'chip' });
     });
+}
+
+/**
+ * Aplica un cambio de filtro con animación de salida + entrada escalonada.
+ *
+ * @param {HTMLElement} grid          El contenedor con .product-card adentro.
+ * @param {String}      hideClass     Clase que oculta la tarjeta (ej: 'is-hidden' o 'is-hidden-filter').
+ * @param {Function}    decideVisible Función (card) => bool. true si la tarjeta debe quedar visible.
+ * @param {Object}      [opts]
+ * @param {String}      [opts.mode='chip']  'chip' (más dramático) o 'search' (más rápido / sutil).
+ */
+function animatedFilter(grid, hideClass, decideVisible, opts = {}) {
+    const reduceMotion = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const mode = opts.mode || 'chip';
+    // Tiempos cortos para que se sienta snappy. La sensación que importa
+    // es: "click → cambio inmediato", no esperar a que termine la animación.
+    const exitMs   = mode === 'search' ? 70  : 110;  // espera antes de aplicar el hide real
+    const enterCap = mode === 'search' ? 8   : 12;   // tope del índice para el stagger
+
+    const cards = Array.from(grid.querySelectorAll('.product-card'));
+
+    // Atajo: si el usuario tiene reduce-motion, hacemos el cambio sin animación
+    if (reduceMotion) {
+        cards.forEach(card => {
+            card.classList.toggle(hideClass, !decideVisible(card));
+        });
+        return;
+    }
+
+    // 1) Decidimos antes de tocar nada
+    const decisions = new Map();
+    cards.forEach(card => {
+        const wasVisible = !card.classList.contains(hideClass);
+        const willShow   = decideVisible(card);
+        decisions.set(card, { wasVisible, willShow });
+    });
+
+    // 2) Las que se van: marcar para que se animen "afuera"
+    let anyExiting = false;
+    cards.forEach(card => {
+        const d = decisions.get(card);
+        if (d.wasVisible && !d.willShow) {
+            card.classList.add('is-rejecting');
+            anyExiting = true;
+        }
+    });
+
+    // Cancelamos timers previos para que filtros consecutivos no peleen
+    if (grid._filterTimer) clearTimeout(grid._filterTimer);
+    if (grid._restageTimer) clearTimeout(grid._restageTimer);
+
+    const delay = anyExiting ? exitMs : 0;
+
+    grid._filterTimer = setTimeout(() => {
+        // 3) Aplicar el hide real y limpiar la clase de salida
+        cards.forEach(card => {
+            const d = decisions.get(card);
+            card.classList.toggle(hideClass, !d.willShow);
+            card.classList.remove('is-rejecting');
+        });
+
+        // 4) Restagger: las que quedan visibles vuelven a entrar
+        const visibles = cards.filter(c =>
+            !c.classList.contains('is-hidden') &&
+            !c.classList.contains('is-hidden-filter')
+        );
+
+        visibles.forEach((card, i) => {
+            card.style.setProperty('--fx-card-index', String(Math.min(i, enterCap)));
+            card.classList.remove('is-restaging');
+            // Forzar reflow para que la animación se reinicie
+            // (asignar a una variable evita que el optimizador lo descarte)
+            const _ = card.offsetWidth; void _;
+            card.classList.add('is-restaging');
+        });
+
+        grid._restageTimer = setTimeout(() => {
+            visibles.forEach(c => c.classList.remove('is-restaging'));
+        }, mode === 'search' ? 450 : 600);
+    }, delay);
 }
 
 // =============================================
@@ -451,11 +538,11 @@ function renderReelItem(item, index) {
 
     // Acción del 🛒: si hay producto, suma ese producto al carrito; si no, va al carrito de home
     const cartActionHTML = promoted
-        ? `<button class="reel-action" data-action="add-to-cart" data-product-id="${escapeHtml(promoted.id)}" aria-label="Agregar ${escapeHtml(promoted.nombre)} al carrito">
+        ? `<button class="reel-action" data-action="add-to-cart" data-product-id="${escapeHtml(promoted.id)}" data-tooltip="Agregar ${escapeHtml(promoted.nombre)} al carrito" aria-label="Agregar ${escapeHtml(promoted.nombre)} al carrito">
                 <span class="reel-action-icon">🛒</span>
                 <span class="reel-action-label">Agregar</span>
             </button>`
-        : `<a class="reel-action" href="index.html#cart" aria-label="Ver carrito">
+        : `<a class="reel-action" href="index.html#cart" data-tooltip="Ver mi carrito" aria-label="Ver carrito">
                 <span class="reel-action-icon">🛒</span>
                 <span class="reel-action-label">Carrito</span>
             </a>`;
@@ -478,11 +565,11 @@ function renderReelItem(item, index) {
                 </div>
 
                 <div class="reel-actions">
-                    <button class="reel-action" data-action="mute" aria-label="Activar o silenciar sonido">
+                    <button class="reel-action" data-action="mute" data-tooltip="Activar o silenciar sonido" aria-label="Activar o silenciar sonido">
                         <span class="reel-action-icon">🔇</span>
                         <span class="reel-action-label">Sonido</span>
                     </button>
-                    <button class="reel-action" data-action="share" aria-label="Compartir">
+                    <button class="reel-action" data-action="share" data-tooltip="Compartir este short" aria-label="Compartir">
                         <span class="reel-action-icon">📤</span>
                         <span class="reel-action-label">Compartir</span>
                     </button>
@@ -1498,13 +1585,20 @@ if (reopenBtn) {
             const cards = grid.querySelectorAll('.product-card');
             let countInGrid = 0;
 
+            // Calculamos primero cuáles van a quedar visibles (para el empty state)
+            const visibleSet = new Set();
             cards.forEach(card => {
                 const nombre = normalize(card.querySelector('h3')?.textContent);
                 const grupo  = normalize(card.dataset.productGroup);
                 const matches = !filtering || nombre.includes(q) || grupo.includes(q);
-                card.classList.toggle('is-hidden', !matches);
-                if (matches) countInGrid++;
+                if (matches) {
+                    visibleSet.add(card);
+                    countInGrid++;
+                }
             });
+
+            // Aplica con animación (modo 'search': suave y rápido)
+            animatedFilter(grid, 'is-hidden', card => visibleSet.has(card), { mode: 'search' });
 
             const emptyEl = document.getElementById(t.emptyId);
             if (emptyEl) {
@@ -1576,7 +1670,30 @@ if (reopenBtn) {
         if (qtyMinus) qtyMinus.disabled = currentQty <= 1;
     }
 
-    function openModal(product) {
+    const modalEl = overlay.querySelector('.product-modal');
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function setOriginFromRect(rect) {
+        if (!modalEl || !rect) return;
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        const ox = rect.left + rect.width / 2;
+        const oy = rect.top + rect.height / 2;
+        const tx = Math.round(ox - cx);
+        const ty = Math.round(oy - cy);
+        modalEl.style.setProperty('--origin-tx', `${tx}px`);
+        modalEl.style.setProperty('--origin-ty', `${ty}px`);
+        modalEl.classList.add('with-origin-anim');
+    }
+
+    function clearOrigin() {
+        if (!modalEl) return;
+        modalEl.classList.remove('with-origin-anim');
+        modalEl.style.removeProperty('--origin-tx');
+        modalEl.style.removeProperty('--origin-ty');
+    }
+
+    function openModal(product, originRect) {
         if (!product) return;
         currentProduct = product;
         currentQty = 1;
@@ -1600,15 +1717,30 @@ if (reopenBtn) {
 
         updateQtyUI();
 
+        // Animación estilo Mac: el modal "crece" desde la tarjeta clickeada
+        if (originRect && !reduceMotion) {
+            setOriginFromRect(originRect);
+        } else {
+            clearOrigin();
+        }
+
         overlay.classList.add('active');
         overlay.setAttribute('aria-hidden', 'false');
         document.body.classList.add('no-scroll');
     }
 
     function closeModal() {
+        // Marca el modal como "cerrando" para que use la curva/duración
+        // de cierre (más punchy que la de apertura) y se "regrese" al origen.
+        if (modalEl) modalEl.classList.add('is-closing');
         overlay.classList.remove('active');
         overlay.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('no-scroll');
+        // Limpio el origen y el flag al terminar la animación de cierre
+        setTimeout(() => {
+            clearOrigin();
+            if (modalEl) modalEl.classList.remove('is-closing');
+        }, 360);
         currentProduct = null;
     }
 
@@ -1622,7 +1754,10 @@ if (reopenBtn) {
 
         const id = card.dataset.productId;
         const product = findProduct(id);
-        if (product) openModal(product);
+        if (product) {
+            const rect = card.getBoundingClientRect();
+            openModal(product, rect);
+        }
     });
 
     // Abrir con Enter o Espacio (accesibilidad)
@@ -1633,7 +1768,10 @@ if (reopenBtn) {
             e.preventDefault();
             const id = document.activeElement.dataset.productId;
             const product = findProduct(id);
-            if (product) openModal(product);
+            if (product) {
+                const rect = document.activeElement.getBoundingClientRect();
+                openModal(product, rect);
+            }
         }
     });
 
@@ -1703,6 +1841,136 @@ function scrollReelsToHash() {
         targetReel.scrollIntoView({ behavior: 'auto', block: 'start' });
     });
 }
+
+// =============================================
+// SCROLL: arrancar siempre arriba (salvo que la URL apunte a algo concreto)
+// El browser "recuerda" el scroll en algunas navegaciones; lo desactivamos
+// y, si la URL no trae un anchor que tenga sentido (golosinas/snacks/gaseosas/cart/short-X/product-X),
+// forzamos volver al tope al cargar.
+// =============================================
+(function initScrollRestoration() {
+    if ('scrollRestoration' in history) {
+        try { history.scrollRestoration = 'manual'; } catch (_) {}
+    }
+    const meaningfulHash = /^#(golosinas|snacks|gaseosas|cart|short-\d+|product-.+)$/i;
+    const hash = window.location.hash || '';
+    if (!meaningfulHash.test(hash)) {
+        // Saltarse el "scroll a la mitad" que algunos browsers hacen en back/forward
+        window.scrollTo(0, 0);
+        // Y otra vez después de pintar, para vencer cualquier scroll automático
+        requestAnimationFrame(() => window.scrollTo(0, 0));
+    }
+})();
+
+// =============================================
+// NAV ACTIVA POR SECCIÓN (basado en scroll-position)
+// En home, marca como activo el link cuya sección está siendo vista.
+// Algoritmo: hay una "línea de activación" a 32% del viewport desde
+// arriba. La sección actual es la última cuyo top cruzó esa línea
+// (y cuyo bottom todavía no la pasó). Mucho más predecible que un
+// IntersectionObserver con thresholds.
+// =============================================
+(function initSectionNavSpy() {
+    const navLinks = document.querySelectorAll('.nav-links a');
+    if (!navLinks.length) return;
+
+    // Sólo aplica en páginas con secciones internas (home)
+    const sections = ['golosinas', 'snacks', 'gaseosas']
+        .map(id => document.getElementById(id))
+        .filter(Boolean);
+
+    if (!sections.length) return; // No es home: no tocamos nada
+
+    // Mapa: id de sección → links que apuntan a ella
+    const linksBySection = new Map();
+    function registerLink(linkEl, sectionId) {
+        if (!linksBySection.has(sectionId)) linksBySection.set(sectionId, []);
+        linksBySection.get(sectionId).push(linkEl);
+    }
+
+    // Link a "Inicio" (en home, suele ser href="index.html" o href="#")
+    const homeLinks = [];
+    navLinks.forEach(a => {
+        const href = a.getAttribute('href') || '';
+        if (href.startsWith('#')) {
+            const id = href.slice(1);
+            if (id) registerLink(a, id);
+        } else if (
+            href === 'index.html' ||
+            href === '/' ||
+            href === './' ||
+            href === 'index.html#'
+        ) {
+            homeLinks.push(a);
+        }
+    });
+
+    // Helper: marca UN único nav link como activo (limpia los demás internos)
+    let lastActive = null;
+    function setActive(activeLink) {
+        if (lastActive === activeLink) return; // evita reflows innecesarios
+        navLinks.forEach(a => {
+            const href = a.getAttribute('href') || '';
+            const isInternal = href.startsWith('#') ||
+                href === 'index.html' || href === '/' ||
+                href === './' || href === 'index.html#';
+            if (isInternal) a.classList.remove('active');
+        });
+        if (activeLink) activeLink.classList.add('active');
+        lastActive = activeLink;
+    }
+
+    function recalcActive() {
+        // Posición absoluta de la "línea de activación" (32% desde el top del viewport)
+        const scrollY = window.scrollY || window.pageYOffset || 0;
+        const trigger = scrollY + window.innerHeight * 0.32;
+
+        // Si todavía no llegamos a la primera sección → Inicio
+        const firstTop = sections[0].offsetTop;
+        if (trigger < firstTop) {
+            setActive(homeLinks[0] || null);
+            return;
+        }
+
+        // Buscamos la última sección cuyo top está por encima de la línea
+        let current = null;
+        for (const s of sections) {
+            if (s.offsetTop <= trigger) {
+                current = s;
+            } else {
+                break;
+            }
+        }
+
+        if (current) {
+            const links = linksBySection.get(current.id) || [];
+            setActive(links[0] || null);
+        } else {
+            setActive(homeLinks[0] || null);
+        }
+    }
+
+    // Throttle con rAF para que el scroll sea fluido
+    let scheduled = false;
+    function onScrollOrResize() {
+        if (scheduled) return;
+        scheduled = true;
+        requestAnimationFrame(() => {
+            scheduled = false;
+            recalcActive();
+        });
+    }
+
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize, { passive: true });
+
+    // Las grillas se renderizan después → las secciones cambian de altura.
+    // Re-medimos varias veces tras la carga inicial para acompañar ese reflow.
+    [50, 200, 600, 1500].forEach(ms => setTimeout(recalcActive, ms));
+
+    // Estado inicial
+    recalcActive();
+})();
 
 // =============================================
 // BOOT: render inicial
