@@ -295,11 +295,20 @@ function renderSubgroupChips(list, chipsContainerId, gridContainerId) {
         chipsContainer.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('is-active'));
         chip.classList.add('is-active');
 
-        // Animación facherita: las que se van se desvanecen, las que entran se re-staggerean
-        animatedFilter(gridEl, 'is-hidden-filter', card => {
+        // Animación SOLO en el botón clickeado: pulso corto y satisfactorio.
+        // Las tarjetas cambian sin animación → respuesta instantánea.
+        chip.classList.remove('is-tapped');
+        // Forzar reflow para reiniciar la animación si el chip ya estaba "tapeado"
+        const _ = chip.offsetWidth; void _;
+        chip.classList.add('is-tapped');
+        setTimeout(() => chip.classList.remove('is-tapped'), 380);
+
+        // Aplicar el filtro directo, sin animar las tarjetas
+        gridEl.querySelectorAll('.product-card').forEach(card => {
             const cardGroup = card.dataset.productGroup || '';
-            return filter === '*' || cardGroup === filter;
-        }, { mode: 'chip' });
+            const matches = filter === '*' || cardGroup === filter;
+            card.classList.toggle('is-hidden-filter', !matches);
+        });
     });
 }
 
@@ -827,7 +836,19 @@ function updateCartUI() {
     const totalPrice = cart.reduce((sum, i) => sum + (i.precio * i.qty), 0);
 
     // Actualizar TODOS los contadores de carrito (por si hay varios, ej. placeholder en otras páginas)
-    document.querySelectorAll('.cart-count').forEach(el => { el.textContent = totalItems; });
+    // Si el número subió respecto al render anterior, "bump" animado en el badge.
+    document.querySelectorAll('.cart-count').forEach(el => {
+        const oldVal = parseInt(el.dataset.lastValue || '0', 10);
+        el.textContent = totalItems;
+        el.dataset.lastValue = String(totalItems);
+        if (totalItems > oldVal) {
+            el.classList.remove('is-bumped');
+            // Reflow para reiniciar la animación
+            const _ = el.offsetWidth; void _;
+            el.classList.add('is-bumped');
+            setTimeout(() => el.classList.remove('is-bumped'), 480);
+        }
+    });
 
     if (cartTotal) cartTotal.textContent = '$' + totalPrice.toLocaleString('es-AR');
 
