@@ -7,6 +7,22 @@
     <meta name="theme-color" content="#8B5E34">
     <title>Falahbar.SnkS - Golosinas y SnkS</title>
     <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <!-- Open Graph: vista previa cuando se comparte en WhatsApp / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Falahbar.SnkS - Golosinas y snacks a domicilio en La Rioja">
+    <meta property="og:description" content="Golosinas, chocolates y snacks salados con pedido por WhatsApp y envío en La Rioja Capital.">
+    <meta property="og:image" content="logo.png">
+    <meta property="og:locale" content="es_AR">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Falahbar.SnkS">
+    <meta name="twitter:description" content="Golosinas y snacks a domicilio. Pedidos por WhatsApp.">
+    <meta name="twitter:image" content="logo.png">
+
+    <!-- Preload de los datos críticos: el JSON empieza a bajar antes que el JS -->
+    <link rel="preload" href="data/productos.json" as="fetch" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles-extra.css">
 </head>
@@ -31,7 +47,7 @@
             </ul>
             <button class="cart-btn" id="cartBtn" aria-label="Abrir carrito">
                 <span aria-hidden="true">🛒</span>
-                <span class="cart-count" id="cartCount">0</span>
+                <span class="cart-count" id="cartCount" aria-live="polite" aria-label="Productos en el carrito">0</span>
             </button>
         </nav>
     </header>
@@ -249,6 +265,7 @@
                 <span>Total:</span>
                 <strong id="cartTotal">$0</strong>
             </div>
+            <div class="cart-savings" id="cartSavings" hidden></div>
             <button class="btn btn-whatsapp" id="sendWhatsApp" disabled>
                 Enviar pedido por WhatsApp
             </button>
@@ -264,7 +281,7 @@
             <button class="product-modal-close" id="productModalClose" aria-label="Cerrar">×</button>
             <div class="product-modal-hero">
                 <div class="product-modal-emoji" id="productModalEmoji" aria-hidden="true">🍬</div>
-                <div class="product-modal-photo-placeholder">📷 Foto próximamente</div>
+                <div class="product-modal-photo-placeholder">📷 Imagen pendiente</div>
             </div>
             <div class="product-modal-body">
                 <span class="product-modal-group" id="productModalGroup"></span>
@@ -304,6 +321,9 @@
         </div>
     </div>
 
+    <!-- Catálogo + videos embebidos como fallback (para abrir el index sin servidor) -->
+    <script src="data/productos.js"></script>
+    <script src="data/videos.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

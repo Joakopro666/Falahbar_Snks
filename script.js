@@ -3,110 +3,172 @@
 // =============================================
 
 // =============================================
-// CATÁLOGO DE PRODUCTOS
+// CATÁLOGO DE PRODUCTOS (data-driven)
 // =============================================
-// Estructura: cada producto tiene { id, grupo, nombre, precio, emoji, descripcion? }
-// - `grupo` se usa para mostrar el subtítulo en el catálogo.
-// - `precio` son placeholders cómodos de editar (todos redondos).
-// - `descripcion` es opcional; si falta, el modal muestra un placeholder.
+// Los productos NO se escriben acá. Se cargan desde data/productos.json.
+// Para editarlos, usá el panel admin (admin.html) o editá ese JSON directo.
 //
-// NOTA: los precios son placeholders. Actualizalos con los valores reales
-// cuando los tengas. Están agrupados de forma que es fácil buscar y reemplazar.
+// Estructura de cada producto en el JSON:
+//   {
+//     "codigo": "FAL003",
+//     "id":     "alf-triple-choco",   // slug único usado por el carrito
+//     "categoria":   "golosinas",     // golosinas | snacks | gaseosas
+//     "subcategoria":"Chupetines",    // chip de filtro / título del modal
+//     "nombre":      "...",
+//     "descripcion": "",
+//     "precio":      2500,
+//     "stock":       10,              // 0 = sin stock (no se puede agregar)
+//     "imagen":      "img/...jpg",    // si está vacío, se usa el emoji
+//     "emoji":       "🍬",
+//     "destacado":   false,
+//     "activo":      true,            // false = no se renderiza
+//     "videoId":     null,
+//     "notas":       ""
+//   }
 // =============================================
 
 const DESC_PLACEHOLDER = 'Descripción próximamente. Un clásico que no falla en Falahbar.SnkS 🍬';
 
-const golosinas = [
-    // ---------- Chupetines ----------
-    { id: 'chp-cebollitas-ddl',   grupo: 'Chupetines', nombre: 'Chupetín Cebollitas Dulce de Leche', precio: 500,  emoji: '🍭' },
-    { id: 'chp-picodulce-pote',   grupo: 'Chupetines', nombre: 'Chupetín Pico Dulce (pote)',         precio: 2500, emoji: '🍬' },
-    { id: 'chp-picodulce-frut',   grupo: 'Chupetines', nombre: 'Chupetín Pico Dulce Frut (caja)',    precio: 2500, emoji: '🍓' },
-    { id: 'chp-flynnpaff-emoji',  grupo: 'Chupetines', nombre: 'Chupetín Flynn Paff Emoji',          precio: 600,  emoji: '😛' },
-    { id: 'chp-flynnpaff-sandia', grupo: 'Chupetines', nombre: 'Chupetín Flynn Paff Sandía Melón',   precio: 600,  emoji: '🍉' },
+// Estos arrays se llenan al cargar productos.json.
+// Mantenemos los nombres antiguos (golosinas / snacks / gaseosas) para no
+// romper el resto del código, pero ahora son "let" porque se reemplazan
+// después del fetch.
+let golosinas = [];
+let snacks    = [];
+let gaseosas  = [];
+let allProducts = [];          // catálogo completo (las 3 listas concatenadas)
 
-    // ---------- Alfajores Fantoche ----------
-    { id: 'alf-raul-simple-blanco', grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Pescado Raúl Simple Blanco', precio: 1500, emoji: '🤍', videoId: 1 },
-    { id: 'alf-raul-simple-negro',  grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Pescado Raúl Simple Negro',  precio: 1500, emoji: '🍫', videoId: 1 },
-    { id: 'alf-super-triple',       grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Super Triple',      precio: 2500, emoji: '🍪', videoId: 2 },
-    { id: 'alf-triple-redvelvet',   grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Triple Red Velvet', precio: 2500, emoji: '❤️', videoId: 3 },
-    { id: 'alf-cuadruple-choco',    grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Cuádruple Chocolate', precio: 3500, emoji: '🍫' },
-    { id: 'alf-triple-blanco',      grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Triple Blanco',     precio: 2500, emoji: '🤍' },
-    { id: 'alf-triple-choco',       grupo: 'Alfajores Fantoche', nombre: 'Alfajor Fantoche Triple Chocolate',  precio: 2500, emoji: '🍫' }
-];
+// Map auxiliar: id → producto. Se rebuildea al recargar el catálogo.
+let productById = new Map();
 
-// Snacks: caramelos, chicles y similares (productos para picar / masticar).
-const snacks = [
-    // ---------- Caramelos Menthoplus ----------
-    { id: 'mp-frio-mentol',    grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Frío Mentol',      precio: 500, emoji: '❄️' },
-    { id: 'mp-ac-manzana',     grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Ácidos Manzana',   precio: 500, emoji: '🍏' },
-    { id: 'mp-ac-naranja',     grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Ácidos Naranja',   precio: 500, emoji: '🍊' },
-    { id: 'mp-ac-blackcherry', grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Ácidos Black Cherry', precio: 500, emoji: '🍒' },
-    { id: 'mp-c-limon',        grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus C + Limón',        precio: 500, emoji: '🍋' },
-    { id: 'mp-miel',           grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Miel',             precio: 500, emoji: '🍯' },
-    { id: 'mp-cereza',         grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Cereza',           precio: 500, emoji: '🍒' },
-    { id: 'mp-strong',         grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Strong',           precio: 500, emoji: '⚡' },
-    { id: 'mp-mentol',         grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Mentol',           precio: 500, emoji: '🌿' },
-    { id: 'mp-menta',          grupo: 'Caramelos Menthoplus', nombre: 'Menthoplus Menta',            precio: 500, emoji: '🌱' },
+// Adapta un producto del JSON al "shape" antiguo que el resto del JS espera
+// (que usa `.grupo` en lugar de `.subcategoria`). Mantenemos los dos para
+// compatibilidad con el código que ya estaba.
+function adaptProduct(p) {
+    return {
+        ...p,
+        grupo: p.subcategoria || p.grupo || ''
+    };
+}
 
-    // ---------- Caramelos Menthoplus Sin Azúcar ----------
-    { id: 'mpsa-mentol',  grupo: 'Caramelos Menthoplus Sin Azúcar', nombre: 'Menthoplus S/A Mentol',  precio: 550, emoji: '🌿' },
-    { id: 'mpsa-durazno', grupo: 'Caramelos Menthoplus Sin Azúcar', nombre: 'Menthoplus S/A Durazno', precio: 550, emoji: '🍑' },
-    { id: 'mpsa-sandia',  grupo: 'Caramelos Menthoplus Sin Azúcar', nombre: 'Menthoplus S/A Sandía',  precio: 550, emoji: '🍉' },
-    { id: 'mpsa-cherry',  grupo: 'Caramelos Menthoplus Sin Azúcar', nombre: 'Menthoplus S/A Cherry',  precio: 550, emoji: '🍒' },
-    { id: 'mpsa-strong',  grupo: 'Caramelos Menthoplus Sin Azúcar', nombre: 'Menthoplus S/A Strong',  precio: 550, emoji: '⚡' },
+// Convierte una ruta de imagen "corta" (ej: "fantoche-triple.jpg") en
+// una ruta completa "img/productos/fantoche-triple.jpg". Si ya viene con
+// "/" o es una URL absoluta, no la toca.
+function resolveImagePath(img) {
+    if (!img) return '';
+    const s = String(img).trim();
+    if (!s) return '';
+    if (s.startsWith('http') || s.startsWith('/') || s.includes('/')) return s;
+    return 'img/productos/' + s;
+}
 
-    // ---------- Chicles Topline ----------
-    { id: 'tl-seven-bubblefun',    grupo: 'Chicles Topline', nombre: 'Topline Seven Bubble Fun',    precio: 1000, emoji: '🫧' },
-    { id: 'tl-seven-mentol',       grupo: 'Chicles Topline', nombre: 'Topline Seven Mentol',       precio: 1000, emoji: '🌿' },
-    { id: 'tl-seven-mandarina',    grupo: 'Chicles Topline', nombre: 'Topline Seven Mandarina',    precio: 1000, emoji: '🍊' },
-    { id: 'tl-seven-menta',        grupo: 'Chicles Topline', nombre: 'Topline Seven Menta',        precio: 1000, emoji: '🌱' },
-    { id: 'tl-seven-violetcherry', grupo: 'Chicles Topline', nombre: 'Topline Seven Violet Cherry',precio: 1000, emoji: '🍒' },
-    { id: 'tl-sandia-menta',       grupo: 'Chicles Topline', nombre: 'Topline Sandía Menta',       precio: 1000, emoji: '🍉' },
-    { id: 'tl-seven-sandia',       grupo: 'Chicles Topline', nombre: 'Topline Seven Sandía',       precio: 1000, emoji: '🍉' },
-    { id: 'tl-strong',             grupo: 'Chicles Topline', nombre: 'Topline Strong',             precio: 1000, emoji: '⚡' },
-    { id: 'tl-fruta',              grupo: 'Chicles Topline', nombre: 'Topline Fruta',              precio: 1000, emoji: '🍓' },
-    { id: 'tl-menta',              grupo: 'Chicles Topline', nombre: 'Topline Menta',              precio: 1000, emoji: '🌱' },
-    { id: 'tl-seven-clickfresh',   grupo: 'Chicles Topline', nombre: 'Topline Seven Click Fresh',  precio: 1000, emoji: '💨' },
-    { id: 'tl-seven-strong',       grupo: 'Chicles Topline', nombre: 'Topline Seven Strong',       precio: 1000, emoji: '⚡' },
-    { id: 'tl-seven-frutilla',     grupo: 'Chicles Topline', nombre: 'Topline Seven Frutilla',     precio: 1000, emoji: '🍓' }
-];
+// Cargar el catálogo. Estrategia:
+//   1) Probamos fetch a productos.json (es lo "live", actualizable desde el admin).
+//   2) Si falla (típicamente abierto con file://), caemos al objeto global
+//      window.FALAHBAR_PRODUCTS_DATA que viene de data/productos.js.
+async function loadCatalog() {
+    let data = null;
+    try {
+        const res = await fetch('data/productos.json?v=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        data = await res.json();
+    } catch (err) {
+        console.warn('[Falahbar] fetch productos.json falló (probable file://). Usando productos.js.', err);
+        if (window.FALAHBAR_PRODUCTS_DATA) {
+            data = window.FALAHBAR_PRODUCTS_DATA;
+        }
+    }
 
-// Gaseosas y bebidas - productos placeholder hasta cargar los reales.
-// Precios redondos como referencia; actualizalos cuando los confirmes.
-const gaseosas = [
-    { id: 'bb-coca-500',     grupo: 'Gaseosas', nombre: 'Coca-Cola 500ml',          precio: 1500, emoji: '🥤' },
-    { id: 'bb-coca-zero-500',grupo: 'Gaseosas', nombre: 'Coca-Cola Zero 500ml',     precio: 1500, emoji: '🥤' },
-    { id: 'bb-coca-225',     grupo: 'Gaseosas', nombre: 'Coca-Cola 2.25L',          precio: 4500, emoji: '🧃' },
-    { id: 'bb-sprite-500',   grupo: 'Gaseosas', nombre: 'Sprite 500ml',             precio: 1400, emoji: '🥤' },
-    { id: 'bb-fanta-500',    grupo: 'Gaseosas', nombre: 'Fanta Naranja 500ml',      precio: 1400, emoji: '🍊' },
-    { id: 'bb-pepsi-500',    grupo: 'Gaseosas', nombre: 'Pepsi 500ml',              precio: 1300, emoji: '🥤' },
-    { id: 'bb-7up-500',      grupo: 'Gaseosas', nombre: '7Up 500ml',                precio: 1300, emoji: '🥤' },
-    { id: 'bb-paso-nar-500', grupo: 'Gaseosas', nombre: 'Paso de los Toros 500ml',  precio: 1300, emoji: '🍋' },
-    { id: 'bb-agua-500',     grupo: 'Aguas',    nombre: 'Agua Mineral 500ml',       precio: 1000, emoji: '💧' },
-    { id: 'bb-agua-sab-500', grupo: 'Aguas',    nombre: 'Agua Saborizada 500ml',    precio: 1200, emoji: '🍋' },
-    { id: 'bb-agua-225',     grupo: 'Aguas',    nombre: 'Agua Mineral 2.25L',       precio: 2500, emoji: '💧' }
-];
+    const lista = (data && Array.isArray(data.productos)) ? data.productos : [];
+    const visibles = lista
+        .filter(p => p && p.activo !== false)
+        .map(adaptProduct)
+        .map(p => ({ ...p, imagen: resolveImagePath(p.imagen) }));
+
+    golosinas = visibles.filter(p => p.categoria === 'golosinas');
+    snacks    = visibles.filter(p => p.categoria === 'snacks');
+    gaseosas  = visibles.filter(p => p.categoria === 'gaseosas');
+    allProducts = visibles;
+    productById = new Map(allProducts.map(p => [p.id, p]));
+
+    if (!visibles.length) {
+        console.error('[Falahbar] No se pudo cargar el catálogo. Verificá data/productos.js o servir con servidor.');
+    }
+}
 
 // =============================================
-// SHORTS / VIDEOS
-// Dejá el array vacío para mostrar placeholders elegantes.
-// Para agregar un video real, elegí una de estas formas:
-//
-// 1) Embed externo (YouTube Shorts, Instagram Reels, TikTok):
-//    { id: 1, title: 'Mix de frutos secos', embedUrl: 'https://www.youtube.com/embed/XXXXXX' }
-//
-// 2) Archivo propio (MP4 alojado en la web):
-//    { id: 2, title: 'Unboxing alfajores', videoUrl: 'videos/alfajores.mp4', thumbnail: 'img/alfajores.jpg' }
-//
-// 3) Solo miniatura (link a video externo en otro lado):
-//    { id: 3, title: 'Nuevos snacks', thumbnail: 'img/snacks.jpg', link: 'https://instagram.com/p/XXXX/' }
+// SHORTS / VIDEOS (data-driven)
 // =============================================
-const shortsData = [
-    { id: 1, title: 'Falahbar en acción 🍫', videoUrl: 'videos/short1.mp4' },
-    { id: 2, title: 'Novedades Falahbar ✨',  videoUrl: 'videos/short2.mp4' },
-    { id: 3, title: 'Lo mejor de Falahbar 🍿', videoUrl: 'videos/short3.mp4' }
-    // Agregá más objetos acá a medida que tengas nuevos videos.
-];
+// Los videos se editan desde admin.html (pestaña Videos) y se guardan
+// en data/videos.json. Cada video tiene esta estructura:
+//
+//   {
+//     id:            1,                           // id único, número
+//     titulo:        "...",                       // texto en pantalla
+//     tipo:          "mp4" | "embed" | "link",   // formato del video
+//     videoUrl:      "videos/short1.mp4",        // si tipo=mp4
+//     embedUrl:      "https://youtube.com/embed/XXX",  // si tipo=embed
+//     linkExterno:   "https://www.instagram.com/p/XXX/", // si tipo=link
+//     thumbnail:     "img/...",                  // miniatura opcional
+//     productoId:    "alf-raul-simple-negro",   // id del producto vinculado, "" si ninguno
+//     mostrarEnHome: true,                       // si va al carrusel del home
+//     ordenHome:     1,                          // orden dentro del home
+//     activo:        true                        // false = no se renderiza
+//   }
+// =============================================
+let shortsData = [];           // se llena después del fetch
+let shortsHomeData = [];       // subset filtrado para el preview del home
+
+// Adaptador: convierte la forma "json" del video a la forma legacy que ya
+// usaban renderShortCard / renderReelItem (con campos title, videoUrl, etc.).
+function adaptVideo(v) {
+    const out = {
+        id: v.id,
+        title: v.titulo,
+        thumbnail: v.thumbnail || ''
+    };
+    if (v.tipo === 'embed' && v.embedUrl) {
+        out.embedUrl = v.embedUrl;
+    } else if (v.tipo === 'link' && v.linkExterno) {
+        out.link = v.linkExterno;
+    } else if (v.videoUrl) {
+        // mp4 (default)
+        out.videoUrl = v.videoUrl;
+    } else if (v.linkExterno) {
+        // fallback: si no hay videoUrl pero sí link, lo tratamos como link
+        out.link = v.linkExterno;
+    }
+    return out;
+}
+
+async function loadVideos() {
+    let data = null;
+    try {
+        const res = await fetch('data/videos.json?v=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        data = await res.json();
+    } catch (err) {
+        if (window.FALAHBAR_VIDEOS_DATA) {
+            data = window.FALAHBAR_VIDEOS_DATA;
+        }
+    }
+    const list = (data && Array.isArray(data.videos)) ? data.videos : [];
+    const visibles = list.filter(v => v && v.activo !== false);
+
+    // Lista completa para shorts.html (feed inmersivo) — orden estable por id
+    shortsData = visibles
+        .slice()
+        .sort((a, b) => (Number(a.id) || 0) - (Number(b.id) || 0))
+        .map(adaptVideo);
+
+    // Subset para el preview del home: solo los marcados como mostrarEnHome,
+    // ordenados por ordenHome.
+    shortsHomeData = visibles
+        .filter(v => v.mostrarEnHome !== false)
+        .slice()
+        .sort((a, b) => (Number(a.ordenHome) || 999) - (Number(b.ordenHome) || 999))
+        .map(adaptVideo);
+}
 
 const WHATSAPP_NUMBER = '5493804653294';
 const FREE_SHIPPING_THRESHOLD = 30000; // Envío gratis superando este monto
@@ -152,18 +214,17 @@ function loadCartFromStorage() {
         const parsed = JSON.parse(raw);
         if (!Array.isArray(parsed)) return;
 
-        // Filtro ítems huérfanos (ids viejos que ya no están en el catálogo).
-        // Esto protege contra carritos persistidos de versiones anteriores
-        // (ej. g1..g16, s1..s16) que romperían el renderizado/total.
-        const validIds = new Set([...golosinas, ...snacks, ...gaseosas].map(p => p.id));
+        // Validación de shape: en este punto el catálogo todavía no se cargó
+        // (es asíncrono). Aceptamos cualquier id "razonable" — los ids que
+        // ya no existan en el catálogo nuevo se limpian más tarde, en
+        // bootCatalog(), una vez que tenemos productById poblado.
         cart = parsed.filter(item =>
             item && typeof item === 'object'
-            && item.id && validIds.has(item.id)
+            && typeof item.id === 'string' && item.id.length > 0
             && typeof item.precio === 'number'
             && typeof item.qty === 'number' && item.qty > 0
         );
 
-        // Si limpiamos algo, persistimos el carrito saneado
         if (cart.length !== parsed.length) {
             try { localStorage.setItem(STORAGE_KEY_CART, JSON.stringify(cart)); } catch (_) {}
         }
@@ -184,22 +245,122 @@ function productCardHTML(p) {
     const videoBadge = (p.videoId != null)
         ? `<span class="product-video-badge" aria-label="Tiene video" title="Tiene video">🎬</span>`
         : '';
+
+    const stock      = Number.isFinite(p.stock) ? p.stock : 1;
+    const sinStock   = stock <= 0;
+    const stockLow   = stock > 0 && stock <= 3;
+
+    // Visual del producto: si hay imagen real, mostramos <img>; si no, emoji.
+    let mediaHTML;
+    if (p.imagen) {
+        mediaHTML = `
+            <div class="product-media">
+                <img class="product-img" src="${escapeHtml(p.imagen)}" alt="${escapeHtml(p.nombre)}"
+                     loading="lazy" decoding="async"
+                     onerror="this.parentElement.classList.add('product-media--fallback'); this.remove();">
+                <div class="product-emoji product-emoji--inline" aria-hidden="true">${p.emoji || '🍬'}</div>
+            </div>
+        `;
+    } else {
+        mediaHTML = `
+            <div class="product-emoji product-emoji--big" aria-hidden="true">${p.emoji || '🍬'}</div>
+            <div class="product-photo-placeholder" aria-hidden="true">📷 Imagen pendiente</div>
+        `;
+    }
+
+    // Etiqueta de stock
+    let stockBadge = '';
+    if (sinStock) {
+        stockBadge = `<span class="stock-badge stock-badge--out">Sin stock</span>`;
+    } else if (stockLow) {
+        stockBadge = `<span class="stock-badge stock-badge--low">¡Quedan ${stock}!</span>`;
+    }
+
+    const btnHTML = sinStock
+        ? `<button class="add-to-cart is-disabled" disabled aria-disabled="true">Sin stock</button>`
+        : `<button class="add-to-cart" data-id="${escapeHtml(p.id)}" aria-label="Agregar ${escapeHtml(p.nombre)} al carrito">Agregar</button>`;
+
+    // Precio: si es 0/null, lo mostramos como "Precio a consultar" en gris
+    // (más amable que un "$0" pelado) y el botón pasa a "Consultar"
+    const precioNum = Number(p.precio) || 0;
+    const priceHTML = precioNum > 0
+        ? `<div class="product-price">$${precioNum.toLocaleString('es-AR')}</div>`
+        : `<div class="product-price product-price--pending">Precio a consultar</div>`;
+
+    // Badge de promo / pack clickeable: agrega `cantidadPack` unidades de una.
+    // Si no hay cantidadPack (pack cerrado sin cantidad), muestra el texto
+    // pero no es clickeable.
+    const promoText = formatPromoText(p);
+    const cantPack  = Number(p.cantidadPack);
+    let promoHTML = '';
+    if (promoText && !sinStock) {
+        if (Number.isFinite(cantPack) && cantPack >= 2) {
+            promoHTML = `<button type="button" class="product-promo product-promo--btn"
+                data-action="add-pack" data-id="${escapeHtml(p.id)}" data-pack-qty="${cantPack}"
+                aria-label="Agregar ${cantPack} unidades de ${escapeHtml(p.nombre)} con descuento">${escapeHtml(promoText)}</button>`;
+        } else {
+            promoHTML = `<div class="product-promo">${escapeHtml(promoText)}</div>`;
+        }
+    }
+
+    const sinPrecio = precioNum <= 0;
+    const cardClasses = ['product-card'];
+    if (sinStock)  cardClasses.push('is-out-of-stock');
+    if (sinPrecio) cardClasses.push('is-no-price');
+
     return `
-        <div class="product-card"
+        <div class="${cardClasses.join(' ')}"
              data-product-id="${escapeHtml(p.id)}"
              data-product-group="${escapeHtml(p.grupo || '')}"
+             data-product-stock="${stock}"
              role="button" tabindex="0"
-             aria-label="Ver ${escapeHtml(p.nombre)}">
+             aria-label="Ver ${escapeHtml(p.nombre)}, ${precioNum > 0 ? '$' + precioNum : 'precio a consultar'}">
             ${videoBadge}
-            <div class="product-emoji" aria-hidden="true">${p.emoji || '🍬'}</div>
+            ${stockBadge}
+            ${mediaHTML}
             <h3>${escapeHtml(p.nombre)}</h3>
-            <div class="product-price">$${p.precio.toLocaleString('es-AR')}</div>
-            <div class="product-photo-placeholder" aria-hidden="true">📷 Foto próximamente</div>
-            <button class="add-to-cart" data-id="${escapeHtml(p.id)}" aria-label="Agregar ${escapeHtml(p.nombre)} al carrito">
-                Agregar
-            </button>
+            ${priceHTML}
+            ${promoHTML}
+            ${btnHTML}
         </div>
     `;
+}
+
+/**
+ * Formatea el texto del badge de promo/pack a partir de los campos
+ * `precioPack` (precio total del pack) y `cantidadPack` (unidades del pack).
+ * Devuelve string vacío si no hay promo válida.
+ */
+function formatPromoText(p) {
+    const pp = Number(p.precioPack);
+    const qty = Number(p.cantidadPack);
+    if (!Number.isFinite(pp) || pp <= 0) return '';
+    const ppFmt = pp.toLocaleString('es-AR');
+    if (Number.isFinite(qty) && qty >= 2) {
+        return `${qty} por $${ppFmt}`;
+    }
+    return `Pack: $${ppFmt}`;
+}
+
+/**
+ * Calcula el subtotal de un ítem del carrito aplicando el descuento de pack.
+ * Si tiene `precioPack` + `cantidadPack`, agrupa de a `cantidadPack` y cobra
+ * `precioPack` por cada grupo; lo que sobra se cobra al precio unitario.
+ *
+ * Ejemplo: precio=1000, precioPack=1800, cantidadPack=2
+ *   qty=1 → 1000   qty=2 → 1800   qty=3 → 2800   qty=4 → 3600
+ */
+function lineTotal(item) {
+    const u   = Number(item.precio) || 0;
+    const n   = Number(item.qty) || 0;
+    const pp  = Number(item.precioPack);
+    const qty = Number(item.cantidadPack);
+    if (Number.isFinite(pp) && pp > 0 && Number.isFinite(qty) && qty >= 2 && n >= qty) {
+        const packs  = Math.floor(n / qty);
+        const extras = n % qty;
+        return packs * pp + extras * u;
+    }
+    return n * u;
 }
 
 /**
@@ -234,9 +395,16 @@ function renderProducts(list, containerId, options = {}) {
     // Grilla plana, sin headers de subcategoría
     container.innerHTML = list.map(productCardHTML).join('');
 
+    // Por defecto NO se muestran en la grilla los productos sin stock ni los
+    // de "Precio a consultar" (precio = 0). El buscador los puede mostrar
+    // al matchear nombre, o al buscar "sin stock".
+    Array.from(container.querySelectorAll('.product-card.is-out-of-stock, .product-card.is-no-price')).forEach(card => {
+        card.classList.add('is-hidden');
+    });
+
     // Asignar --fx-card-index a cada tarjeta para el stagger de animación
     // (limito a las primeras 24 para que productos lejos no esperen demasiado)
-    Array.from(container.querySelectorAll('.product-card')).forEach((card, i) => {
+    Array.from(container.querySelectorAll('.product-card:not(.is-hidden)')).forEach((card, i) => {
         card.style.setProperty('--fx-card-index', String(Math.min(i, 24)));
     });
 
@@ -475,14 +643,18 @@ function renderShortCard(item) {
     return renderShortCard({ placeholder: true });
 }
 
-function renderShorts(containerId, { limit = null, minPlaceholders = 6 } = {}) {
+function renderShorts(containerId, { limit = null, minPlaceholders = 6, useHomeList = false } = {}) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    let items = shortsData.slice();
+    // En el home queremos solo los seleccionados ("mostrarEnHome").
+    // En shorts.html queremos todo.
+    const fuente = useHomeList ? shortsHomeData : shortsData;
+    let items = fuente.slice();
     if (limit) items = items.slice(0, limit);
 
-    // Rellenar con placeholders hasta llegar al mínimo visual
+    // Rellenar con placeholders ("Más videos pronto") hasta el mínimo visual.
+    // El placeholder SIEMPRE queda al final.
     const target = limit || minPlaceholders;
     while (items.length < target) {
         items.push({ placeholder: true });
@@ -534,7 +706,7 @@ function renderReelItem(item, index) {
 
     // Producto promocionado (primer producto cuyo videoId coincide con el id del short)
     const promoted = (item.id != null)
-        ? [...golosinas, ...snacks, ...gaseosas].find(p => Number(p.videoId) === Number(item.id))
+        ? allProducts.find(p => Number(p.videoId) === Number(item.id))
         : null;
 
     // CTA: si hay producto promocionado, abre su modal en home; si no, va a la sección golosinas
@@ -667,12 +839,21 @@ function initReelsBehavior(container) {
                 e.preventDefault();
                 const pid = actionBtn.dataset.productId;
                 if (pid) {
+                    // Solo mostramos el feedback dorado si efectivamente se agregó
+                    // (addToCart se rehúsa silenciosamente si está sin stock).
+                    const product = findProduct(pid);
+                    const stock   = product && Number.isFinite(product.stock) ? product.stock : 1;
+                    const yaEnCart = (cart.find(i => i.id === pid)?.qty) || 0;
+                    const podemos  = product && stock > 0 && yaEnCart < stock;
+
                     addToCart(pid, actionBtn);
-                    // Feedback visual extra: pulso dorado momentáneo
-                    actionBtn.classList.remove('reel-action--added');
-                    void actionBtn.offsetWidth;
-                    actionBtn.classList.add('reel-action--added');
-                    setTimeout(() => actionBtn.classList.remove('reel-action--added'), 700);
+
+                    if (podemos) {
+                        actionBtn.classList.remove('reel-action--added');
+                        void actionBtn.offsetWidth;
+                        actionBtn.classList.add('reel-action--added');
+                        setTimeout(() => actionBtn.classList.remove('reel-action--added'), 700);
+                    }
                 }
                 return;
             }
@@ -780,21 +961,94 @@ function showCartToast(nombre) {
 // FUNCIONES DEL CARRITO
 // =============================================
 function findProduct(id) {
-    return [...golosinas, ...snacks, ...gaseosas].find(p => p.id === id);
+    if (productById.has(id)) return productById.get(id);
+    return allProducts.find(p => p.id === id);
 }
 
-function addToCart(id, btnEl) {
+// Pequeño toast de error (cuando se intenta agregar sin stock o pasarse del stock)
+function showStockToast(msg) {
+    let toast = document.getElementById('cartToast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'cartToast';
+        toast.className = 'cart-toast';
+        document.body.appendChild(toast);
+    }
+    toast.textContent = '⚠️ ' + msg;
+    toast.classList.add('visible', 'cart-toast--warn');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+        toast.classList.remove('visible', 'cart-toast--warn');
+    }, 2400);
+}
+
+// "Fly to cart": una mini-bola con el emoji del producto vuela desde el botón
+// hasta el ícono del carrito. Sirve como confirmación visceral del agregado.
+function flyToCart(originEl, emoji) {
+    if (!originEl) return;
+    const cartBtn = document.getElementById('cartBtn');
+    if (!cartBtn) return;
+    // Respeta reduce-motion
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const start = originEl.getBoundingClientRect();
+    const end   = cartBtn.getBoundingClientRect();
+
+    const ball = document.createElement('div');
+    ball.className = 'fly-to-cart-ball';
+    ball.textContent = emoji || '🍬';
+    ball.style.left = (start.left + start.width / 2 - 14) + 'px';
+    ball.style.top  = (start.top  + start.height / 2 - 14) + 'px';
+    document.body.appendChild(ball);
+
+    // Forzar reflow antes de transicionar al destino
+    requestAnimationFrame(() => {
+        ball.style.transform = `translate(${end.left + end.width / 2 - (start.left + start.width / 2)}px, ${end.top + end.height / 2 - (start.top + start.height / 2)}px) scale(0.3)`;
+        ball.style.opacity = '0';
+    });
+    setTimeout(() => ball.remove(), 700);
+}
+
+function addToCart(id, btnEl, addQty) {
     const product = findProduct(id);
     if (!product) return;
 
+    // Bloqueo total si está sin stock (incluso aunque alguien intente
+    // llamar addToCart desde la consola).
+    const stock = Number.isFinite(product.stock) ? product.stock : 1;
+    if (stock <= 0) {
+        showStockToast(`${product.nombre} está sin stock.`);
+        return;
+    }
+
+    // Cantidad a sumar: 1 por defecto. Si vino el botón de pack, sumamos `cantidadPack`.
+    let toAdd = Number(addQty);
+    if (!Number.isFinite(toAdd) || toAdd <= 0) toAdd = 1;
+
     const existing = cart.find(item => item.id === id);
+    const yaEnCarrito = existing ? existing.qty : 0;
+
+    // Si pediste más del stock, recortamos y avisamos.
+    if (yaEnCarrito + toAdd > stock) {
+        const espacio = stock - yaEnCarrito;
+        if (espacio <= 0) {
+            showStockToast(`Solo quedan ${stock} de ${product.nombre}.`);
+            return;
+        }
+        toAdd = espacio;
+        showStockToast(`Solo agregamos ${toAdd} (quedan ${stock} en total).`);
+    }
+
     if (existing) {
-        existing.qty += 1;
+        existing.qty += toAdd;
     } else {
-        cart.push({ ...product, qty: 1 });
+        cart.push({ ...product, qty: toAdd });
     }
     saveCartToStorage();
     updateCartUI();
+
+    // Animación "fly to cart"
+    if (btnEl) flyToCart(btnEl, product.emoji);
 
     if (btnEl) {
         btnEl.classList.remove('added');
@@ -818,6 +1072,17 @@ function addToCart(id, btnEl) {
 function changeQty(id, delta) {
     const item = cart.find(i => i.id === id);
     if (!item) return;
+
+    // Si están sumando, validar stock
+    if (delta > 0) {
+        const product = findProduct(id);
+        const stock = product && Number.isFinite(product.stock) ? product.stock : Infinity;
+        if (item.qty + delta > stock) {
+            showStockToast(`Solo quedan ${stock} de ${item.nombre}.`);
+            return;
+        }
+    }
+
     item.qty += delta;
     if (item.qty <= 0) {
         cart = cart.filter(i => i.id !== id);
@@ -833,7 +1098,10 @@ function updateCartUI() {
     const clearBtn  = document.getElementById('clearCartBtn');
 
     const totalItems = cart.reduce((sum, i) => sum + i.qty, 0);
-    const totalPrice = cart.reduce((sum, i) => sum + (i.precio * i.qty), 0);
+    const totalPrice = cart.reduce((sum, i) => sum + lineTotal(i), 0);
+    // Ahorro total: lo que costaría sin pack menos lo que cuesta con pack.
+    const totalSinDesc = cart.reduce((sum, i) => sum + (Number(i.precio) || 0) * i.qty, 0);
+    const ahorro = Math.max(0, totalSinDesc - totalPrice);
 
     // Actualizar TODOS los contadores de carrito (por si hay varios, ej. placeholder en otras páginas)
     // Si el número subió respecto al render anterior, "bump" animado en el badge.
@@ -852,22 +1120,59 @@ function updateCartUI() {
 
     if (cartTotal) cartTotal.textContent = '$' + totalPrice.toLocaleString('es-AR');
 
+    // Mostrar/ocultar el cartelito verde de ahorro
+    const cartSavings = document.getElementById('cartSavings');
+    if (cartSavings) {
+        if (ahorro > 0) {
+            cartSavings.textContent = '🎉 Te ahorraste $' + ahorro.toLocaleString('es-AR');
+            cartSavings.hidden = false;
+        } else {
+            cartSavings.hidden = true;
+            cartSavings.textContent = '';
+        }
+    }
+
     updateShippingProgress(totalPrice);
 
     if (cart.length === 0) {
-        if (cartItems) cartItems.innerHTML = '<p class="cart-empty">Tu carrito está vacío.</p>';
+        if (cartItems) cartItems.innerHTML = `
+            <div class="cart-empty-state">
+                <div class="cart-empty-icon" aria-hidden="true">🛍️</div>
+                <p class="cart-empty">Tu carrito está vacío</p>
+                <p class="cart-empty-hint">Sumá productos del catálogo para hacer tu pedido por WhatsApp.</p>
+                <button type="button" class="btn btn-secondary" id="cartEmptyExploreBtn">Ver productos</button>
+            </div>
+        `;
         if (sendBtn) sendBtn.disabled = true;
         if (clearBtn) clearBtn.style.display = 'none';
+        // Conectar el botón "Ver productos" → cierra el carrito + scroll a #golosinas
+        const exploreBtn = document.getElementById('cartEmptyExploreBtn');
+        if (exploreBtn) {
+            exploreBtn.addEventListener('click', () => {
+                closeCart();
+                const target = document.getElementById('golosinas');
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        }
     } else {
         if (sendBtn) sendBtn.disabled = false;
         if (clearBtn) clearBtn.style.display = 'block';
         if (cartItems) {
-            cartItems.innerHTML = cart.map(i => `
+            cartItems.innerHTML = cart.map(i => {
+                // Si aplicó descuento de pack, mostramos el subtotal real y un cartelito.
+                const subtotal = lineTotal(i);
+                const sinDesc  = (Number(i.precio) || 0) * i.qty;
+                const aplicaDesc = subtotal < sinDesc;
+                const descHTML = aplicaDesc
+                    ? `<span class="cart-item-strike">$${sinDesc.toLocaleString('es-AR')}</span>
+                       <span class="cart-item-discount-tag">¡Pack!</span>`
+                    : '';
+                return `
                 <div class="cart-item">
                     <div class="cart-item-info">
                         <h4><span aria-hidden="true">${i.emoji}</span> ${escapeHtml(i.nombre)}</h4>
                         <div class="cart-item-price">
-                            $${(i.precio * i.qty).toLocaleString('es-AR')}
+                            $${subtotal.toLocaleString('es-AR')} ${descHTML}
                         </div>
                     </div>
                     <div class="qty-controls">
@@ -876,7 +1181,7 @@ function updateCartUI() {
                         <button class="qty-btn" data-action="increase" data-id="${i.id}" aria-label="Sumar uno">+</button>
                     </div>
                 </div>
-            `).join('');
+            `;}).join('');
         }
     }
 }
@@ -905,6 +1210,13 @@ function updateShippingProgress(totalPrice) {
 // EVENTOS: AGREGAR AL CARRITO (delegación)
 // =============================================
 document.addEventListener('click', (e) => {
+    // Badge de pack clickeable: agrega `cantidadPack` unidades de una pasada.
+    const packBtn = e.target.closest('[data-action="add-pack"]');
+    if (packBtn) {
+        e.stopPropagation(); // que no abra el modal de la tarjeta
+        addToCart(packBtn.dataset.id, packBtn, Number(packBtn.dataset.packQty) || 2);
+        return;
+    }
     const addBtn = e.target.closest('.add-to-cart');
     if (addBtn) {
         addToCart(addBtn.dataset.id, addBtn);
@@ -1184,9 +1496,12 @@ if (sendBtn) {
             : 'Hola Falahbar! Quiero hacer el siguiente pedido:\n\n';
 
         cart.forEach(i => {
-            message += `- ${i.nombre} x${i.qty} - $${(i.precio * i.qty).toLocaleString('es-AR')}\n`;
+            const sub  = lineTotal(i);
+            const full = (Number(i.precio) || 0) * i.qty;
+            const tag  = (sub < full) ? ` (pack ${i.cantidadPack}x$${Number(i.precioPack).toLocaleString('es-AR')})` : '';
+            message += `- ${i.nombre} x${i.qty} - $${sub.toLocaleString('es-AR')}${tag}\n`;
         });
-        const total = cart.reduce((sum, i) => sum + (i.precio * i.qty), 0);
+        const total = cart.reduce((sum, i) => sum + lineTotal(i), 0);
         message += `\nTotal: $${total.toLocaleString('es-AR')}\n`;
         message += `Zona de entrega: La Rioja Capital\n`;
         if (total >= FREE_SHIPPING_THRESHOLD) {
@@ -1592,9 +1907,16 @@ if (reopenBtn) {
             .trim();
     }
 
+    // Queries especiales que listan los productos sin stock.
+    const SIN_STOCK_QUERIES = new Set([
+        'sin stock', 'sinstock', 'sin-stock',
+        'agotado', 'agotados', 'no hay', 'no hay stock'
+    ]);
+
     function applyFilter(rawQuery) {
         const q = normalize(rawQuery);
         const filtering = q.length > 0;
+        const verSinStock = SIN_STOCK_QUERIES.has(q);
 
         if (clearBtn) clearBtn.hidden = !filtering;
 
@@ -1607,11 +1929,26 @@ if (reopenBtn) {
             let countInGrid = 0;
 
             // Calculamos primero cuáles van a quedar visibles (para el empty state)
+            // Reglas:
+            // - Sin búsqueda → ocultamos los sin stock y los "precio a consultar".
+            // - Búsqueda "sin stock"/"agotado" → mostramos SOLO los sin stock o sin precio.
+            // - Búsqueda normal → matcheamos por nombre/grupo (incluyendo los ocultos).
             const visibleSet = new Set();
             cards.forEach(card => {
-                const nombre = normalize(card.querySelector('h3')?.textContent);
-                const grupo  = normalize(card.dataset.productGroup);
-                const matches = !filtering || nombre.includes(q) || grupo.includes(q);
+                const nombre  = normalize(card.querySelector('h3')?.textContent);
+                const grupo   = normalize(card.dataset.productGroup);
+                const fuera   = card.classList.contains('is-out-of-stock');
+                const sinPrec = card.classList.contains('is-no-price');
+                const oculto  = fuera || sinPrec;
+
+                let matches;
+                if (!filtering) {
+                    matches = !oculto;
+                } else if (verSinStock) {
+                    matches = oculto;
+                } else {
+                    matches = nombre.includes(q) || grupo.includes(q);
+                }
                 if (matches) {
                     visibleSet.add(card);
                     countInGrid++;
@@ -1634,6 +1971,13 @@ if (reopenBtn) {
         if (statusEl) {
             if (!filtering) {
                 statusEl.textContent = '';
+            } else if (verSinStock) {
+                statusEl.textContent = totalVisibles === 0
+                    ? '¡Todo en stock! 🎉'
+                    : (totalVisibles === 1
+                        ? '1 producto sin stock'
+                        : `${totalVisibles} productos sin stock`);
+                return;
             } else if (totalVisibles === 0) {
                 statusEl.textContent = `Sin resultados para "${rawQuery.trim()}".`;
             } else {
@@ -1688,7 +2032,10 @@ if (reopenBtn) {
 
     function updateQtyUI() {
         if (qtyValEl) qtyValEl.textContent = String(currentQty);
+        const stock = (currentProduct && Number.isFinite(currentProduct.stock))
+            ? currentProduct.stock : Infinity;
         if (qtyMinus) qtyMinus.disabled = currentQty <= 1;
+        if (qtyPlus)  qtyPlus.disabled  = currentQty >= stock;
     }
 
     const modalEl = overlay.querySelector('.product-modal');
@@ -1721,9 +2068,55 @@ if (reopenBtn) {
 
         if (titleEl) titleEl.textContent = product.nombre;
         if (descEl)  descEl.textContent  = product.descripcion || DESC_PLACEHOLDER;
-        if (priceEl) priceEl.textContent = '$' + product.precio.toLocaleString('es-AR');
-        if (groupEl) groupEl.textContent = product.grupo || '';
+        if (priceEl) {
+            const precioNum = Number(product.precio) || 0;
+            if (precioNum > 0) {
+                priceEl.textContent = '$' + precioNum.toLocaleString('es-AR');
+                priceEl.classList.remove('product-price--pending');
+            } else {
+                priceEl.textContent = 'Precio a consultar';
+                priceEl.classList.add('product-price--pending');
+            }
+        }
+
+        // Promo / pack en el modal: agregamos un span al lado del precio
+        if (priceEl && priceEl.parentElement) {
+            let promoEl = priceEl.parentElement.querySelector('.product-modal-promo');
+            const promoText = formatPromoText(product);
+            if (promoText) {
+                if (!promoEl) {
+                    promoEl = document.createElement('div');
+                    promoEl.className = 'product-modal-promo';
+                    priceEl.insertAdjacentElement('afterend', promoEl);
+                }
+                promoEl.textContent = promoText;
+                promoEl.hidden = false;
+            } else if (promoEl) {
+                promoEl.hidden = true;
+                promoEl.textContent = '';
+            }
+        }
+        if (groupEl) groupEl.textContent = product.grupo || product.subcategoria || '';
         if (emojiEl) emojiEl.textContent = product.emoji || '🍬';
+
+        // Imagen real en el modal: si hay, la inyectamos sobre el hero;
+        // si no, dejamos sólo el emoji.
+        const heroEl = overlay.querySelector('.product-modal-hero');
+        if (heroEl) {
+            // Quitar imagen anterior si existía
+            const oldImg = heroEl.querySelector('.product-modal-img');
+            if (oldImg) oldImg.remove();
+            heroEl.classList.remove('product-modal-hero--with-image');
+            if (product.imagen) {
+                const img = document.createElement('img');
+                img.className = 'product-modal-img';
+                img.src = product.imagen;
+                img.alt = product.nombre;
+                img.onerror = () => { img.remove(); heroEl.classList.remove('product-modal-hero--with-image'); };
+                heroEl.appendChild(img);
+                heroEl.classList.add('product-modal-hero--with-image');
+            }
+        }
 
         // Link al short asociado (si el producto tiene videoId)
         if (videoLink) {
@@ -1734,6 +2127,36 @@ if (reopenBtn) {
                 videoLink.href = '#';
                 videoLink.hidden = true;
             }
+        }
+
+        // Stock: si es 0, deshabilitamos el botón Agregar y mostramos cartel.
+        const stock = Number.isFinite(product.stock) ? product.stock : 1;
+        const sinStock = stock <= 0;
+        if (addBtn) {
+            addBtn.disabled = sinStock;
+            addBtn.textContent = sinStock ? 'Sin stock' : 'Agregar al carrito';
+            addBtn.classList.toggle('is-disabled', sinStock);
+        }
+        if (qtyPlus)  qtyPlus.disabled  = sinStock;
+        if (qtyMinus) qtyMinus.disabled = sinStock || currentQty <= 1;
+
+        // Etiqueta de stock dentro del modal
+        let modalStockEl = overlay.querySelector('.product-modal-stock');
+        if (!modalStockEl) {
+            modalStockEl = document.createElement('div');
+            modalStockEl.className = 'product-modal-stock';
+            const priceParent = priceEl && priceEl.parentElement;
+            if (priceParent) priceParent.insertBefore(modalStockEl, priceEl);
+        }
+        if (sinStock) {
+            modalStockEl.textContent = 'Sin stock por ahora';
+            modalStockEl.className = 'product-modal-stock product-modal-stock--out';
+        } else if (stock <= 3) {
+            modalStockEl.textContent = `Quedan solo ${stock} unidades`;
+            modalStockEl.className = 'product-modal-stock product-modal-stock--low';
+        } else {
+            modalStockEl.textContent = `${stock} disponibles`;
+            modalStockEl.className = 'product-modal-stock product-modal-stock--ok';
         }
 
         updateQtyUI();
@@ -1765,10 +2188,12 @@ if (reopenBtn) {
         currentProduct = null;
     }
 
-    // Abrir al click en tarjeta (evitando el botón Agregar)
+    // Abrir al click en tarjeta (evitando el botón Agregar y el badge de pack)
     document.addEventListener('click', (e) => {
         // Si clickeó el botón Agregar dentro de la tarjeta, que no abra el modal
         if (e.target.closest('.add-to-cart')) return;
+        // Idem para el badge de pack ("2 por $X")
+        if (e.target.closest('[data-action="add-pack"]')) return;
 
         const card = e.target.closest('.product-card');
         if (!card) return;
@@ -1810,13 +2235,29 @@ if (reopenBtn) {
         if (currentQty > 1) { currentQty--; updateQtyUI(); }
     });
     if (qtyPlus) qtyPlus.addEventListener('click', () => {
+        const stock = (currentProduct && Number.isFinite(currentProduct.stock))
+            ? currentProduct.stock : Infinity;
+        if (currentQty + 1 > stock) {
+            showStockToast(`Solo quedan ${stock} de ${currentProduct.nombre}.`);
+            return;
+        }
         currentQty++; updateQtyUI();
     });
 
     // Agregar desde el modal (sumando la cantidad elegida)
     if (addBtn) addBtn.addEventListener('click', () => {
         if (!currentProduct) return;
-        for (let i = 0; i < currentQty; i++) {
+        const stock = Number.isFinite(currentProduct.stock) ? currentProduct.stock : Infinity;
+        if (stock <= 0) return;
+        // No pasarse del stock contando lo que ya está en el carrito
+        const yaEnCarrito = (cart.find(i => i.id === currentProduct.id)?.qty) || 0;
+        const cabe = Math.max(0, stock - yaEnCarrito);
+        const aAgregar = Math.min(currentQty, cabe);
+        if (aAgregar <= 0) {
+            showStockToast(`Ya tenés ${yaEnCarrito} en el carrito y solo hay ${stock}.`);
+            return;
+        }
+        for (let i = 0; i < aAgregar; i++) {
             addToCart(currentProduct.id);
         }
         closeModal();
@@ -1835,7 +2276,8 @@ if (reopenBtn) {
         // Pequeño delay para que primero rendericen las grillas
         setTimeout(() => openModal(product), 250);
     }
-    openModalFromHash();
+    // Lo exponemos para llamarlo después de que termine de cargar el catálogo
+    window.openProductFromHash = openModalFromHash;
 })();
 
 // =============================================
@@ -1996,10 +2438,194 @@ function scrollReelsToHash() {
 // =============================================
 // BOOT: render inicial
 // =============================================
-renderProducts(golosinas, 'golosinasGrid', { chipsContainerId: 'golosinasFilters' });
-renderProducts(snacks,    'snacksGrid',    { chipsContainerId: 'snacksFilters' });
-renderProducts(gaseosas,  'gaseosasGrid',  { chipsContainerId: 'gaseosasFilters' });
-renderShorts('homeShortsScroller', { limit: 5 });     // preview horizontal en home
-renderReels('reelsFeed');                             // feed inmersivo estilo TikTok / Reels en shorts.html
-scrollReelsToHash();                                  // si venimos con #short-N, abrimos ese reel
-updateCartUI(); // refleja el carrito persistido (incluso en páginas sin carrito, para el contador)
+async function bootCatalog() {
+    // Skeleton loader: 6 tarjetas "fantasmas" con shimmer mientras llega el JSON.
+    // Es más amable que un texto "Cargando..." porque ya muestra la grilla.
+    const skeletonHTML = Array(6).fill(0).map(() => `
+        <div class="product-card product-card--skeleton" aria-hidden="true">
+            <div class="skeleton-shimmer skeleton-img"></div>
+            <div class="skeleton-shimmer skeleton-line skeleton-line--title"></div>
+            <div class="skeleton-shimmer skeleton-line skeleton-line--price"></div>
+            <div class="skeleton-shimmer skeleton-btn"></div>
+        </div>
+    `).join('');
+    ['golosinasGrid', 'snacksGrid', 'gaseosasGrid'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = skeletonHTML;
+    });
+
+    // Cargamos productos y videos en paralelo (son independientes)
+    await Promise.all([loadCatalog(), loadVideos()]);
+
+    // Si la carga falló completamente, mostramos un mensaje útil en lugar
+    // del placeholder genérico de "Próximamente".
+    if (allProducts.length === 0) {
+        ['golosinasGrid', 'snacksGrid', 'gaseosasGrid'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = `
+                <div class="products-empty">
+                    <div class="products-empty-icon" aria-hidden="true">⚠️</div>
+                    <h3>No pudimos cargar el catálogo</h3>
+                    <p>Refrescá la página (Ctrl+F5 / Cmd+Shift+R). Si el problema persiste, escribinos por WhatsApp y te atendemos personalmente: <strong>3804-65-3294</strong>.</p>
+                </div>
+            `;
+        });
+        return;
+    }
+
+    renderProducts(golosinas, 'golosinasGrid', { chipsContainerId: 'golosinasFilters' });
+    renderProducts(snacks,    'snacksGrid',    { chipsContainerId: 'snacksFilters' });
+    renderProducts(gaseosas,  'gaseosasGrid',  { chipsContainerId: 'gaseosasFilters' });
+
+    // Limpiar carrito de items con id que ya no existen en el catálogo nuevo
+    if (productById.size > 0) {
+        const before = cart.length;
+        cart = cart.filter(it => productById.has(it.id));
+        if (cart.length !== before) saveCartToStorage();
+    }
+    updateCartUI();
+
+    // Preview de shorts en el home: solo los marcados "mostrarEnHome"
+    renderShorts('homeShortsScroller', { limit: 5, useHomeList: true });
+
+    // Re-renderizamos los reels: ahora sí tenemos productos para enlazarles
+    renderReels('reelsFeed');
+    scrollReelsToHash();
+
+    // Si venimos con #product-XYZ, ahora que el catálogo está cargado,
+    // abrimos el modal correspondiente.
+    if (typeof window.openProductFromHash === 'function') {
+        window.openProductFromHash();
+    }
+}
+
+updateCartUI();           // refleja el contador del carrito persistido
+bootCatalog();            // carga productos.json + videos.json y renderiza grids/reels/shorts
+
+// =============================================
+// MEJORAS DE EXPERIENCIA DE USUARIO
+// =============================================
+
+// 1) Botón flotante "subir al inicio" — aparece cuando scrolleás >400px
+(function initScrollTop() {
+    if (!document.body) return;
+    // Solo en pantallas que tienen scroll vertical (la home, etc.)
+    const btn = document.createElement('button');
+    btn.className = 'scroll-top';
+    btn.setAttribute('aria-label', 'Volver al inicio de la página');
+    btn.innerHTML = '↑';
+    document.body.appendChild(btn);
+
+    let visible = false;
+    function onScroll() {
+        const shouldShow = window.scrollY > 400;
+        if (shouldShow !== visible) {
+            visible = shouldShow;
+            btn.classList.toggle('is-visible', visible);
+        }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+})();
+
+// 2) Atajo de teclado Ctrl+K / Cmd+K → enfocar el buscador
+(function initSearchShortcut() {
+    const input = document.getElementById('productSearch');
+    if (!input) return;
+
+    // Hint visual (kbd) dentro del search box
+    const box = input.closest('.search-box');
+    if (box && !box.querySelector('.search-shortcut-hint')) {
+        const isMac = /(Mac|iPhone|iPad)/i.test(navigator.platform);
+        const hint = document.createElement('span');
+        hint.className = 'search-shortcut-hint';
+        hint.setAttribute('aria-hidden', 'true');
+        hint.textContent = isMac ? '⌘ K' : 'Ctrl K';
+        box.appendChild(hint);
+    }
+
+    document.addEventListener('keydown', (e) => {
+        const isMod = e.ctrlKey || e.metaKey;
+        if (isMod && (e.key === 'k' || e.key === 'K')) {
+            e.preventDefault();
+            input.focus();
+            input.select();
+            window.scrollTo({ top: input.getBoundingClientRect().top + window.scrollY - 120, behavior: 'smooth' });
+        }
+        // Esc en el buscador limpia y blurrea
+        if (e.key === 'Escape' && document.activeElement === input && input.value) {
+            input.value = '';
+            input.dispatchEvent(new Event('input'));
+        }
+    });
+})();
+
+// 3) Sticky CTA en mobile: botón flotante "Hacer pedido (X)" que aparece
+//    cuando hay items en el carrito y la página está scrolleada. Solo en mobile.
+(function initStickyCTA() {
+    if (!document.body) return;
+    // Solo en home (donde existe el carrito propio, no link a otra página)
+    const cartBtn = document.getElementById('cartBtn');
+    if (!cartBtn || cartBtn.tagName !== 'BUTTON') return;
+
+    const cta = document.createElement('button');
+    cta.className = 'sticky-cta';
+    cta.setAttribute('aria-label', 'Abrir carrito y hacer el pedido');
+    cta.innerHTML = `
+        <span class="sticky-cta-icon" aria-hidden="true">🛒</span>
+        <span>Hacer pedido</span>
+        <span class="sticky-cta-count" id="stickyCtaCount">0</span>
+    `;
+    document.body.appendChild(cta);
+
+    cta.addEventListener('click', () => {
+        // openCart() está definida arriba en script.js — la llamamos
+        if (typeof openCart === 'function') openCart();
+    });
+
+    function update() {
+        const total = cart.reduce((sum, i) => sum + i.qty, 0);
+        const countEl = document.getElementById('stickyCtaCount');
+        if (countEl) countEl.textContent = total;
+        const scrolled = window.scrollY > 300;
+        const cartOpen = document.getElementById('cart')?.classList.contains('active');
+        const visible = total > 0 && scrolled && !cartOpen;
+        cta.classList.toggle('is-visible', visible);
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    // Reaccionar a cambios del carrito: paqueamos updateCartUI con un decorador
+    const origUpdateCartUI = window.updateCartUI || updateCartUI;
+    if (typeof origUpdateCartUI === 'function') {
+        window.updateCartUI = function() {
+            origUpdateCartUI.apply(this, arguments);
+            update();
+        };
+    }
+    update();
+})();
+
+// 4) Shake feedback cuando addToCart rechaza algo (sin stock o overflow)
+(function decorateShowStockToast() {
+    const original = window.showStockToast || showStockToast;
+    if (typeof original !== 'function') return;
+    window.showStockToast = function(msg) {
+        original.apply(this, arguments);
+        // Shakear la última tarjeta tocada (si hay)
+        const lastBtn = document._lastClickedAddBtn;
+        if (lastBtn) {
+            const card = lastBtn.closest('.product-card') || lastBtn;
+            card.classList.remove('is-shaking');
+            void card.offsetWidth;
+            card.classList.add('is-shaking');
+            setTimeout(() => card.classList.remove('is-shaking'), 450);
+        }
+    };
+    // Track el último botón clicado para asociar el shake
+    document.addEventListener('click', (e) => {
+        const b = e.target.closest('.add-to-cart, .qty-btn, .reel-action');
+        if (b) document._lastClickedAddBtn = b;
+    }, true);
+})();

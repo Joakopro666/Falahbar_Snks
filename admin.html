@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel Admin · Falahbar.SnkS</title>
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="stylesheet" href="styles.css">
+<style>
+    /* ==========================================================
+       Estilos exclusivos del panel admin.
+       Reusan las variables de styles.css (crema, marrón, dorado).
+       ========================================================== */
+    :root {
+        --admin-bg:        #f8f1e4;
+        --admin-card:      #fffaf0;
+        --admin-border:    #e6d6b8;
+        --admin-brown:     #8B5E34;
+        --admin-brown-d:   #6c4527;
+        --admin-gold:      #d4af37;
+        --admin-cream:     #f5e9d3;
+        --admin-text:      #3a2614;
+        --admin-muted:     #7a6147;
+        --admin-danger:    #c0392b;
+        --admin-success:   #2e8c4e;
+    }
+    body {
+        background: var(--admin-bg);
+        color: var(--admin-text);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .admin-header {
+        background: linear-gradient(135deg, var(--admin-brown), var(--admin-brown-d));
+        color: #fff;
+        padding: 18px 32px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        box-shadow: 0 2px 14px rgba(60, 35, 15, 0.18);
+    }
+    .admin-header img { height: 44px; width: auto; }
+    .admin-header h1 {
+        margin: 0;
+        font-size: 1.35rem;
+        letter-spacing: 0.02em;
+    }
+    .admin-header .admin-back {
+        margin-left: auto;
+        color: #fff;
+        text-decoration: none;
+        background: rgba(255,255,255,0.18);
+        padding: 8px 16px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: background 0.2s;
+    }
+    .admin-header .admin-back:hover { background: rgba(255,255,255,0.32); }
+
+    main {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 28px 24px 80px;
+    }
+
+    .admin-section {
+        background: var(--admin-card);
+        border: 1px solid var(--admin-border);
+        border-radius: 18px;
+        padding: 24px;
+        margin-bottom: 24px;
+        box-shadow: 0 2px 8px rgba(80, 50, 20, 0.06);
+    }
+    .admin-section h2 {
+        margin: 0 0 6px 0;
+        color: var(--admin-brown-d);
+        font-size: 1.15rem;
+    }
+    .admin-section .admin-hint {
+        margin: 0 0 16px 0;
+        color: var(--admin-muted);
+        font-size: 0.92rem;
+    }
+
+    /* --- Botones --- */
+    .btn {
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        padding: 10px 18px;
+        border-radius: 999px;
+        font-size: 0.92rem;
+        font-family: inherit;
+        transition: transform 0.12s, box-shadow 0.2s;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary {
+        background: linear-gradient(135deg, var(--admin-brown), var(--admin-brown-d));
+        color: #fff;
+        box-shadow: 0 2px 6px rgba(80,50,20,0.25);
+    }
+    .btn-gold {
+        background: linear-gradient(135deg, var(--admin-gold), #b8932f);
+        color: #3a2614;
+        box-shadow: 0 2px 6px rgba(212,175,55,0.4);
+    }
+    .btn-secondary {
+        background: var(--admin-cream);
+        color: var(--admin-brown-d);
+        border: 1px solid var(--admin-border);
+    }
+    .btn-danger {
+        background: var(--admin-danger);
+        color: #fff;
+    }
+    .btn-ghost {
+        background: transparent;
+        color: var(--admin-brown-d);
+        padding: 6px 10px;
+        border-radius: 6px;
+    }
+    .btn-ghost:hover { background: var(--admin-cream); }
+
+    .actions-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
+    }
+    .file-input-wrap {
+        position: relative;
+        overflow: hidden;
+    }
+    .file-input-wrap input[type=file] {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* --- Tabla --- */
+    .table-wrap {
+        max-height: 70vh;
+        overflow: auto;
+        border-radius: 12px;
+        border: 1px solid var(--admin-border);
+        background: #fff;
+    }
+    table.admin-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.88rem;
+    }
+    table.admin-table thead th {
+        position: sticky;
+        top: 0;
+        background: var(--admin-cream);
+        text-align: left;
+        padding: 10px 8px;
+        font-weight: 700;
+        color: var(--admin-brown-d);
+        border-bottom: 2px solid var(--admin-border);
+        white-space: nowrap;
+        z-index: 1;
+    }
+    table.admin-table tbody td {
+        padding: 6px 8px;
+        border-bottom: 1px solid #f0e2c8;
+        vertical-align: middle;
+    }
+    table.admin-table tbody tr:hover {
+        background: rgba(212, 175, 55, 0.08);
+    }
+    table.admin-table tbody tr.is-out-of-stock {
+        background: rgba(192, 57, 43, 0.05);
+    }
+    table.admin-table tbody tr.is-inactive {
+        opacity: 0.55;
+    }
+    /* Marcas visuales: precio sin cargar (rojo suave a la izq) */
+    table.admin-table tbody tr.needs-price td.col-precio input {
+        background: rgba(192, 57, 43, 0.06);
+        border-color: rgba(192, 57, 43, 0.25);
+    }
+    table.admin-table tbody tr.needs-price td.col-precio input::placeholder {
+        color: var(--admin-danger);
+    }
+    /* Imagen sin cargar: tinte amarillo */
+    table.admin-table tbody tr.needs-image td:nth-of-type(8) input {
+        background: rgba(212, 175, 55, 0.07);
+    }
+    table.admin-table input,
+    table.admin-table select {
+        width: 100%;
+        padding: 6px 8px;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        background: transparent;
+        font-size: inherit;
+        font-family: inherit;
+        color: inherit;
+        min-width: 80px;
+    }
+    table.admin-table input:focus,
+    table.admin-table select:focus {
+        outline: none;
+        border-color: var(--admin-gold);
+        background: #fffdf6;
+    }
+    table.admin-table input[type=number] {
+        text-align: right;
+    }
+    .col-codigo  { width: 90px; }
+    .col-cat     { width: 120px; }
+    .col-sub     { width: 160px; }
+    .col-precio  { width: 110px; }
+    .col-stock   { width: 80px; }
+    .col-emoji   { width: 60px; text-align: center; }
+    .col-act     { width: 60px; text-align: center; }
+    .col-actions { width: 70px; text-align: center; white-space: nowrap; }
+
+    .row-stock-out {
+        color: var(--admin-danger);
+        font-weight: 700;
+    }
+
+    .summary-bar {
+        display: flex;
+        gap: 22px;
+        flex-wrap: wrap;
+        font-size: 0.92rem;
+        color: var(--admin-muted);
+        padding: 10px 14px;
+        background: var(--admin-cream);
+        border-radius: 10px;
+        margin-bottom: 12px;
+    }
+    .summary-bar strong { color: var(--admin-brown-d); }
+
+    .filter-bar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+    }
+    .filter-bar input,
+    .filter-bar select {
+        padding: 8px 12px;
+        border: 1px solid var(--admin-border);
+        border-radius: 999px;
+        background: #fff;
+        font-family: inherit;
+        font-size: 0.9rem;
+    }
+    .filter-bar input { min-width: 240px; }
+
+    /* ==== Tabs ==== */
+    .tabs-bar {
+        display: flex;
+        gap: 4px;
+        background: var(--admin-cream);
+        padding: 6px;
+        border-radius: 999px;
+        margin-bottom: 22px;
+        max-width: fit-content;
+    }
+    .tab-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 10px 22px;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        font-family: inherit;
+        color: var(--admin-muted);
+        transition: background 0.2s, color 0.2s;
+    }
+    .tab-btn:hover { color: var(--admin-brown-d); }
+    .tab-btn.active {
+        background: linear-gradient(135deg, var(--admin-brown), var(--admin-brown-d));
+        color: #fff;
+        box-shadow: 0 2px 6px rgba(80,50,20,0.25);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ==== Card de instrucciones ==== */
+    .instructions-card {
+        background: linear-gradient(135deg, #fffaf0, #fdf5e1);
+        border: 1px solid var(--admin-border);
+        border-left: 4px solid var(--admin-gold);
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 18px;
+    }
+    .instructions-card h3 {
+        margin: 0 0 8px;
+        color: var(--admin-brown-d);
+        font-size: 1rem;
+    }
+    .instructions-card ol, .instructions-card ul {
+        margin: 6px 0 6px 20px;
+        padding: 0;
+        font-size: 0.9rem;
+        color: var(--admin-text);
+    }
+    .instructions-card li { margin-bottom: 4px; }
+    .instructions-card code {
+        background: rgba(0,0,0,0.06);
+        padding: 1px 6px;
+        border-radius: 4px;
+        font-family: 'SFMono-Regular', Menlo, monospace;
+        font-size: 0.85rem;
+    }
+
+    /* ==== Selector de tipo de video (radio "tipo pill") ==== */
+    .type-radio {
+        display: inline-flex;
+        gap: 0;
+        background: var(--admin-cream);
+        border-radius: 999px;
+        padding: 2px;
+    }
+    .type-radio label {
+        cursor: pointer;
+        padding: 4px 10px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: var(--admin-muted);
+        border-radius: 999px;
+        white-space: nowrap;
+    }
+    .type-radio input { display: none; }
+    .type-radio input:checked + label {
+        background: var(--admin-brown);
+        color: #fff;
+    }
+
+    /* ==== Mini-preview de miniatura del video en la tabla ==== */
+    .video-thumb {
+        width: 56px;
+        height: 56px;
+        border-radius: 8px;
+        background: var(--admin-cream);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        overflow: hidden;
+    }
+    .video-thumb img,
+    .video-thumb video {
+        width: 100%; height: 100%; object-fit: cover;
+    }
+
+    .toast {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background: var(--admin-brown-d);
+        color: #fff;
+        padding: 12px 18px;
+        border-radius: 999px;
+        font-weight: 600;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.25s, transform 0.25s;
+        z-index: 999;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.toast-error { background: var(--admin-danger); }
+    .toast.toast-ok    { background: var(--admin-success); }
+
+    .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.45);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 50;
+        padding: 20px;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+        background: var(--admin-card);
+        border-radius: 18px;
+        padding: 24px;
+        max-width: 480px;
+        width: 100%;
+        box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    }
+    .modal h3 { margin: 0 0 6px; color: var(--admin-brown-d); }
+    .modal p  { margin: 0 0 16px; color: var(--admin-muted); }
+    .modal .modal-actions {
+        display: flex; gap: 10px; justify-content: flex-end;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: var(--admin-muted);
+    }
+    .empty-state .icon { font-size: 2.5rem; }
+
+    .badge {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: var(--admin-cream);
+        color: var(--admin-brown-d);
+    }
+
+    @media (max-width: 700px) {
+        .admin-header { padding: 14px 18px; flex-wrap: wrap; }
+        .admin-header h1 { font-size: 1.1rem; }
+        main { padding: 18px 12px 60px; }
+        .admin-section { padding: 16px; }
+        table.admin-table { font-size: 0.8rem; }
+        .col-sub, .col-emoji, .col-act { display: none; }
+    }
+</style>
+</head>
+<body>
+    <header class="admin-header">
+        <img src="logo.png" alt="Falahbar.SnkS">
+        <h1>Panel Admin · Catálogo</h1>
+        <a href="index.html" class="admin-back">← Volver a la web</a>
+    </header>
+
+    <main>
+        <!-- TABS -->
+        <div class="tabs-bar" role="tablist">
+            <button class="tab-btn active" data-tab="productos" role="tab">📦 Productos</button>
+            <button class="tab-btn" data-tab="videos" role="tab">🎬 Videos</button>
+        </div>
+
+        <!-- =========================
+             TAB: PRODUCTOS
+        ========================== -->
+        <div class="tab-panel active" id="tab-productos">
+
+        <!-- 1. CARGAR DATOS -->
+        <section class="admin-section">
+            <h2>1) Cargar el catálogo</h2>
+            <p class="admin-hint">
+                Empezá leyendo el <strong>productos.json</strong> que ya está publicado, y
+                opcionalmente importá un Excel/CSV nuevo. Cuando importes, se
+                <strong>fusiona con lo existente</strong>: los que ya están se conservan
+                (con su precio/stock/imagen), los que no estén en el Excel se eliminan,
+                y los nuevos se agregan automáticamente.
+            </p>
+            <div class="actions-row">
+                <button class="btn btn-secondary" id="btnLoadJson">
+                    <span>📥</span> Cargar productos.json actual
+                </button>
+                <span class="file-input-wrap btn btn-gold">
+                    <span>📊</span> Importar Excel / CSV…
+                    <input type="file" id="fileImport" accept=".xlsx,.xls,.csv">
+                </span>
+                <button class="btn btn-secondary" id="btnAdd">
+                    <span>➕</span> Agregar producto manual
+                </button>
+                <button class="btn btn-ghost" id="btnReset" title="Vacía la tabla en pantalla (no toca el JSON publicado)">
+                    🗑️ Vaciar tabla
+                </button>
+            </div>
+        </section>
+
+        <!-- 2. EDITAR -->
+        <section class="admin-section">
+            <h2>2) Editar productos</h2>
+            <p class="admin-hint">
+                Tocá cualquier celda para modificarla. Los cambios solo se guardan
+                cuando exportás el JSON.
+            </p>
+
+            <div class="summary-bar">
+                <span>Total: <strong id="sumTotal">0</strong></span>
+                <span>Golosinas: <strong id="sumGolosinas">0</strong></span>
+                <span>Snacks: <strong id="sumSnacks">0</strong></span>
+                <span>Gaseosas: <strong id="sumGaseosas">0</strong></span>
+                <span>Sin stock: <strong id="sumSinStock">0</strong></span>
+                <span>Inactivos: <strong id="sumInactivos">0</strong></span>
+            </div>
+
+            <div class="filter-bar">
+                <input type="search" id="searchTable" placeholder="Buscar por nombre, código…">
+                <select id="filterCat">
+                    <option value="">Todas las categorías</option>
+                    <option value="golosinas">Golosinas</option>
+                    <option value="snacks">Snacks</option>
+                    <option value="gaseosas">Gaseosas</option>
+                </select>
+                <select id="filterSub">
+                    <option value="">Todas las subcategorías</option>
+                </select>
+                <select id="filterStock">
+                    <option value="">Todo stock</option>
+                    <option value="0">Solo sin stock</option>
+                    <option value="low">Stock bajo (≤3)</option>
+                    <option value="ok">Con stock</option>
+                </select>
+                <select id="filterPrice">
+                    <option value="">Todo precio</option>
+                    <option value="0">Sin precio (0)</option>
+                    <option value="ok">Con precio</option>
+                </select>
+            </div>
+
+            <div class="table-wrap">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th class="col-codigo">Código</th>
+                            <th>Nombre</th>
+                            <th class="col-cat">Categoría</th>
+                            <th class="col-sub">Subcategoría</th>
+                            <th class="col-precio">Precio</th>
+                            <th class="col-stock">Stock</th>
+                            <th class="col-emoji">Emoji</th>
+                            <th>Imagen</th>
+                            <th class="col-act">Activo</th>
+                            <th>Notas</th>
+                            <th class="col-actions"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        <!-- filas dinámicas -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="emptyState" class="empty-state" style="display:none;">
+                <div class="icon">📦</div>
+                <p>Aún no cargaste productos. Tocá <strong>"Cargar productos.json actual"</strong> arriba.</p>
+            </div>
+        </section>
+
+        <!-- 3. EXPORTAR -->
+        <section class="admin-section">
+            <h2>3) Exportar y publicar</h2>
+            <p class="admin-hint">
+                Cuando termines, descargá los archivos <strong>productos.json</strong> y
+                <strong>productos.js</strong> y subilos a la carpeta <code>data/</code> en
+                GitHub. El primero es el que usa la web normalmente y el segundo es un
+                fallback para que también funcione si abrís <code>index.html</code> con
+                doble click. La web toma los cambios automáticamente.
+            </p>
+            <div class="actions-row">
+                <button class="btn btn-primary" id="btnExportJson">
+                    <span>💾</span> Descargar productos.json + productos.js
+                </button>
+                <button class="btn btn-secondary" id="btnExportCsv">
+                    <span>📑</span> Descargar como CSV
+                </button>
+                <button class="btn btn-ghost" id="btnPreview">
+                    👁️ Ver JSON
+                </button>
+            </div>
+        </section>
+
+        </div><!-- /tab-productos -->
+
+
+        <!-- =========================
+             TAB: VIDEOS
+        ========================== -->
+        <div class="tab-panel" id="tab-videos">
+
+            <section class="admin-section">
+                <h2>🎬 Videos / Shorts</h2>
+                <p class="admin-hint">
+                    Acá manejás todos los videos cortos de la página: los del feed
+                    inmersivo de <code>shorts.html</code>, los del preview del inicio,
+                    y la conexión con productos para que el botón "🛒 Agregar" del
+                    reel sume el producto correcto al carrito.
+                </p>
+
+                <div class="instructions-card">
+                    <h3>📋 Cómo subir un video nuevo</h3>
+                    <ol>
+                        <li>
+                            <strong>Si es un MP4 propio:</strong> subí el archivo a la carpeta
+                            <code>videos/</code> en GitHub (ej: <code>videos/oferta-octubre.mp4</code>),
+                            después acá poné solo el nombre del archivo.
+                            <br><em>Tamaño recomendado: vertical (9:16), &lt;15&nbsp;MB, formato MP4.</em>
+                        </li>
+                        <li>
+                            <strong>Si es un Reel/Story de Instagram, YouTube Short o TikTok:</strong>
+                            elegí <em>"Link externo"</em> y pegá la URL pública. La tarjeta
+                            mostrará la miniatura y abre el link al tocar.
+                        </li>
+                        <li>
+                            <strong>Linkear con un producto:</strong> elegí el producto en
+                            la columna correspondiente. Cuando el cliente vea el video va
+                            a poder agregar ese producto al carrito en un toque, y desde
+                            la ficha del producto va a aparecer un botón "🎬 Ver video".
+                        </li>
+                        <li>
+                            <strong>Mostrar en el inicio:</strong> marcá la casilla
+                            "🏠 En inicio" y poné un orden (1, 2, 3…). Los más bajos
+                            aparecen primero. Recomendado: hasta 5 videos en el inicio.
+                            Si elegís menos de 5, el espacio sobrante se completa
+                            automáticamente con la tarjeta "Más videos pronto".
+                        </li>
+                        <li>
+                            Cuando termines, exportá <code>videos.json + videos.js</code> y
+                            subilos a la carpeta <code>data/</code> en GitHub.
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="actions-row">
+                    <button class="btn btn-secondary" id="btnLoadVideos">
+                        <span>📥</span> Cargar videos.json actual
+                    </button>
+                    <button class="btn btn-gold" id="btnAddVideo">
+                        <span>➕</span> Agregar video nuevo
+                    </button>
+                    <button class="btn btn-ghost" id="btnResetVideos" title="Vacía la tabla en pantalla">
+                        🗑️ Vaciar tabla
+                    </button>
+                </div>
+            </section>
+
+            <section class="admin-section">
+                <h2>📋 Tabla de videos</h2>
+                <p class="admin-hint">
+                    Los marcados como "🏠 En inicio" aparecen en el carrusel del home,
+                    en el orden que elijas. Los demás solo se muestran en
+                    <code>shorts.html</code>.
+                </p>
+
+                <div class="summary-bar">
+                    <span>Total: <strong id="vSumTotal">0</strong></span>
+                    <span>En inicio: <strong id="vSumHome">0</strong></span>
+                    <span>Vinculados a producto: <strong id="vSumLinked">0</strong></span>
+                    <span>Inactivos: <strong id="vSumInactive">0</strong></span>
+                </div>
+
+                <div class="table-wrap">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th class="col-codigo">ID</th>
+                                <th>Título</th>
+                                <th style="width: 100px;">Tipo</th>
+                                <th>URL del video / link</th>
+                                <th>Miniatura</th>
+                                <th style="width: 220px;">Producto vinculado</th>
+                                <th class="col-act">🏠 En inicio</th>
+                                <th class="col-stock">Orden</th>
+                                <th class="col-act">Activo</th>
+                                <th class="col-actions"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="videoTbody">
+                            <!-- filas dinámicas -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="videoEmptyState" class="empty-state" style="display:none;">
+                    <div class="icon">🎬</div>
+                    <p>Aún no hay videos cargados.<br>Tocá <strong>"Cargar videos.json actual"</strong> o <strong>"Agregar video nuevo"</strong>.</p>
+                </div>
+            </section>
+
+            <section class="admin-section">
+                <h2>💾 Exportar videos</h2>
+                <p class="admin-hint">
+                    Descargá <strong>videos.json</strong> y <strong>videos.js</strong>,
+                    y subí los dos a la carpeta <code>data/</code> en GitHub.
+                </p>
+                <div class="actions-row">
+                    <button class="btn btn-primary" id="btnExportVideos">
+                        <span>💾</span> Descargar videos.json + videos.js
+                    </button>
+                    <button class="btn btn-ghost" id="btnPreviewVideos">
+                        👁️ Ver JSON
+                    </button>
+                </div>
+            </section>
+
+        </div><!-- /tab-videos -->
+
+    </main>
+
+    <!-- Modal de confirmación / preview -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <h3 id="modalTitle">Confirmar</h3>
+            <p id="modalText"></p>
+            <pre id="modalPre" style="max-height: 50vh; overflow:auto; background: #2c1810; color: #f5e9d3; padding: 12px; border-radius: 8px; font-size: 0.78rem; display:none;"></pre>
+            <div class="modal-actions">
+                <button class="btn btn-ghost" id="modalCancel">Cancelar</button>
+                <button class="btn btn-danger" id="modalConfirm">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <!-- SheetJS para parsear Excel directamente desde el navegador -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!-- Catálogo embebido (fallback file://) -->
+    <script src="data/productos.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

@@ -7,6 +7,13 @@
     <meta name="theme-color" content="#FFFBF5">
     <title>Falahbar.SnkS - Shorts</title>
     <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta property="og:type" content="video.other">
+    <meta property="og:title" content="Shorts · Falahbar.SnkS">
+    <meta property="og:description" content="Mirá nuestros shorts: novedades, combos y los productos en acción.">
+    <meta property="og:image" content="logo.png">
+    <meta property="og:locale" content="es_AR">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles-extra.css">
 </head>
@@ -31,7 +38,7 @@
             </ul>
             <a href="index.html#cart" class="cart-btn cart-btn-link" aria-label="Ver carrito en la página principal">
                 <span aria-hidden="true">🛒</span>
-                <span class="cart-count" id="cartCount">0</span>
+                <span class="cart-count" id="cartCount" aria-live="polite" aria-label="Productos en el carrito">0</span>
             </a>
         </nav>
     </header>
@@ -49,6 +56,9 @@
         </div>
     </main>
 
+    <!-- Catálogo + videos embebidos como fallback (para abrir el sitio sin servidor) -->
+    <script src="data/productos.js"></script>
+    <script src="data/videos.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

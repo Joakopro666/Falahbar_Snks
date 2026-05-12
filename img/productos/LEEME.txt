@@ -1,0 +1,23 @@
+CARPETA DE IMÁGENES DE PRODUCTOS
+================================
+
+Cómo usar:
+1) Subí acá las fotos de los productos. Por ejemplo:
+     fantoche-triple-chocolate.jpg
+     menthoplus-mentol.png
+     coca-cola-500ml.jpg
+
+2) En el panel admin (admin.html) o directo en el Excel,
+   poné solo el NOMBRE del archivo en la columna "Imagen":
+     fantoche-triple-chocolate.jpg
+
+   La web le agrega automáticamente "img/productos/" adelante.
+
+3) Si la imagen no existe o todavía no la subiste, la tarjeta
+   muestra el emoji + "Imagen pendiente". Cuando subas la
+   foto y pongas el nombre, aparece sola.
+
+4) Tamaños recomendados:
+     - 600 x 600 px (cuadrada)
+     - JPG si es foto, PNG si tiene fondo transparente
+     - Menos de 200 KB cada una para que cargue rápido
