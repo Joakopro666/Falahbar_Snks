@@ -1,0 +1,25 @@
+{
+  "name": "Falahbar.SnkS",
+  "short_name": "Falahbar",
+  "description": "Golosinas, chocolates y snacks salados a domicilio en La Rioja. Pedidos por WhatsApp.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#faf5ef",
+  "theme_color": "#8B5E34",
+  "orientation": "portrait-primary",
+  "lang": "es-AR",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
