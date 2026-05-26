@@ -1,8 +1,6 @@
-// Auto-generado a partir de productos.json
-// Subí este archivo a data/productos.js junto con data/productos.json.
-window.FALAHBAR_PRODUCTS_DATA = {
+{
   "version": 3,
-  "actualizado": "2026-05-26",
+  "actualizado": "2026-05-06",
   "productos": [
     {
       "codigo": "FAL003",
@@ -12,15 +10,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Chupetín Pico Dulce Frut 14 g",
       "descripcion": "",
       "precio": 400,
-      "precioPack": 1000,
-      "cantidadPack": 3,
       "stock": 20,
       "imagen": "",
       "emoji": "🍓",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "3 por $1000"
+      "notas": "3 por $1000",
+      "precioPack": 1000,
+      "cantidadPack": 3
     },
     {
       "codigo": "FAL007",
@@ -30,15 +28,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Chicle Topline Seven Bubble Fun 14 g",
       "descripcion": "",
       "precio": 700,
-      "precioPack": 1200,
-      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🫧",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200"
+      "notas": "2 por $1200",
+      "precioPack": 1200,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL008",
@@ -48,15 +46,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Chicle Topline Seven Mentol 14 g",
       "descripcion": "",
       "precio": 700,
-      "precioPack": 1200,
-      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🌿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200"
+      "notas": "2 por $1200",
+      "precioPack": 1200,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL009",
@@ -66,15 +64,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Chicle Topline Seven Mandarina 14 g",
       "descripcion": "",
       "precio": 700,
-      "precioPack": 1200,
-      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🍊",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200"
+      "notas": "2 por $1200",
+      "precioPack": 1200,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL010",
@@ -84,15 +82,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Chicle Topline Seven Menta 14 g",
       "descripcion": "",
       "precio": 700,
-      "precioPack": 1200,
-      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🌱",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200"
+      "notas": "2 por $1200",
+      "precioPack": 1200,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL011",
@@ -102,15 +100,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Chicle Topline Seven Violet Cherry 14 g",
       "descripcion": "",
       "precio": 700,
-      "precioPack": 1200,
-      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🍒",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200"
+      "notas": "2 por $1200",
+      "precioPack": 1200,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL012",
@@ -120,15 +118,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Chicle Topline Sandía Menta 6,7 g",
       "descripcion": "",
       "precio": 700,
-      "precioPack": 1200,
-      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🍉",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200"
+      "notas": "2 por $1200",
+      "precioPack": 1200,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL013",
@@ -138,15 +136,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Chicle Topline Seven Sandía 14 g",
       "descripcion": "",
       "precio": 700,
-      "precioPack": 1200,
-      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🍉",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200"
+      "notas": "2 por $1200",
+      "precioPack": 1200,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL014",
@@ -156,15 +154,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Chicle Topline Strong 6,7 g",
       "descripcion": "",
       "precio": 700,
-      "precioPack": 1200,
-      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "⚡",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200"
+      "notas": "2 por $1200",
+      "precioPack": 1200,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL015",
@@ -174,15 +172,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Chicle Topline Fruta 6,7 g",
       "descripcion": "",
       "precio": 700,
-      "precioPack": 1200,
-      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🍓",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200"
+      "notas": "2 por $1200",
+      "precioPack": 1200,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL016",
@@ -192,15 +190,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Chicle Topline Menta 6,7 g",
       "descripcion": "",
       "precio": 700,
-      "precioPack": 1200,
-      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🌱",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200"
+      "notas": "2 por $1200",
+      "precioPack": 1200,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL017",
@@ -210,15 +208,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Chicle Topline Seven Click Fresh 14 g",
       "descripcion": "",
       "precio": 700,
-      "precioPack": 1200,
-      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "💨",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200"
+      "notas": "2 por $1200",
+      "precioPack": 1200,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL018",
@@ -228,15 +226,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Chicle Topline Seven Strong 14 g",
       "descripcion": "",
       "precio": 700,
-      "precioPack": 1200,
-      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "⚡",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200"
+      "notas": "2 por $1200",
+      "precioPack": 1200,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL019",
@@ -246,15 +244,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Chicle Topline Seven Frutilla 14 g",
       "descripcion": "",
       "precio": 700,
-      "precioPack": 1200,
-      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🍓",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200"
+      "notas": "2 por $1200",
+      "precioPack": 1200,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL020",
@@ -264,15 +262,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Caramelo Menthoplus S/A Mentol 30,6 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🌿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL021",
@@ -282,15 +280,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Caramelo Menthoplus S/A Durazno 30,6 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍑",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL022",
@@ -300,15 +298,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Caramelo Menthoplus S/A Sandía 30,6 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍉",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL023",
@@ -318,15 +316,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Caramelo Menthoplus S/A Cherry 30,6 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍒",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL024",
@@ -336,15 +334,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Caramelo Menthoplus S/A Strong 30,6 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "⚡",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL025",
@@ -354,15 +352,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Caramelo Menthoplus Frío Mentol 30,6 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "❄️",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL026",
@@ -372,15 +370,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Caramelo Menthoplus Ácidos Manzana 30,6 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍏",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL027",
@@ -390,15 +388,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Caramelo Menthoplus Ácidos Naranja 30,6 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍊",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL028",
@@ -408,15 +406,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Caramelo Menthoplus Ácidos Black Cherry 30,6 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍒",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL029",
@@ -426,15 +424,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Caramelo Menthoplus C + Limón 30,6 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍋",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL030",
@@ -444,15 +442,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Caramelo Menthoplus Miel 30,6 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍯",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL031",
@@ -462,15 +460,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Caramelo Menthoplus Cereza 30,6 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍒",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL032",
@@ -480,15 +478,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Caramelo Menthoplus Strong 30,6 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "⚡",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL033",
@@ -498,15 +496,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Caramelo Menthoplus Mentol 30,6 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🌿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL034",
@@ -516,15 +514,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Caramelo Menthoplus Menta 30,6 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🌱",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL035",
@@ -534,15 +532,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Jugo Baggio Pronto Durazno 1 L",
       "descripcion": "",
       "precio": 2500,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🧃",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "Pack cerrado: 1600 / 2000 c/u (revisar)"
+      "notas": "Pack cerrado: 1600 / 2000 c/u (revisar)",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL036",
@@ -552,15 +550,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Jugo Baggio Pronto Multifruta 1 L",
       "descripcion": "",
       "precio": 2500,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🧃",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "Pack cerrado: 1600 / 2000 c/u (revisar)"
+      "notas": "Pack cerrado: 1600 / 2000 c/u (revisar)",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL037",
@@ -570,15 +568,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Jugo Baggio Pronto Manzana Roja 1 L",
       "descripcion": "",
       "precio": 2500,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🧃",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "Pack cerrado: 1600 / 2000 c/u (revisar)"
+      "notas": "Pack cerrado: 1600 / 2000 c/u (revisar)",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL038",
@@ -588,15 +586,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Cereal Flow Cajú / Caramelo / Salado 23 g",
       "descripcion": "",
       "precio": 1400,
-      "precioPack": 2600,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🥣",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $2600"
+      "notas": "2 por $2600",
+      "precioPack": 2600,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL039",
@@ -606,15 +604,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Cereal Flow Manzana Light 23 g",
       "descripcion": "",
       "precio": 1400,
-      "precioPack": 2600,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🥣",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $2600"
+      "notas": "2 por $2600",
+      "precioPack": 2600,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL040",
@@ -624,15 +622,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Cereal Flow Avellanas y Arándanos 23 g",
       "descripcion": "",
       "precio": 1400,
-      "precioPack": 2600,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🥣",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $2600"
+      "notas": "2 por $2600",
+      "precioPack": 2600,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL054",
@@ -642,15 +640,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Alfajor Fantoche Pescado Raúl Simple Blanco 50 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🤍",
       "destacado": false,
       "activo": true,
       "videoId": 1,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL055",
@@ -660,15 +658,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Alfajor Fantoche Pescado Raúl Simple Negro 50 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": 1,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL056",
@@ -677,16 +675,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Alfajores Fantoche",
       "nombre": "Alfajor Fantoche Súper Triple 100 g",
       "descripcion": "",
-      "precio": 1400,
-      "precioPack": null,
-      "cantidadPack": null,
+      "precio": 2500,
       "stock": 20,
       "imagen": "",
       "emoji": "🍪",
       "destacado": false,
       "activo": true,
       "videoId": 2,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL057",
@@ -695,16 +693,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Alfajores Fantoche",
       "nombre": "Alfajor Fantoche Triple Red Velvet 100 g",
       "descripcion": "",
-      "precio": 1600,
-      "precioPack": null,
-      "cantidadPack": null,
+      "precio": 2500,
       "stock": 20,
       "imagen": "",
       "emoji": "❤️",
       "destacado": false,
       "activo": true,
       "videoId": 3,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL059",
@@ -713,16 +711,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Alfajores Fantoche",
       "nombre": "Alfajor Fantoche Triple Blanco 85 g",
       "descripcion": "",
-      "precio": 1300,
-      "precioPack": null,
-      "cantidadPack": null,
+      "precio": 2500,
       "stock": 20,
       "imagen": "",
       "emoji": "🤍",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL060",
@@ -731,16 +729,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Alfajores Fantoche",
       "nombre": "Alfajor Fantoche Triple Chocolate 85 g",
       "descripcion": "",
-      "precio": 1300,
-      "precioPack": null,
-      "cantidadPack": null,
+      "precio": 2500,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL061",
@@ -750,15 +748,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Gaseosa Doble Cola 1 L",
       "descripcion": "",
       "precio": 1300,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🥤",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL062",
@@ -768,15 +766,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Gaseosa Pritty Limón 1 L",
       "descripcion": "",
       "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🥤",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL063",
@@ -786,15 +784,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Chocolate Felfort Dos Corazones 26 g",
       "descripcion": "",
       "precio": 1500,
-      "precioPack": 2800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $2800"
+      "notas": "2 por $2800",
+      "precioPack": 2800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL064",
@@ -804,15 +802,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Mecano Tuerca Negro Bonafide 19 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL065",
@@ -822,15 +820,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Mecano Blanco Bonafide Tuerca 19 g",
       "descripcion": "",
       "precio": 1000,
-      "precioPack": 1800,
-      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800"
+      "notas": "2 por $1800",
+      "precioPack": 1800,
+      "cantidadPack": 2
     },
     {
       "codigo": "FAL066",
@@ -840,15 +838,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Bocadito Felfort Marroc Chocolate 14 g",
       "descripcion": "",
       "precio": 0,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL067",
@@ -858,15 +856,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Medallón Felfort Dulce de Leche 21 g",
       "descripcion": "",
       "precio": 500,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍭",
       "destacado": false,
-      "activo": false,
+      "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL069",
@@ -876,15 +874,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Bombonera Felfort Felicidades 264 g",
       "descripcion": "",
       "precio": 20000,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL070",
@@ -894,15 +892,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Bombonera Felfort Choc Clásico Hexágono 150 g",
       "descripcion": "",
       "precio": 0,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 0,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "(En off — no es Oro Lila / Felicidades / Marroc)"
+      "notas": "(En off — no es Oro Lila / Felicidades / Marroc)",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL071",
@@ -912,15 +910,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Bombonera Felfort Lovers 264 g",
       "descripcion": "",
       "precio": 0,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 0,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "(En off — no es Oro Lila / Felicidades / Marroc)"
+      "notas": "(En off — no es Oro Lila / Felicidades / Marroc)",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL072",
@@ -929,16 +927,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Chocolates",
       "nombre": "Chocolate Felfort Love 25 g",
       "descripcion": "",
-      "precio": 19900,
-      "precioPack": null,
-      "cantidadPack": null,
+      "precio": 0,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL073",
@@ -948,15 +946,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Bocadito Felfort Marroc Cric 14 g",
       "descripcion": "",
       "precio": 0,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL074",
@@ -966,15 +964,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Bocadito Felfort Marroc Chocolate Liviano 14 g",
       "descripcion": "",
       "precio": 0,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL075",
@@ -984,15 +982,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Bombonera Felfort Plateada 264 g",
       "descripcion": "",
       "precio": 0,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 0,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "(En off — no es Oro Lila / Felicidades / Marroc)"
+      "notas": "(En off — no es Oro Lila / Felicidades / Marroc)",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL076",
@@ -1002,15 +1000,15 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Bombonera Felfort Oro Lila 264 g",
       "descripcion": "",
       "precio": 20000,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E950",
@@ -1019,16 +1017,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Cheddar 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E949",
@@ -1037,16 +1035,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Barbacoa 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E948",
@@ -1055,16 +1053,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Pizza 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E947",
@@ -1073,16 +1071,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Jamón 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E946",
@@ -1091,16 +1089,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Queso 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E945",
@@ -1109,16 +1107,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Clásicas 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E942",
@@ -1127,16 +1125,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex con Semillas 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E941",
@@ -1145,16 +1143,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Picante 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E886",
@@ -1163,16 +1161,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Cebolla 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E877",
@@ -1181,16 +1179,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Salame 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E876",
@@ -1199,16 +1197,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Provoleta 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E865",
@@ -1217,16 +1215,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Bañadas Frutilla 88 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E864",
@@ -1235,16 +1233,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Bañadas Crema Cookies 88 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E672",
@@ -1253,16 +1251,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Ketchup 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E653",
@@ -1271,16 +1269,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Milanga 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E652",
@@ -1289,16 +1287,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Asadazo 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E651",
@@ -1307,16 +1305,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Cancha / Pancho 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E650",
@@ -1325,16 +1323,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Oliva 125 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "E863",
@@ -1343,16 +1341,16 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Bañadas Chocolate 88 g",
       "descripcion": "",
-      "precio": 1500,
-      "precioPack": null,
-      "cantidadPack": null,
-      "stock": 20,
+      "precio": 0,
+      "stock": 0,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "N95",
@@ -1362,24 +1360,24 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "nombre": "Avellanas con Chocolate Geo 100 g",
       "descripcion": "",
       "precio": 0,
-      "precioPack": null,
-      "cantidadPack": null,
       "stock": 0,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": ""
+      "notas": "",
+      "precioPack": null,
+      "cantidadPack": null
     },
     {
       "codigo": "FAL077",
       "id": "alfajor-elixir-60g",
       "categoria": "golosinas",
       "subcategoria": "Alfajores",
-      "nombre": "Alfajor Elixir Chocolate Blanco/Negro 60 g",
+      "nombre": "Alfajor Elixir Chocolate Blanco 60 g",
       "descripcion": "",
-      "precio": 1500,
+      "precio": 1400,
       "precioPack": null,
       "cantidadPack": null,
       "stock": 20,
@@ -1409,4 +1407,4 @@ window.FALAHBAR_PRODUCTS_DATA = {
       "notas": ""
     }
   ]
-};
+}

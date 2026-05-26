@@ -1,6 +1,6 @@
 {
   "version": 3,
-  "actualizado": "2026-05-06",
+  "actualizado": "2026-05-26",
   "productos": [
     {
       "codigo": "FAL003",
@@ -10,15 +10,15 @@
       "nombre": "Chupetín Pico Dulce Frut 14 g",
       "descripcion": "",
       "precio": 400,
+      "precioPack": 1000,
+      "cantidadPack": 3,
       "stock": 20,
       "imagen": "",
       "emoji": "🍓",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "3 por $1000",
-      "precioPack": 1000,
-      "cantidadPack": 3
+      "notas": "3 por $1000"
     },
     {
       "codigo": "FAL007",
@@ -28,15 +28,15 @@
       "nombre": "Chicle Topline Seven Bubble Fun 14 g",
       "descripcion": "",
       "precio": 700,
+      "precioPack": 1200,
+      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🫧",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200",
-      "precioPack": 1200,
-      "cantidadPack": 2
+      "notas": "2 por $1200"
     },
     {
       "codigo": "FAL008",
@@ -46,15 +46,15 @@
       "nombre": "Chicle Topline Seven Mentol 14 g",
       "descripcion": "",
       "precio": 700,
+      "precioPack": 1200,
+      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🌿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200",
-      "precioPack": 1200,
-      "cantidadPack": 2
+      "notas": "2 por $1200"
     },
     {
       "codigo": "FAL009",
@@ -64,15 +64,15 @@
       "nombre": "Chicle Topline Seven Mandarina 14 g",
       "descripcion": "",
       "precio": 700,
+      "precioPack": 1200,
+      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🍊",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200",
-      "precioPack": 1200,
-      "cantidadPack": 2
+      "notas": "2 por $1200"
     },
     {
       "codigo": "FAL010",
@@ -82,15 +82,15 @@
       "nombre": "Chicle Topline Seven Menta 14 g",
       "descripcion": "",
       "precio": 700,
+      "precioPack": 1200,
+      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🌱",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200",
-      "precioPack": 1200,
-      "cantidadPack": 2
+      "notas": "2 por $1200"
     },
     {
       "codigo": "FAL011",
@@ -100,15 +100,15 @@
       "nombre": "Chicle Topline Seven Violet Cherry 14 g",
       "descripcion": "",
       "precio": 700,
+      "precioPack": 1200,
+      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🍒",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200",
-      "precioPack": 1200,
-      "cantidadPack": 2
+      "notas": "2 por $1200"
     },
     {
       "codigo": "FAL012",
@@ -118,15 +118,15 @@
       "nombre": "Chicle Topline Sandía Menta 6,7 g",
       "descripcion": "",
       "precio": 700,
+      "precioPack": 1200,
+      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🍉",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200",
-      "precioPack": 1200,
-      "cantidadPack": 2
+      "notas": "2 por $1200"
     },
     {
       "codigo": "FAL013",
@@ -136,15 +136,15 @@
       "nombre": "Chicle Topline Seven Sandía 14 g",
       "descripcion": "",
       "precio": 700,
+      "precioPack": 1200,
+      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🍉",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200",
-      "precioPack": 1200,
-      "cantidadPack": 2
+      "notas": "2 por $1200"
     },
     {
       "codigo": "FAL014",
@@ -154,15 +154,15 @@
       "nombre": "Chicle Topline Strong 6,7 g",
       "descripcion": "",
       "precio": 700,
+      "precioPack": 1200,
+      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "⚡",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200",
-      "precioPack": 1200,
-      "cantidadPack": 2
+      "notas": "2 por $1200"
     },
     {
       "codigo": "FAL015",
@@ -172,15 +172,15 @@
       "nombre": "Chicle Topline Fruta 6,7 g",
       "descripcion": "",
       "precio": 700,
+      "precioPack": 1200,
+      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🍓",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200",
-      "precioPack": 1200,
-      "cantidadPack": 2
+      "notas": "2 por $1200"
     },
     {
       "codigo": "FAL016",
@@ -190,15 +190,15 @@
       "nombre": "Chicle Topline Menta 6,7 g",
       "descripcion": "",
       "precio": 700,
+      "precioPack": 1200,
+      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🌱",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200",
-      "precioPack": 1200,
-      "cantidadPack": 2
+      "notas": "2 por $1200"
     },
     {
       "codigo": "FAL017",
@@ -208,15 +208,15 @@
       "nombre": "Chicle Topline Seven Click Fresh 14 g",
       "descripcion": "",
       "precio": 700,
+      "precioPack": 1200,
+      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "💨",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200",
-      "precioPack": 1200,
-      "cantidadPack": 2
+      "notas": "2 por $1200"
     },
     {
       "codigo": "FAL018",
@@ -226,15 +226,15 @@
       "nombre": "Chicle Topline Seven Strong 14 g",
       "descripcion": "",
       "precio": 700,
+      "precioPack": 1200,
+      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "⚡",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200",
-      "precioPack": 1200,
-      "cantidadPack": 2
+      "notas": "2 por $1200"
     },
     {
       "codigo": "FAL019",
@@ -244,15 +244,15 @@
       "nombre": "Chicle Topline Seven Frutilla 14 g",
       "descripcion": "",
       "precio": 700,
+      "precioPack": 1200,
+      "cantidadPack": 2,
       "stock": 0,
       "imagen": "",
       "emoji": "🍓",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1200",
-      "precioPack": 1200,
-      "cantidadPack": 2
+      "notas": "2 por $1200"
     },
     {
       "codigo": "FAL020",
@@ -262,15 +262,15 @@
       "nombre": "Caramelo Menthoplus S/A Mentol 30,6 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🌿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL021",
@@ -280,15 +280,15 @@
       "nombre": "Caramelo Menthoplus S/A Durazno 30,6 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍑",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL022",
@@ -298,15 +298,15 @@
       "nombre": "Caramelo Menthoplus S/A Sandía 30,6 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍉",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL023",
@@ -316,15 +316,15 @@
       "nombre": "Caramelo Menthoplus S/A Cherry 30,6 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍒",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL024",
@@ -334,15 +334,15 @@
       "nombre": "Caramelo Menthoplus S/A Strong 30,6 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "⚡",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL025",
@@ -352,15 +352,15 @@
       "nombre": "Caramelo Menthoplus Frío Mentol 30,6 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "❄️",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL026",
@@ -370,15 +370,15 @@
       "nombre": "Caramelo Menthoplus Ácidos Manzana 30,6 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍏",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL027",
@@ -388,15 +388,15 @@
       "nombre": "Caramelo Menthoplus Ácidos Naranja 30,6 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍊",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL028",
@@ -406,15 +406,15 @@
       "nombre": "Caramelo Menthoplus Ácidos Black Cherry 30,6 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍒",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL029",
@@ -424,15 +424,15 @@
       "nombre": "Caramelo Menthoplus C + Limón 30,6 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍋",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL030",
@@ -442,15 +442,15 @@
       "nombre": "Caramelo Menthoplus Miel 30,6 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍯",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL031",
@@ -460,15 +460,15 @@
       "nombre": "Caramelo Menthoplus Cereza 30,6 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍒",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL032",
@@ -478,15 +478,15 @@
       "nombre": "Caramelo Menthoplus Strong 30,6 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "⚡",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL033",
@@ -496,15 +496,15 @@
       "nombre": "Caramelo Menthoplus Mentol 30,6 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🌿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL034",
@@ -514,15 +514,15 @@
       "nombre": "Caramelo Menthoplus Menta 30,6 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🌱",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL035",
@@ -532,15 +532,15 @@
       "nombre": "Jugo Baggio Pronto Durazno 1 L",
       "descripcion": "",
       "precio": 2500,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🧃",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "Pack cerrado: 1600 / 2000 c/u (revisar)",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": "Pack cerrado: 1600 / 2000 c/u (revisar)"
     },
     {
       "codigo": "FAL036",
@@ -550,15 +550,15 @@
       "nombre": "Jugo Baggio Pronto Multifruta 1 L",
       "descripcion": "",
       "precio": 2500,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🧃",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "Pack cerrado: 1600 / 2000 c/u (revisar)",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": "Pack cerrado: 1600 / 2000 c/u (revisar)"
     },
     {
       "codigo": "FAL037",
@@ -568,15 +568,15 @@
       "nombre": "Jugo Baggio Pronto Manzana Roja 1 L",
       "descripcion": "",
       "precio": 2500,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🧃",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "Pack cerrado: 1600 / 2000 c/u (revisar)",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": "Pack cerrado: 1600 / 2000 c/u (revisar)"
     },
     {
       "codigo": "FAL038",
@@ -586,15 +586,15 @@
       "nombre": "Cereal Flow Cajú / Caramelo / Salado 23 g",
       "descripcion": "",
       "precio": 1400,
+      "precioPack": 2600,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🥣",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $2600",
-      "precioPack": 2600,
-      "cantidadPack": 2
+      "notas": "2 por $2600"
     },
     {
       "codigo": "FAL039",
@@ -604,15 +604,15 @@
       "nombre": "Cereal Flow Manzana Light 23 g",
       "descripcion": "",
       "precio": 1400,
+      "precioPack": 2600,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🥣",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $2600",
-      "precioPack": 2600,
-      "cantidadPack": 2
+      "notas": "2 por $2600"
     },
     {
       "codigo": "FAL040",
@@ -622,15 +622,15 @@
       "nombre": "Cereal Flow Avellanas y Arándanos 23 g",
       "descripcion": "",
       "precio": 1400,
+      "precioPack": 2600,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🥣",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $2600",
-      "precioPack": 2600,
-      "cantidadPack": 2
+      "notas": "2 por $2600"
     },
     {
       "codigo": "FAL054",
@@ -640,15 +640,15 @@
       "nombre": "Alfajor Fantoche Pescado Raúl Simple Blanco 50 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🤍",
       "destacado": false,
       "activo": true,
       "videoId": 1,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "FAL055",
@@ -658,15 +658,15 @@
       "nombre": "Alfajor Fantoche Pescado Raúl Simple Negro 50 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": 1,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "FAL056",
@@ -675,16 +675,16 @@
       "subcategoria": "Alfajores Fantoche",
       "nombre": "Alfajor Fantoche Súper Triple 100 g",
       "descripcion": "",
-      "precio": 2500,
+      "precio": 1400,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍪",
       "destacado": false,
       "activo": true,
       "videoId": 2,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "FAL057",
@@ -693,16 +693,16 @@
       "subcategoria": "Alfajores Fantoche",
       "nombre": "Alfajor Fantoche Triple Red Velvet 100 g",
       "descripcion": "",
-      "precio": 2500,
+      "precio": 1600,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "❤️",
       "destacado": false,
       "activo": true,
       "videoId": 3,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "FAL059",
@@ -711,16 +711,16 @@
       "subcategoria": "Alfajores Fantoche",
       "nombre": "Alfajor Fantoche Triple Blanco 85 g",
       "descripcion": "",
-      "precio": 2500,
+      "precio": 1300,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🤍",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "FAL060",
@@ -729,16 +729,16 @@
       "subcategoria": "Alfajores Fantoche",
       "nombre": "Alfajor Fantoche Triple Chocolate 85 g",
       "descripcion": "",
-      "precio": 2500,
+      "precio": 1300,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "FAL061",
@@ -748,15 +748,15 @@
       "nombre": "Gaseosa Doble Cola 1 L",
       "descripcion": "",
       "precio": 1300,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🥤",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "FAL062",
@@ -766,15 +766,15 @@
       "nombre": "Gaseosa Pritty Limón 1 L",
       "descripcion": "",
       "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🥤",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "FAL063",
@@ -784,15 +784,15 @@
       "nombre": "Chocolate Felfort Dos Corazones 26 g",
       "descripcion": "",
       "precio": 1500,
+      "precioPack": 2800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $2800",
-      "precioPack": 2800,
-      "cantidadPack": 2
+      "notas": "2 por $2800"
     },
     {
       "codigo": "FAL064",
@@ -802,15 +802,15 @@
       "nombre": "Mecano Tuerca Negro Bonafide 19 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL065",
@@ -820,15 +820,15 @@
       "nombre": "Mecano Blanco Bonafide Tuerca 19 g",
       "descripcion": "",
       "precio": 1000,
+      "precioPack": 1800,
+      "cantidadPack": 2,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "2 por $1800",
-      "precioPack": 1800,
-      "cantidadPack": 2
+      "notas": "2 por $1800"
     },
     {
       "codigo": "FAL066",
@@ -838,15 +838,15 @@
       "nombre": "Bocadito Felfort Marroc Chocolate 14 g",
       "descripcion": "",
       "precio": 0,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "FAL067",
@@ -856,15 +856,15 @@
       "nombre": "Medallón Felfort Dulce de Leche 21 g",
       "descripcion": "",
       "precio": 500,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍭",
       "destacado": false,
-      "activo": true,
+      "activo": false,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "FAL069",
@@ -874,15 +874,15 @@
       "nombre": "Bombonera Felfort Felicidades 264 g",
       "descripcion": "",
       "precio": 20000,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "FAL070",
@@ -892,15 +892,15 @@
       "nombre": "Bombonera Felfort Choc Clásico Hexágono 150 g",
       "descripcion": "",
       "precio": 0,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 0,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "(En off — no es Oro Lila / Felicidades / Marroc)",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": "(En off — no es Oro Lila / Felicidades / Marroc)"
     },
     {
       "codigo": "FAL071",
@@ -910,15 +910,15 @@
       "nombre": "Bombonera Felfort Lovers 264 g",
       "descripcion": "",
       "precio": 0,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 0,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "(En off — no es Oro Lila / Felicidades / Marroc)",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": "(En off — no es Oro Lila / Felicidades / Marroc)"
     },
     {
       "codigo": "FAL072",
@@ -927,16 +927,16 @@
       "subcategoria": "Chocolates",
       "nombre": "Chocolate Felfort Love 25 g",
       "descripcion": "",
-      "precio": 0,
+      "precio": 19900,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "FAL073",
@@ -946,15 +946,15 @@
       "nombre": "Bocadito Felfort Marroc Cric 14 g",
       "descripcion": "",
       "precio": 0,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "FAL074",
@@ -964,15 +964,15 @@
       "nombre": "Bocadito Felfort Marroc Chocolate Liviano 14 g",
       "descripcion": "",
       "precio": 0,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "FAL075",
@@ -982,15 +982,15 @@
       "nombre": "Bombonera Felfort Plateada 264 g",
       "descripcion": "",
       "precio": 0,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 0,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "(En off — no es Oro Lila / Felicidades / Marroc)",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": "(En off — no es Oro Lila / Felicidades / Marroc)"
     },
     {
       "codigo": "FAL076",
@@ -1000,15 +1000,15 @@
       "nombre": "Bombonera Felfort Oro Lila 264 g",
       "descripcion": "",
       "precio": 20000,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 20,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E950",
@@ -1017,16 +1017,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Cheddar 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E949",
@@ -1035,16 +1035,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Barbacoa 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E948",
@@ -1053,16 +1053,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Pizza 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E947",
@@ -1071,16 +1071,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Jamón 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E946",
@@ -1089,16 +1089,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Queso 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E945",
@@ -1107,16 +1107,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Clásicas 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E942",
@@ -1125,16 +1125,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex con Semillas 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E941",
@@ -1143,16 +1143,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Picante 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E886",
@@ -1161,16 +1161,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Cebolla 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E877",
@@ -1179,16 +1179,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Salame 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E876",
@@ -1197,16 +1197,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Provoleta 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E865",
@@ -1215,16 +1215,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Bañadas Frutilla 88 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E864",
@@ -1233,16 +1233,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Bañadas Crema Cookies 88 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E672",
@@ -1251,16 +1251,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Ketchup 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E653",
@@ -1269,16 +1269,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Milanga 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E652",
@@ -1287,16 +1287,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Asadazo 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E651",
@@ -1305,16 +1305,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Cancha / Pancho 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E650",
@@ -1323,16 +1323,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex sabor Oliva 125 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "E863",
@@ -1341,16 +1341,16 @@
       "subcategoria": "Snacks salados",
       "nombre": "Cintitas Tostex Bañadas Chocolate 88 g",
       "descripcion": "",
-      "precio": 0,
-      "stock": 0,
+      "precio": 1500,
+      "precioPack": null,
+      "cantidadPack": null,
+      "stock": 20,
       "imagen": "",
       "emoji": "🍿",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "N95",
@@ -1360,24 +1360,24 @@
       "nombre": "Avellanas con Chocolate Geo 100 g",
       "descripcion": "",
       "precio": 0,
+      "precioPack": null,
+      "cantidadPack": null,
       "stock": 0,
       "imagen": "",
       "emoji": "🍫",
       "destacado": false,
       "activo": true,
       "videoId": null,
-      "notas": "",
-      "precioPack": null,
-      "cantidadPack": null
+      "notas": ""
     },
     {
       "codigo": "FAL077",
       "id": "alfajor-elixir-60g",
       "categoria": "golosinas",
       "subcategoria": "Alfajores",
-      "nombre": "Alfajor Elixir Chocolate Blanco 60 g",
+      "nombre": "Alfajor Elixir Chocolate Blanco/Negro 60 g",
       "descripcion": "",
-      "precio": 1400,
+      "precio": 1500,
       "precioPack": null,
       "cantidadPack": null,
       "stock": 20,
